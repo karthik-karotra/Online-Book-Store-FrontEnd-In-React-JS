@@ -1,17 +1,16 @@
 import React from 'react';
 import './App.css';
-import TopNavigationBar from "./components/TopNavigationBar";
-import BottomBar from "./components/BottomBar";
 import AdminFrontPage from "./components/AdminFrontPage";
+import AdminTopNavigationBar from "./components/AdminTopNavigationBar";
+import BottomBar from "./components/BottomBar";
+
 
 function App() {
     return (
         <div>
-            <TopNavigationBar/>
-            <div className="adminfrontpage">
-                <AdminFrontPage/>
+            <div>
+            <AdminFrontPage/>
             </div>
-            <BottomBar/>
         </div>
     );
 }
