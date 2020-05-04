@@ -6,6 +6,7 @@ import AdminTopNavigationBar from "./AdminTopNavigationBar";
 import BottomBar from "./BottomBar";
 import {addBookToDatabase} from "../service/AxiosConfiguration";
 
+
 class AdminFrontPage extends React.Component {
     constructor(props) {
         super(props);
@@ -106,13 +107,6 @@ class AdminFrontPage extends React.Component {
                         <div className="data">
                             <TextField className="input" id="outlined-basic" label="Author Name" variant="outlined"
                                        value={this.state.authorName} onChange={this.handleChange} name="authorName"/>
-                            <TextField className="input" id="outlined-basic" label="Description" variant="outlined"
-                                       value={this.state.bookDetails} onChange={this.handleChange} name="bookDetails"/>
-                        </div>
-                        <div className="data">
-                            <TextField className="input" id="outlined-basic" label="Book Cover" variant="outlined"
-                                       value={this.state.bookImageSource} onChange={this.handleChange}
-                                       name="bookImageSource"/>
                             <TextField className="input" id="outlined-basic" label="Price" variant="outlined"
                                        value={this.state.bookPrice} onChange={this.handleChange} name="bookPrice"/>
                         </div>
@@ -123,9 +117,21 @@ class AdminFrontPage extends React.Component {
                                        value={this.state.publishingYear} onChange={this.handleChange}
                                        name="publishingYear"/>
                         </div>
+                        <div className="data2">
+                            <TextField className="input" id="outlined-basic" label="Book Cover" variant="outlined"
+                                       value={this.state.bookImageSource} onChange={this.handleChange}
+                                       name="bookImageSource"/>
+                        </div>
+                        <div className="data2">
+                            <TextField className="input" id="outlined-textarea" label="Description"
+                                       placeholder="Placeholder" multiline variant="outlined"
+                                       value={this.state.bookDetails} onChange={this.handleChange} name="bookDetails"/>
+                        </div>
                         <div className="data">
-                            <Button className="button" variant="contained" color="secondary"
-                                    onClick={this.validation}>Add</Button>
+                            <Button className="button" variant="contained"
+                                    onClick={this.validation} style={{backgroundColor: "#45A29E"}}>
+                                <div className="buttonfont">Add</div>
+                            </Button>
                         </div>
                         <div>
                             <BottomBar/>
