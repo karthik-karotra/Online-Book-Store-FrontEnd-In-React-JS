@@ -149,8 +149,8 @@ class AdminFrontPage extends React.Component {
                                        name="bookImageSource"/>
                         </div>
                         <div className="data2">
-                            <TextField className="input" id="outlined-textarea" label="Description"
-                                       placeholder="Placeholder" multiline variant="outlined"
+                            <TextField className="input" id="outlined-multiline-flexible" label="Description"
+                                       placeholder="Description" multiline rowsMax={2} variant="outlined"
                                        value={this.state.bookDetails} onChange={this.handleChange}
                                        name="bookDetails"/>
                         </div>
