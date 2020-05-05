@@ -62,6 +62,7 @@
 
 .buttonfont {
     font-size: larger;
+    color: white;
 }
 
 @media only screen and (max-width: 780px) and (max-height: 1050px ) {
@@ -129,6 +130,7 @@
 
     .buttonfont {
         font-size: small;
+        color: white;
     }
 }
 
@@ -169,5 +171,6 @@
 
     .buttonfont {
         font-size: x-large;
+        color: white;
     }
 }

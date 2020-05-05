@@ -5,7 +5,8 @@ import Button from '@material-ui/core/Button';
 import AdminTopNavigationBar from "./AdminTopNavigationBar";
 import BottomBar from "./BottomBar";
 import {addBookToDatabase} from "../service/AxiosConfiguration";
-
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from "@material-ui/lab/Alert";
 
 class AdminFrontPage extends React.Component {
     constructor(props) {
@@ -18,8 +19,15 @@ class AdminFrontPage extends React.Component {
             quantity: "",
             bookDetails: "",
             bookImageSource: "",
-            publishingYear: ""
+            publishingYear: "",
+            snackbaropen: false,
+            snackbarmsg: '',
+            severity: ""
         }
+    }
+
+    snackbarClose = (event) => {
+        this.setState({snackbaropen: false});
     }
 
     handleChange = ({target}) => {
@@ -27,51 +35,56 @@ class AdminFrontPage extends React.Component {
     };
 
     validation = () => {
+
         var isbnNumberPattern = /^([1-9]{1})([0-9]{3})$/;
-        var validNamePattern = /^([A-Z]{1})([a-zA-Z]{2,})$/;
+        var validNamePattern = /^([a-zA-Z]+[ ]*[a-zA-Z]*)$/;
         var validNumberPattern = /^([1-9]{1,})([0-9]*)$/;
         var publishingYearPattern = /^([1-9]{1})([0-9]{3})$/;
-        if (this.state.isbn.trim() == "") {
-            alert("ISBN Number Should Not Be Blank");
-            return false;
-        } else if (isbnNumberPattern.test(this.state.isbn) == false) {
-            alert("ISBN No Should Be 4 Digit Number");
-            return false;
-        } else if (this.state.bookName.trim() == "") {
-            alert("Book Name Should Not Be Blank");
+        if (isbnNumberPattern.test(this.state.isbn) == false) {
+            this.setState({
+                severity: "error",
+                snackbaropen: true,
+                snackbarmsg: 'ISBN No Field Should Not be Empty And Should Be 4 Digit Number'
+            });
             return false;
         } else if (validNamePattern.test(this.state.bookName) == false) {
-            alert("Book Name start with caps and minimum has three character");
-            return false;
-        } else if (this.state.authorName.trim() == "") {
-            alert("Author Name Should Not Be Blank");
+            this.setState({
+                severity: "error",
+                snackbaropen: true,
+                snackbarmsg: 'Book Name Field Should Not Be Empty And Can Only Contain 2 Words'
+            });
             return false;
         } else if (validNamePattern.test(this.state.authorName) == false) {
-            alert("Author Name start with caps and minimum has three character");
-            return false;
-        } else if (this.state.bookDetails.trim() == "") {
-            alert("Description Should Not Be Blank");
-            return false;
-        } else if (this.state.bookImageSource.trim() == "") {
-            alert("Book Cover Should Not Be Blank");
-            return false;
-        } else if (this.state.bookPrice.trim() == "") {
-            alert("Book Price Should Not Be Blank");
+            this.setState({
+                severity: "error",
+                snackbaropen: true,
+                snackbarmsg: 'Author Name Field Should Not Be Empty And Can Only Contain 2 Words'
+            });
             return false;
         } else if (validNumberPattern.test(this.state.bookPrice) == false) {
-            alert("Book Price Should Be Greater Than Zero");
-            return false;
-        } else if (this.state.quantity.trim() == "") {
-            alert("Quantity Should Not Be Blank");
+            this.setState({
+                severity: "error",
+                snackbaropen: true,
+                snackbarmsg: 'Book Price Field Should Not Be Empty And Should Be Greater Than Zero'
+            });
             return false;
         } else if (validNumberPattern.test(this.state.quantity) == false) {
-            alert("Quantity Should Be Greater Than Zero");
-            return false;
-        } else if (this.state.publishingYear.trim() == "") {
-            alert("Publishing Year Should Not Be Blank");
+            this.setState({
+                severity: "error",
+                snackbaropen: true,
+                snackbarmsg: 'Quantity Field Should Not Be Empty And Should Be Greater Than Zero'
+            });
             return false;
         } else if (publishingYearPattern.test(this.state.publishingYear) == false) {
-            alert("Publishing Year Should Be Greater Than 999");
+            this.setState({
+                severity: "error",
+                snackbaropen: true,
+                snackbarmsg: 'Publishing Year Field Should Not Be Empty And Should Be Greater Than 999'
+            });
+            return false;
+        }
+        if (this.state.bookDetails.trim() == "" || this.state.bookImageSource.trim() == "") {
+            this.setState({severity: "error", snackbaropen: true, snackbarmsg: 'Fields Should Not Be Empty'});
             return false;
         } else {
             const data = {
@@ -85,6 +98,11 @@ class AdminFrontPage extends React.Component {
                 publishingYear: this.state.publishingYear
             }
             addBookToDatabase(data)
+            this.setState({
+                severity: "success",
+                snackbaropen: true,
+                snackbarmsg: 'Book Added Successfully'
+            });
             return true;
         }
     }
@@ -94,6 +112,12 @@ class AdminFrontPage extends React.Component {
             <div>
                 <AdminTopNavigationBar/>
                 <div className="container">
+                    <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={this.state.snackbaropen}
+                              autoHideDuration={4000} onClose={this.snackbarClose}>
+                        <Alert onClose={this.snackbarClose} severity={this.state.severity} variant={"filled"}>
+                            {<span id="message-id">{this.state.snackbarmsg}</span>}
+                        </Alert>
+                    </Snackbar>
                     <div className="content">
                         <div className="data">
                             <h2>Books Details</h2>
@@ -106,14 +130,16 @@ class AdminFrontPage extends React.Component {
                         </div>
                         <div className="data">
                             <TextField className="input" id="outlined-basic" label="Author Name" variant="outlined"
-                                       value={this.state.authorName} onChange={this.handleChange} name="authorName"/>
+                                       value={this.state.authorName} onChange={this.handleChange}
+                                       name="authorName"/>
                             <TextField className="input" id="outlined-basic" label="Price" variant="outlined"
                                        value={this.state.bookPrice} onChange={this.handleChange} name="bookPrice"/>
                         </div>
                         <div className="data">
                             <TextField className="input" id="outlined-basic" label="Quantity" variant="outlined"
                                        value={this.state.quantity} onChange={this.handleChange} name="quantity"/>
-                            <TextField className="input" id="outlined-basic" label="Publishing Year" variant="outlined"
+                            <TextField className="input" id="outlined-basic" label="Publishing Year"
+                                       variant="outlined"
                                        value={this.state.publishingYear} onChange={this.handleChange}
                                        name="publishingYear"/>
                         </div>
@@ -125,11 +151,12 @@ class AdminFrontPage extends React.Component {
                         <div className="data2">
                             <TextField className="input" id="outlined-textarea" label="Description"
                                        placeholder="Placeholder" multiline variant="outlined"
-                                       value={this.state.bookDetails} onChange={this.handleChange} name="bookDetails"/>
+                                       value={this.state.bookDetails} onChange={this.handleChange}
+                                       name="bookDetails"/>
                         </div>
                         <div className="data">
                             <Button className="button" variant="contained"
-                                    onClick={this.validation} style={{backgroundColor: "#45A29E"}}>
+                                    onClick={this.validation} style={{backgroundColor: "rgb(51, 51, 255)"}}>
                                 <div className="buttonfont">Add</div>
                             </Button>
                         </div>
