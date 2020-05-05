@@ -109,12 +109,23 @@ class AdminFrontPage extends React.Component {
                     bookImageSource: this.state.bookImageSource,
                     publishingYear: this.state.publishingYear
                 }
-                addBookToDatabase(data)
-                this.setState({
-                    severity: "success",
-                    snackbaropen: true,
-                    snackbarmsg: 'Book Added Successfully'
-                });
+                addBookToDatabase(data).then((response) => {
+                    console.log(response.data);
+                    if ( response.data.bookDetails != null) {
+                        this.setState({
+                            severity: "success",
+                            snackbaropen: true,
+                            snackbarmsg: response.data.message
+                        });
+                    } else {
+                        this.setState({
+                            severity: "error",
+                            snackbaropen: true,
+                            snackbarmsg: response.data.message
+                        });
+                    }
+                })
+                    .catch((error) => {console.log(error)})
             }
         }
 
