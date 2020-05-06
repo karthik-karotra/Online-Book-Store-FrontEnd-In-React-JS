@@ -380,45 +380,43 @@ class AdminFrontPage extends React.Component {
                         </div>
                         <div className="data">
                             <TextField error={this.state.status1} className="input" id="outlined-basic" label="ISBN No."
-                                       variant="outlined"
+                                       variant="outlined" autoComplete="off"
                                        helperText={this.state.helpertext1} value={this.state.isbn}
                                        onClick={this.handleChange} onChange={this.handleChange} name="isbn"/>
 
                             <TextField error={this.state.status2} className="input" id="outlined-basic"
-                                       label="Book Name" variant="outlined"
+                                       label="Book Name" variant="outlined" autoComplete="off"
                                        value={this.state.bookName} helperText={this.state.helpertext2}
                                        onClick={this.handleChange} onChange={this.handleChange} name="bookName"/>
                         </div>
                         <div className="data">
                             <TextField error={this.state.status3} className="input" id="outlined-basic"
-                                       label="Author Name" variant="outlined"
+                                       label="Author Name" variant="outlined" autoComplete="off"
                                        value={this.state.authorName} helperText={this.state.helpertext3}
                                        onClick={this.handleChange} onChange={this.handleChange}
                                        name="authorName"/>
 
 
                             <TextField error={this.state.status4} className="input" id="outlined-basic" label="Price"
-                                       variant="outlined"
+                                       variant="outlined" autoComplete="off"
                                        value={this.state.bookPrice} helperText={this.state.helpertext4}
                                        onClick={this.handleChange} onChange={this.handleChange} name="bookPrice"/>
                         </div>
                         <div className="data">
                             <TextField error={this.state.status5} className="input" id="outlined-basic" label="Quantity"
-                                       variant="outlined"
+                                       variant="outlined" autoComplete="off"
                                        value={this.state.quantity} helperText={this.state.helpertext5}
                                        onClick={this.handleChange} onChange={this.handleChange} name="quantity"/>
                             <TextField error={this.state.status6} className="input" id="outlined-basic"
                                        label="Publishing Year"
-                                       variant="outlined"
+                                       variant="outlined" autoComplete="off"
                                        value={this.state.publishingYear} helperText={this.state.helpertext6}
                                        onClick={this.handleChange} onChange={this.handleChange}
                                        name="publishingYear"/>
                         </div>
                         <div className="data2">
-                            <TextField error={this.state.status7} helperText={this.state.helpertext7} className="input"
-                                       id="outlined-basic" label="Book Cover" variant="outlined"
-                                       value={this.state.bookImageSource} onClick={this.handleChange}
-                                       onChange={this.handleChange}
+                            <TextField error={this.state.status7} helperText={this.state.helpertext7} className="input" id="outlined-basic" label="" variant="outlined"
+                                       value={this.state.bookImageSource} type="file" accept="file_extension|image/*"  onClick={this.handleChange} onChange={this.handleChange}
                                        name="bookImageSource"/>
                         </div>
                         <div className="data2">
