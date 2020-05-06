@@ -26,19 +26,6 @@ const useStyles = makeStyles(theme => ({
             display: "block"
         }
     },
-    exitToApp: {
-        padding: "0 0 0 18%",
-        display: "inline-block",
-        position: "absolute",
-        top: "15px",
-        right: "16px",
-        fontSize: "36px",
-        [theme.breakpoints.up("sm")]: {
-            padding: "0 0 0 10%",
-            fontSize: "36px"
-        }
-
-    },
     sectionDesktop: {
         display: "none",
         [theme.breakpoints.up("md")]: {
@@ -65,7 +52,6 @@ export default function Header() {
                     <Typography className={classes.title} variant="h6" noWrap>
                         The Country Bookshop
                     </Typography>
-                    <ExitToApp edge="end" className={classes.exitToApp}/>
                 </Toolbar>
             </AppBar>
         </div>
