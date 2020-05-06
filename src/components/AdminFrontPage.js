@@ -213,7 +213,7 @@ class AdminFrontPage extends React.Component {
             if (isbnNumberPattern.test(this.state.isbn) == false) {
                 this.setState({
                     status1: true,
-                    helpertext1: 'Should Be 10 Digit Number',
+                    helpertext1: 'Should Be 4 Digit Number',
                 })
             } else {
                 this.setState({
@@ -231,10 +231,6 @@ class AdminFrontPage extends React.Component {
             helpertext2: '*required*',
         })
         var validNamePattern = /^([a-zA-Z]+[ ]*[a-zA-Z]*)$/;
-        this.setState({
-            bookName: this.state.bookName.trim()
-        })
-
         if (this.state.bookName.trim() != "") {
             if (validNamePattern.test(this.state.bookName) == false) {
                 this.setState({
@@ -256,10 +252,6 @@ class AdminFrontPage extends React.Component {
             helpertext3: '*required*',
         })
         var validNamePattern = /^([a-zA-Z]+[ ]*[a-zA-Z]*)$/;
-        this.setState({
-            authorName: this.state.authorName.trim()
-        })
-
         if (this.state.authorName.trim() != "") {
             if (validNamePattern.test(this.state.authorName) == false) {
                 this.setState({
@@ -377,6 +369,21 @@ class AdminFrontPage extends React.Component {
                 helpertext8: '*required*',
             })
         }
+        var validDescriptionPattern = /^.{0,251}$/;
+        if (this.state.bookDetails.trim() != "") {
+            if (validDescriptionPattern.test(this.state.bookDetails) == false) {
+                this.setState({
+                    status8: true,
+                    helpertext8: 'Maximum 250 Characters',
+                })
+            } else {
+                this.setState({
+                    status8: false,
+                    helpertext8: '',
+                })
+            }
+        }
+
     }
 
     render() {
@@ -438,7 +445,7 @@ class AdminFrontPage extends React.Component {
                         <div className="data2">
                             <TextField error={this.state.status8} helperText={this.state.helpertext8} className="input"
                                        id="outlined-multiline-flexible" label="Description"
-                                       placeholder="Description" multiline rowsMax={2} variant="outlined"
+                                       placeholder="Maximum 250 Characters"  multiline rowsMax={2} variant="outlined"
                                        value={this.state.bookDetails} onClick={this.handleChange}
                                        onChange={this.handleChange}
                                        name="bookDetails"/>
