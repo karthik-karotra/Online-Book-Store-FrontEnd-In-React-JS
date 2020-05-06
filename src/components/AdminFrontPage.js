@@ -112,6 +112,9 @@ class AdminFrontPage extends React.Component {
 
         if (this.state.isbn.trim() != "" && this.state.bookName.trim() != "" && this.state.authorName.trim() != "" && this.state.bookPrice.trim() != "" && this.state.quantity.trim() != "" && this.state.publishingYear.trim() != "" && this.state.bookImageSource.trim() != "" && this.state.bookDetails.trim() != "") {
             if (this.state.status1 == false && this.state.status2 == false && this.state.status3 == false && this.state.status4 == false && this.state.status5 == false && this.state.status6 == false && this.state.status7 == false && this.state.status8 == false) {
+                var path=`${this.state.bookImageSource}`;
+                var newPath=`${path.replace("C:\\fakepath\\", "" )}`;
+                newPath=`D:\\images\\${newPath}`
                 const data = {
                     isbn: this.state.isbn,
                     bookName: this.state.bookName,
@@ -119,7 +122,7 @@ class AdminFrontPage extends React.Component {
                     bookPrice: this.state.bookPrice,
                     quantity: this.state.quantity,
                     bookDetails: this.state.bookDetails,
-                    bookImageSource: this.state.bookImageSource,
+                    bookImageSource: newPath,
                     publishingYear: this.state.publishingYear
                 }
                 addBookToDatabase(data).then((response) => {
