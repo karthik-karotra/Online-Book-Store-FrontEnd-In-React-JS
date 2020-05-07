@@ -64,49 +64,49 @@ class AdminFrontPage extends React.Component {
         if (this.state.isbn.trim() == "") {
             this.setState({
                 status1: true,
-                helpertext1: 'required'
+                helpertext1: 'Required*'
             });
         }
         if (this.state.bookName.trim() == "") {
             this.setState({
                 status2: true,
-                helpertext2: 'required'
+                helpertext2: 'Required*'
             });
         }
         if (this.state.authorName.trim() == "") {
             this.setState({
                 status3: true,
-                helpertext3: 'required'
+                helpertext3: 'Required*'
             });
         }
         if (this.state.bookPrice.trim() == "") {
             this.setState({
                 status4: true,
-                helpertext4: 'required'
+                helpertext4: 'Required*'
             });
         }
         if (this.state.quantity.trim() == "") {
             this.setState({
                 status5: true,
-                helpertext5: 'required'
+                helpertext5: 'Required*'
             });
         }
         if (this.state.publishingYear.trim() == "") {
             this.setState({
                 status6: true,
-                helpertext6: 'required'
+                helpertext6: 'Required*'
             });
         }
         if (this.state.bookImageSource.trim() == "") {
             this.setState({
                 status7: true,
-                helpertext7: 'required'
+                helpertext7: 'Required*'
             });
         }
         if (this.state.bookDetails.trim() == "") {
             this.setState({
                 status8: true,
-                helpertext8: 'required'
+                helpertext8: 'Required*'
             });
         }
 
@@ -202,7 +202,7 @@ class AdminFrontPage extends React.Component {
     isbn() {
         this.setState({
             status1: true,
-            helpertext1: '*required*',
+            helpertext1: 'Required*',
         })
 
         var isbnNumberPattern = /^([1-9]{1})([0-9]{3})$/;
@@ -228,14 +228,14 @@ class AdminFrontPage extends React.Component {
     bookName() {
         this.setState({
             status2: true,
-            helpertext2: '*required*',
+            helpertext2: 'Required*',
         })
-        var validNamePattern = /^([a-zA-Z]+[ ]*[a-zA-Z]*)$/;
+        var validNamePattern = /^.{3,25}$/;
         if (this.state.bookName.trim() != "") {
             if (validNamePattern.test(this.state.bookName) == false) {
                 this.setState({
                     status2: true,
-                    helpertext2: 'Can contain max 2 words',
+                    helpertext2: 'Min 2 characters & max 24 characters',
                 })
             } else {
                 this.setState({
@@ -249,14 +249,14 @@ class AdminFrontPage extends React.Component {
     authorName() {
         this.setState({
             status3: true,
-            helpertext3: '*required*',
+            helpertext3: 'Required*',
         })
-        var validNamePattern = /^([a-zA-Z]+[ ]*[a-zA-Z]*)$/;
+        var validNamePattern = /^([a-zA-Z]{3,}[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*)$/;
         if (this.state.authorName.trim() != "") {
             if (validNamePattern.test(this.state.authorName) == false) {
                 this.setState({
                     status3: true,
-                    helpertext3: 'Can contain max 2 words',
+                    helpertext3: 'Min 2 characters',
                 })
             } else {
                 this.setState({
@@ -270,7 +270,7 @@ class AdminFrontPage extends React.Component {
     bookPrice() {
         this.setState({
             status4: true,
-            helpertext4: '*required*',
+            helpertext4: 'Required*',
         })
         var validNumberPattern = /^([1-9]{1,})([0-9]*)$/;
         this.setState({
@@ -295,7 +295,7 @@ class AdminFrontPage extends React.Component {
     quantity() {
         this.setState({
             status5: true,
-            helpertext5: '*required*',
+            helpertext5: 'Required*',
         })
         var validNumberPattern = /^([1-9]{1,})([0-9]*)$/;
         this.setState({
@@ -320,7 +320,7 @@ class AdminFrontPage extends React.Component {
     publishingYear() {
         this.setState({
             status6: true,
-            helpertext6: '*required*',
+            helpertext6: 'Required*',
         })
         var publishingYearPattern = /^([1-9]{1})([0-9]{3})$/;
         this.setState({
@@ -352,7 +352,7 @@ class AdminFrontPage extends React.Component {
         } else {
             this.setState({
                 status7: true,
-                helpertext7: '*required*',
+                helpertext7: 'Required*',
             })
         }
     }
@@ -366,7 +366,7 @@ class AdminFrontPage extends React.Component {
         } else {
             this.setState({
                 status8: true,
-                helpertext8: '*required*',
+                helpertext8: 'Required*',
             })
         }
         var validDescriptionPattern = /^.{0,251}$/;
