@@ -3,10 +3,10 @@ import './AdminFrontPage.css';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import AdminTopNavigationBar from "./AdminTopNavigationBar";
-import BottomBar from "./BottomBar";
-import {addBookToDatabase} from "../service/AxiosConfiguration";
+import BottomBar from "../BottomBar";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
+import {addBookToDatabase} from "../../service/AxiosConfiguration";
 
 class AdminFrontPage extends React.Component {
     constructor(props) {
@@ -47,7 +47,7 @@ class AdminFrontPage extends React.Component {
         this.setState({snackbaropen: false});
     }
 
-    reset =() =>{
+    reset = () => {
         this.setState({
             isbn: "",
             bookName: "",
@@ -112,9 +112,9 @@ class AdminFrontPage extends React.Component {
 
         if (this.state.isbn.trim() != "" && this.state.bookName.trim() != "" && this.state.authorName.trim() != "" && this.state.bookPrice.trim() != "" && this.state.quantity.trim() != "" && this.state.publishingYear.trim() != "" && this.state.bookImageSource.trim() != "" && this.state.bookDetails.trim() != "") {
             if (this.state.status1 == false && this.state.status2 == false && this.state.status3 == false && this.state.status4 == false && this.state.status5 == false && this.state.status6 == false && this.state.status7 == false && this.state.status8 == false) {
-                var path=`${this.state.bookImageSource}`;
-                var newPath=`${path.replace("C:\\fakepath\\", "" )}`;
-                newPath=`D:\\images\\${newPath}`
+                var path = `${this.state.bookImageSource}`;
+                var newPath = `${path.replace("C:\\fakepath\\", "")}`;
+                newPath = `D:\\images\\${newPath}`
                 const data = {
                     isbn: this.state.isbn,
                     bookName: this.state.bookName,
@@ -127,12 +127,14 @@ class AdminFrontPage extends React.Component {
                 }
                 addBookToDatabase(data).then((response) => {
                     console.log(response.data);
-                    if ( response.data.bookDetails != null) {
+                    if (response.data.bookDetails != null) {
                         this.setState({
                             severity: "success",
                             snackbaropen: true,
                             snackbarmsg: response.data.message
-                        },()=>{this.reset()});
+                        }, () => {
+                            this.reset()
+                        });
                     } else {
                         this.setState({
                             severity: "error",
@@ -141,7 +143,9 @@ class AdminFrontPage extends React.Component {
                         });
                     }
                 })
-                    .catch((error) => {console.log(error)})
+                    .catch((error) => {
+                        console.log(error)
+                    })
             }
         }
 
@@ -438,14 +442,16 @@ class AdminFrontPage extends React.Component {
                                        name="publishingYear"/>
                         </div>
                         <div className="data2">
-                            <TextField error={this.state.status7} helperText={this.state.helpertext7} className="input" id="outlined-basic" label="" variant="outlined"
-                                       value={this.state.bookImageSource} type="file" accept="file_extension|image/*"  onClick={this.handleChange} onChange={this.handleChange}
+                            <TextField error={this.state.status7} helperText={this.state.helpertext7} className="input"
+                                       id="outlined-basic" label="" variant="outlined"
+                                       value={this.state.bookImageSource} type="file" accept="file_extension|image/*"
+                                       onClick={this.handleChange} onChange={this.handleChange}
                                        name="bookImageSource"/>
                         </div>
                         <div className="data2">
                             <TextField error={this.state.status8} helperText={this.state.helpertext8} className="input"
                                        id="outlined-multiline-flexible" label="Description"
-                                       placeholder="Maximum 250 Characters"  multiline rowsMax={2} variant="outlined"
+                                       placeholder="Maximum 250 Characters" multiline rowsMax={2} variant="outlined"
                                        value={this.state.bookDetails} onClick={this.handleChange}
                                        onChange={this.handleChange}
                                        name="bookDetails"/>

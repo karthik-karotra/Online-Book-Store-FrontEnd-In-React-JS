@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import AdminFrontPage from "./components/AdminFrontPage";
+import AdminFrontPage from "./components/Admin/AdminFrontPage";
 
 function App() {
     return (
         <div>
             <div>
-                <AdminFrontPage/>
+                <AdminFrontPage />
             </div>
         </div>
     );
