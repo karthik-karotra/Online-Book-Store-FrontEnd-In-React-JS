@@ -114,7 +114,7 @@ class AdminFrontPage extends React.Component {
             if (this.state.status1 == false && this.state.status2 == false && this.state.status3 == false && this.state.status4 == false && this.state.status5 == false && this.state.status6 == false && this.state.status7 == false && this.state.status8 == false) {
                 var path = `${this.state.bookImageSource}`;
                 var newPath = `${path.replace("C:\\fakepath\\", "")}`;
-                newPath = `D:\\images\\${newPath}`
+                newPath = `C:\\images\\${newPath}`
                 const data = {
                     isbn: this.state.isbn,
                     bookName: this.state.bookName,
@@ -127,7 +127,7 @@ class AdminFrontPage extends React.Component {
                 }
                 addBookToDatabase(data).then((response) => {
                     console.log(response.data);
-                    if (response.data.bookDetails != null) {
+                    if (response.data.message == "ADDED SUCCESSFULLY") {
                         this.setState({
                             severity: "success",
                             snackbaropen: true,
@@ -209,7 +209,7 @@ class AdminFrontPage extends React.Component {
             helpertext1: 'Required*',
         })
 
-        var isbnNumberPattern = /^([1-9]{1})([0-9]{3})$/;
+        var isbnNumberPattern = /^([1-9]{1})([0-9]{9})$/;
         this.setState({
             isbn: this.state.isbn.trim()
         })
@@ -217,12 +217,12 @@ class AdminFrontPage extends React.Component {
             if (isbnNumberPattern.test(this.state.isbn) == false) {
                 this.setState({
                     status1: true,
-                    helpertext1: 'Should Be 4 Digit Number',
+                    helpertext1: 'Should Be 10 Digit Number',
                 })
             } else {
                 this.setState({
                     status1: false,
-                    helpertext1: '',
+                    helpertext1: ' ',
                 })
             }
         }
@@ -244,7 +244,7 @@ class AdminFrontPage extends React.Component {
             } else {
                 this.setState({
                     status2: false,
-                    helpertext2: '',
+                    helpertext2: ' ',
                 })
             }
         }
@@ -265,7 +265,7 @@ class AdminFrontPage extends React.Component {
             } else {
                 this.setState({
                     status3: false,
-                    helpertext3: '',
+                    helpertext3: ' ',
                 })
             }
         }
@@ -290,7 +290,7 @@ class AdminFrontPage extends React.Component {
             } else {
                 this.setState({
                     status4: false,
-                    helpertext4: '',
+                    helpertext4: ' ',
                 })
             }
         }
@@ -315,7 +315,7 @@ class AdminFrontPage extends React.Component {
             } else {
                 this.setState({
                     status5: false,
-                    helpertext5: '',
+                    helpertext5: ' ',
                 })
             }
         }
@@ -340,7 +340,7 @@ class AdminFrontPage extends React.Component {
             } else {
                 this.setState({
                     status6: false,
-                    helpertext6: '',
+                    helpertext6: ' ',
                 })
             }
         }
@@ -351,7 +351,7 @@ class AdminFrontPage extends React.Component {
         if (this.state.bookImageSource.trim() !== "") {
             this.setState({
                 status7: false,
-                helpertext7: '',
+                helpertext7: ' ',
             })
         } else {
             this.setState({
@@ -365,7 +365,7 @@ class AdminFrontPage extends React.Component {
         if (this.state.bookDetails.trim() != "") {
             this.setState({
                 status8: false,
-                helpertext8: '',
+                helpertext8: ' ',
             })
         } else {
             this.setState({
@@ -383,7 +383,7 @@ class AdminFrontPage extends React.Component {
             } else {
                 this.setState({
                     status8: false,
-                    helpertext8: '',
+                    helpertext8: ' ',
                 })
             }
         }

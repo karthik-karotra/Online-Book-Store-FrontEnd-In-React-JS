@@ -20,3 +20,29 @@ button.MuiButtonBase-root.MuiCardActionArea-root{
     width: 40%;
     height: 160px;
 }
+
+h6.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom {
+    font-size: 1.1rem;
+    font-family:  Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: left;
+}
+
+p.MuiTypography-root.MuiTypography-body2.MuiTypography-colorTextSecondary {
+    line-height: 0;
+    text-align: left;
+}
+
+h2.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom {
+    font-size: 0.9rem;
+    text-align: left;
+    font-weight: bold;
+    line-height: 3.35;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedSecondary {
+    color: #fff;
+    background-color: rgb(145,10,10);
+    width: 100%;
+    border-radius: 0;
+}
