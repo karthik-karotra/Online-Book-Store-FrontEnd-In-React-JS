@@ -452,8 +452,8 @@ class AdminFrontPage extends React.Component {
                         </div>
                         <div className="data">
                             <Button className="button" variant="contained"
-                                    onClick={this.handleSubmmit} style={{backgroundColor: "rgb(51, 51, 255)"}}>
-                                <div className="buttonfont">Add</div>
+                                    onClick={this.handleSubmmit} style={{backgroundColor: "rgb(145,10,10)"}}>
+                                <div className="buttonfont">Add Book</div>
                             </Button>
                         </div>
                         <div>
