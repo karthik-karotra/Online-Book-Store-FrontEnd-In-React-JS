@@ -45,7 +45,7 @@ export default function Header() {
 
     return (
         <div className={classes.grow}>
-            <AppBar position="fixed" style={{backgroundColor: "rgb(51, 51, 255)"}}>
+            <AppBar position="fixed" style={{backgroundColor: "rgb(145,10,10)"}}>
                 <Toolbar>
                     <MenuBookIcon edge="start" className={classes.bookIcon}/>
                     <Typography className={classes.title} variant="h6" noWrap>
