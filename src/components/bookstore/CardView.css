@@ -1,0 +1,22 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.cards:hover{
+    box-shadow: 3px 3px #E0E0E0;
+}
+
+button.MuiButtonBase-root.MuiCardActionArea-root{
+    width: 100%;
+    display: block;
+    text-align: inherit;
+    background-color: #F0F0F0;
+    height: 54%;
+    display: flex;
+}
+
+.MuiCardMedia-root.media{
+    width: 40%;
+    height: 160px;
+}
