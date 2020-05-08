@@ -7,8 +7,6 @@ import MenuBookIcon from "@material-ui/icons/MenuBookSharp";
 import "./AdminFrontPage.css";
 
 const useStyles = makeStyles(theme => ({
-
-
     grow: {},
     bookIcon: {
         fontSize: "36px",

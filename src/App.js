@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import AdminFrontPage from "./components/Admin/AdminFrontPage";
+import RouterConfiguration from "./service/RouterConfiguration";
 
 function App() {
     return (
         <div>
             <div>
-                <AdminFrontPage />
+                <RouterConfiguration />
             </div>
         </div>
     );
