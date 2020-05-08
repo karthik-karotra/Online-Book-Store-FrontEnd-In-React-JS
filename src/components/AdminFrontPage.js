@@ -31,14 +31,14 @@ class AdminFrontPage extends React.Component {
             status6: false,
             status7: false,
             status8: false,
-            helpertext1: '',
-            helpertext2: '',
-            helpertext3: '',
-            helpertext4: '',
-            helpertext5: '',
-            helpertext6: '',
-            helpertext7: '',
-            helpertext8: '',
+            helpertext1: ' ',
+            helpertext2: ' ',
+            helpertext3: ' ',
+            helpertext4: ' ',
+            helpertext5: ' ',
+            helpertext6: ' ',
+            helpertext7: ' ',
+            helpertext8: ' ',
             button11: ''
         }
     }
