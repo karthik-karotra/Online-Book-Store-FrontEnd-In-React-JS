@@ -399,7 +399,7 @@ class AdminFrontPage extends React.Component {
                     </Snackbar>
                     <div className="content">
                         <div className="data">
-                            <h2>Books Details</h2>
+                            <h2>Book Details</h2>
                         </div>
                         <div className="data">
                             <TextField error={this.state.status1} className="input" id="outlined-basic" label="ISBN No."
