@@ -1,0 +1,14 @@
+.bookstorefooter {
+    position: relative;
+    height: 20px;
+    width: 100%;
+    background-color: #0d0c0a;
+    color: white;
+    text-align: center;
+    font-size: 80%;
+    left: 0;
+    bottom: 0;
+    align-self: auto;
+    padding-bottom: 40px;
+    overflow: hidden;
+}

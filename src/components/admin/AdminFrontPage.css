@@ -66,7 +66,7 @@
 
 input[type="file" i] {
     -webkit-appearance: initial;
-    background-color:initial;
+    background-color: initial;
     height: 53px;
     /* width: 20%; */
     cursor: default;
@@ -78,8 +78,8 @@ input[type="file" i] {
 
 }
 
-input[type="file"]::-webkit-file-upload-button{
-    height:53px;
+input[type="file"]::-webkit-file-upload-button {
+    height: 53px;
     border-radius: 5px;
     width: 25%;
     background-color: rgb(51, 51, 255);
@@ -93,6 +93,7 @@ input[type="file"]::-webkit-file-upload-button{
     align-items: center;
     left: -120px;
 }
+
 @media only screen and (max-width: 780px) and (max-height: 1050px ) {
     .MuiToolbar-root {
         display: flex;
@@ -100,6 +101,7 @@ input[type="file"]::-webkit-file-upload-button{
         align-items: center;
         left: -10px;
     }
+
     .container {
         display: flex;
         align-items: center;
@@ -166,9 +168,10 @@ input[type="file"]::-webkit-file-upload-button{
         font-size: small;
         color: white;
     }
+
     input[type="file" i] {
         -webkit-appearance: initial;
-        background-color:initial;
+        background-color: initial;
         height: 53px;
         /* width: 20%; */
         cursor: default;
@@ -180,8 +183,8 @@ input[type="file"]::-webkit-file-upload-button{
 
     }
 
-    input[type="file"]::-webkit-file-upload-button{
-        height:53px;
+    input[type="file"]::-webkit-file-upload-button {
+        height: 53px;
         border-radius: 5px;
         width: 33%;
         background-color: rgb(51, 51, 255);
@@ -197,6 +200,7 @@ input[type="file"]::-webkit-file-upload-button{
         align-items: center;
         left: -40px;
     }
+
     .content {
         width: 850px;
         height: 1020px;
