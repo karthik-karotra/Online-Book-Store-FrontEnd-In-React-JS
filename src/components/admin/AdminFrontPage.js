@@ -240,7 +240,7 @@ class AdminFrontPage extends React.Component {
             if (validNamePattern.test(this.state.bookName) == false) {
                 this.setState({
                     status2: true,
-                    helpertext2: 'Min 2 characters & max 24 characters',
+                    helpertext2: 'Min 2 characters & max 50 characters',
                 })
             } else {
                 this.setState({
@@ -374,12 +374,12 @@ class AdminFrontPage extends React.Component {
                 helpertext8: 'Required*',
             })
         }
-        var validDescriptionPattern = /^.{0,500}$/;
+        var validDescriptionPattern = /^.{0,1000}$/;
         if (this.state.bookDetails.trim() != "") {
             if (validDescriptionPattern.test(this.state.bookDetails) == false) {
                 this.setState({
                     status8: true,
-                    helpertext8: 'Maximum 500 Characters',
+                    helpertext8: 'Maximum 1000 Characters',
                 })
             } else {
                 this.setState({
@@ -452,7 +452,7 @@ class AdminFrontPage extends React.Component {
                         <div className="data2">
                             <TextField error={this.state.status8} helperText={this.state.helpertext8} className="input"
                                        id="outlined-multiline-static" label="Description"
-                                       placeholder="Maximum 500 Characters" multiline rows={2} variant="outlined"
+                                       placeholder="Maximum 1000 Characters" multiline rows={2} variant="outlined"
                                        value={this.state.bookDetails} onClick={this.handleChange}
                                        onChange={this.handleChange}
                                        name="bookDetails"/>

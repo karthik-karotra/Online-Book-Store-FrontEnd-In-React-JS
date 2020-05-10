@@ -34,3 +34,14 @@
     width: 100%;
     height: 100%;
 }
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+}
+
+button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPaginationItem-rounded.Mui-selected{
+    background-color: rgb(150, 0, 0);
+}
