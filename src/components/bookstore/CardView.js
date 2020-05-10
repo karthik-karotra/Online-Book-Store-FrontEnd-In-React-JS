@@ -19,6 +19,7 @@ class CardView extends React.Component {
                         title="Paella dish"
                     />
                 </CardActionArea>
+                <div id="centered" className={this.props.bookDetails.quantity == 0 ? 'visible' : 'hidden'}>OUT OF STOCK</div>
                 <CardContent>
                     <Typography gutterBottom variant="h6">{this.props.bookDetails.bookName}</Typography>
                     <Typography variant="body2" color="textSecondary" component="p">by {this.props.bookDetails.authorName}</Typography>

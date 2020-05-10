@@ -46,3 +46,26 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-contained
     width: 100%;
     border-radius: 0;
 }
+
+#centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    width: 60%;
+    font-size: 20px;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.hidden {
+    visibility: hidden;
+}
