@@ -114,7 +114,8 @@ class AdminFrontPage extends React.Component {
             if (this.state.status1 == false && this.state.status2 == false && this.state.status3 == false && this.state.status4 == false && this.state.status5 == false && this.state.status6 == false && this.state.status7 == false && this.state.status8 == false) {
                 var path = `${this.state.bookImageSource}`;
                 var newPath = `${path.replace("C:\\fakepath\\", "")}`;
-                newPath = `C:\\images\\${newPath}`
+                newPath = `${newPath}`
+                var imagePath = newPath.trim();
                 const data = {
                     isbn: this.state.isbn,
                     bookName: this.state.bookName,
@@ -122,7 +123,7 @@ class AdminFrontPage extends React.Component {
                     bookPrice: this.state.bookPrice,
                     quantity: this.state.quantity,
                     bookDetails: this.state.bookDetails,
-                    bookImageSource: newPath,
+                    bookImageSource: imagePath,
                     publishingYear: this.state.publishingYear
                 }
                 addBookToDatabase(data).then((response) => {
@@ -234,7 +235,7 @@ class AdminFrontPage extends React.Component {
             status2: true,
             helpertext2: 'Required*',
         })
-        var validNamePattern = /^.{3,25}$/;
+        var validNamePattern = /^.{3,50}$/;
         if (this.state.bookName.trim() != "") {
             if (validNamePattern.test(this.state.bookName) == false) {
                 this.setState({
@@ -373,12 +374,12 @@ class AdminFrontPage extends React.Component {
                 helpertext8: 'Required*',
             })
         }
-        var validDescriptionPattern = /^.{0,251}$/;
+        var validDescriptionPattern = /^.{0,500}$/;
         if (this.state.bookDetails.trim() != "") {
             if (validDescriptionPattern.test(this.state.bookDetails) == false) {
                 this.setState({
                     status8: true,
-                    helpertext8: 'Maximum 250 Characters',
+                    helpertext8: 'Maximum 500 Characters',
                 })
             } else {
                 this.setState({
@@ -450,8 +451,8 @@ class AdminFrontPage extends React.Component {
                         </div>
                         <div className="data2">
                             <TextField error={this.state.status8} helperText={this.state.helpertext8} className="input"
-                                       id="outlined-multiline-flexible" label="Description"
-                                       placeholder="Maximum 250 Characters" multiline rowsMax={2} variant="outlined"
+                                       id="outlined-multiline-static" label="Description"
+                                       placeholder="Maximum 500 Characters" multiline rows={2} variant="outlined"
                                        value={this.state.bookDetails} onClick={this.handleChange}
                                        onChange={this.handleChange}
                                        name="bookDetails"/>
