@@ -3,7 +3,7 @@ import NavigationBar from "./NavigationBar";
 import BookStoreFooter from "../../util/js/BottomBar";
 import '../css/BookStoreHomePage.css'
 import CardView from "./CardView";
-import {getBooksFromDatabase} from "../../../service/BookStoreAxiosService";
+import {getBooksFromDatabase, getCount} from "../../../service/BookStoreAxiosService";
 import Pagination from "@material-ui/lab/Pagination";
 
 export class BookStoreHomePage extends Component {
@@ -13,6 +13,7 @@ export class BookStoreHomePage extends Component {
         this.state = {
             bookDetails : [],
             pageValue : 0,
+            totalBookCount : '',
             description : '',
             parentFlag : false
         }
@@ -35,14 +36,27 @@ export class BookStoreHomePage extends Component {
         this.setState({parentFlag : getFlagValue, description : getDescription})
     }
 
+    getBooksCount = () => {
+        getCount().then((response) => {
+            console.log(response.data);
+            this.setState({totalBookCount : response.data})
+        })
+    }
+
     componentDidMount() {
         this.displayBooks();
+        this.getBooksCount();
     }
 
     render() {
         return (
             <div className="container1">
                 <NavigationBar/>
+                <div className="count-and-filter-container">
+                    <div className="count-and-filter">
+                        <h2>Books<a className="book-count">({this.state.totalBookCount} items)</a></h2>
+                    </div>
+                </div>
                 <div id="tooltip" className={this.state.parentFlag === true ? 'visible' : 'hidden'}>
                     <div className="description">
                         <h2>Book Detail</h2>
@@ -53,7 +67,7 @@ export class BookStoreHomePage extends Component {
                     {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails} valueSender={this.getBookDetails} /> )}
                 </div>
                 <div className="pagination">
-                    <Pagination count={10} shape="rounded" onChange={this.handleChange} />
+                    <Pagination count={2} shape="rounded" onChange={this.handleChange} />
                 </div>
                 <div className="userfooter">
                     <BookStoreFooter/>

@@ -50,7 +50,7 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -81%);
+    transform: translate(-50%, -66%);
     background-color: #F0F0F0;
     z-index: 9999;
     height: 50%;
@@ -71,4 +71,22 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
 .description {
     width : 95%;
     height: 95%;
+}
+
+.count-and-filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+}
+
+.count-and-filter {
+    width: 79%;
+    margin-top: 26px;
+}
+
+.book-count {
+    font-size: 15px;
+    color: grey;
+    margin: 5px;
 }
