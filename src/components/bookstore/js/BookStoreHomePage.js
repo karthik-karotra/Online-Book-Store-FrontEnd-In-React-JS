@@ -12,7 +12,9 @@ export class BookStoreHomePage extends Component {
         super(props);
         this.state = {
             bookDetails : [],
-            pageValue : 0
+            pageValue : 0,
+            description : '',
+            parentFlag : false
         }
     }
 
@@ -29,6 +31,10 @@ export class BookStoreHomePage extends Component {
         this.setState({pageValue : value-1}, () => {this.displayBooks()})
     }
 
+    getBookDetails = (getFlagValue, getDescription) => {
+        this.setState({parentFlag : getFlagValue, description : getDescription})
+    }
+
     componentDidMount() {
         this.displayBooks();
     }
@@ -37,8 +43,14 @@ export class BookStoreHomePage extends Component {
         return (
             <div className="container1">
                 <NavigationBar/>
+                <div id="tooltip" className={this.state.parentFlag === true ? 'visible' : 'hidden'}>
+                    <div className="description">
+                        <h2>Book Detail</h2>
+                        <p>{this.state.description}</p>
+                    </div>
+                </div>
                 <div className="flex-container">
-                    {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails}/> )}
+                    {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails} valueSender={this.getBookDetails} /> )}
                 </div>
                 <div className="pagination">
                     <Pagination count={10} shape="rounded" onChange={this.handleChange} />

@@ -45,3 +45,30 @@
 button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPaginationItem-rounded.Mui-selected{
     background-color: rgb(150, 0, 0);
 }
+
+#tooltip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -81%);
+    background-color: #F0F0F0;
+    z-index: 9999;
+    height: 50%;
+    width: 38.2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.description {
+    width : 95%;
+    height: 95%;
+}
