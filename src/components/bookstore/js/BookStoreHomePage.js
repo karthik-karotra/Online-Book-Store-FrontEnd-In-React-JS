@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
 import NavigationBar from "./NavigationBar";
-import BookStoreFooter from "./BookStoreFooter";
-import './BookStoreHomePage.css'
+import BookStoreFooter from "../../util/js/BottomBar";
+import '../css/BookStoreHomePage.css'
 import CardView from "./CardView";
-import {getBooksFromDatabase} from "../../service/AxiosConfiguration";
+import {getBooksFromDatabase} from "../../../service/BookStoreAxiosService";
 import Pagination from "@material-ui/lab/Pagination";
-import axios from 'axios';
 
 export class BookStoreHomePage extends Component {
 
@@ -20,6 +19,7 @@ export class BookStoreHomePage extends Component {
     displayBooks = () => {
         getBooksFromDatabase(this.state.pageValue)
             .then((response) => {
+                console.log(response.data)
                 this.setState({bookDetails: response.data.bookList});
             })
             .catch((error) => {console.log(error)});

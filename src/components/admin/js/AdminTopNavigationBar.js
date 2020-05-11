@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import MenuBookIcon from "@material-ui/icons/MenuBookSharp";
-import "./AdminFrontPage.css";
+import "../css/AdminFrontPage.css";
 
 const useStyles = makeStyles(theme => ({
     grow: {},

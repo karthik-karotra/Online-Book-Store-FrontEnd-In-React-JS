@@ -2,20 +2,19 @@ import React from 'react'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
-import './CardView.css';
+import '../css/CardView.css';
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 class CardView extends React.Component {
-
     render() {
         return (
             <Card className="cards">
                 <CardActionArea>
                     <CardMedia
                         className="media"
-                        image={require(`../../images/${this.props.bookDetails.bookImage}`)}
+                        image={require(`../../../assests/images/${this.props.bookDetails.bookImage}`)}
                         title="Paella dish"
                     />
                 </CardActionArea>

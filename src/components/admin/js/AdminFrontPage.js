@@ -1,12 +1,13 @@
 import React from 'react';
-import './AdminFrontPage.css';
+import '../css/AdminFrontPage.css';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import AdminTopNavigationBar from "./AdminTopNavigationBar";
-import BottomBar from "../BottomBar";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
-import {addBookToDatabase} from "../../service/AxiosConfiguration";
+import {addBookToDatabase} from "../../../service/AdminAxiosService";
+import '../../bookstore/css/BookStoreHomePage.css'
+import BookStoreFooter from "../../util/js/BottomBar";
 
 class AdminFrontPage extends React.Component {
     constructor(props) {
@@ -463,11 +464,14 @@ class AdminFrontPage extends React.Component {
                                 <div className="buttonfont">Add Book</div>
                             </Button>
                         </div>
-                        <div>
-                            <BottomBar/>
-                        </div>
+                        {/*<div className="userfooter">*/}
+                        {/*    <BottomBar/>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
+                {/*<div className="userfooter">*/}
+                    <BookStoreFooter />
+                {/*</div>*/}
             </div>
         );
     }
