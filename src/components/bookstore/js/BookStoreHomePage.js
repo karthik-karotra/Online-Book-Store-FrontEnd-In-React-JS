@@ -55,7 +55,9 @@ export class BookStoreHomePage extends Component {
                 <NavigationBar/>
                 <div className="count-and-filter-container">
                     <div className="count-and-filter">
-                        <h2>Books<a className="book-count">({this.state.totalBookCount} items)</a></h2>
+                        <div className="count">
+                            <h2>Books<a className="book-count">({this.state.totalBookCount} items)</a></h2>
+                        </div>
                     </div>
                 </div>
                 <div id="tooltip" className={this.state.parentFlag === true ? 'visible' : 'hidden'}>
@@ -64,8 +66,10 @@ export class BookStoreHomePage extends Component {
                         <p>{this.state.description}</p>
                     </div>
                 </div>
-                <div className="flex-container">
-                    {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails} valueSender={this.getBookDetails} /> )}
+                <div className="flex-container-main">
+                    <div className="flex-container">
+                        {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails} valueSender={this.getBookDetails} /> )}
+                    </div>
                 </div>
                 <div className="pagination">
                     <Pagination count={Math.ceil(this.state.totalBookCount/this.state.bookPerPage)} shape="rounded" onChange={this.handleChange} />
