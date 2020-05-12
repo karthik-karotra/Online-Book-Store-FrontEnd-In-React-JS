@@ -1,15 +1,22 @@
 import Axios from "axios";
+import React from "react";
+import {displayBookURL, getBookCountURL} from "./Environment";
 
-export function getBooksFromDatabase(pageNo) {
-    return Axios({
-        method: 'get', headers: {"Content-Type": "application/json"},
-        url: "http://localhost:8080/books/"+pageNo,
-    })
+class BookStoreAxiosService extends React.Component {
+
+    getBooksFromDatabase(pageNo) {
+        return Axios({
+            method: 'get', headers: {"Content-Type": "application/json"},
+            url: displayBookURL + pageNo,
+        })
+    }
+
+    getCount() {
+        return Axios({
+            method: 'get', headers: {"Content-Type": "application/json"},
+            url: getBookCountURL,
+        })
+    }
 }
 
-export function getCount() {
-    return Axios({
-        method: 'get', headers: {"Content-Type": "application/json"},
-        url: "http://localhost:8080/books/count",
-    })
-}
+export default BookStoreAxiosService;

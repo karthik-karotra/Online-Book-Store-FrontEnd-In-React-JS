@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import AdminTopNavigationBar from "./AdminTopNavigationBar";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
-import {addBookToDatabase} from "../../../service/AdminAxiosService";
+import AdminAxiosService from "../../../service/AdminAxiosService";
 import '../../bookstore/css/BookStoreHomePage.css'
 import BookStoreFooter from "../../util/js/BottomBar";
 
@@ -127,7 +127,7 @@ class AdminFrontPage extends React.Component {
                     bookImageSource: imagePath,
                     publishingYear: this.state.publishingYear
                 }
-                addBookToDatabase(data).then((response) => {
+                new AdminAxiosService().addBookToDatabase(data).then((response) => {
                     console.log(response.data);
                     if (response.data.message == "ADDED SUCCESSFULLY") {
                         this.setState({

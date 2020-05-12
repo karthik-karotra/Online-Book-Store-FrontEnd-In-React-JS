@@ -3,7 +3,7 @@ import NavigationBar from "./NavigationBar";
 import BookStoreFooter from "../../util/js/BottomBar";
 import '../css/BookStoreHomePage.css'
 import CardView from "./CardView";
-import {getBooksFromDatabase, getCount} from "../../../service/BookStoreAxiosService";
+import BookStoreAxiosService from "../../../service/BookStoreAxiosService";
 import Pagination from "@material-ui/lab/Pagination";
 
 export class BookStoreHomePage extends Component {
@@ -21,7 +21,7 @@ export class BookStoreHomePage extends Component {
     }
 
     displayBooks = () => {
-        getBooksFromDatabase(this.state.pageValue)
+        new BookStoreAxiosService().getBooksFromDatabase(this.state.pageValue)
             .then((response) => {
                 console.log(response.data)
                 this.setState({bookDetails: response.data.bookList});
@@ -38,7 +38,7 @@ export class BookStoreHomePage extends Component {
     }
 
     getBooksCount = () => {
-        getCount().then((response) => {
+        new BookStoreAxiosService().getCount().then((response) => {
             console.log(response.data);
             this.setState({totalBookCount : response.data})
         })

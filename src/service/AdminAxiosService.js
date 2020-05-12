@@ -1,16 +1,16 @@
 import Axios from "axios";
+import React from "react";
+import {postURL} from "./Environment";
 
-export function addBookToDatabase(data) {
-    return Axios({
-        method: 'post', headers: {"Content-Type": "application/json"},
-        url: "http://localhost:8080/admin/book",
-        data: JSON.stringify(data),
-    })
+class AdminAxiosService extends React.Component{
+
+    addBookToDatabase(data) {
+        return Axios({
+            method: 'post', headers: {"Content-Type": "application/json"},
+            url: postURL,
+            data: JSON.stringify(data),
+        })
+    }
 }
 
-export function getBooksFromDatabase(pageNo) {
-    return Axios({
-        method: 'get', headers: {"Content-Type": "application/json"},
-        url: "http://localhost:8080/bookstore/list/"+pageNo,
-    })
-}
+export default AdminAxiosService
