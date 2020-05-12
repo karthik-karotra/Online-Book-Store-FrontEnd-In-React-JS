@@ -15,7 +15,8 @@ export class BookStoreHomePage extends Component {
             pageValue : 0,
             totalBookCount : '',
             description : '',
-            parentFlag : false
+            parentFlag : false,
+            bookPerPage : 12
         }
     }
 
@@ -67,7 +68,7 @@ export class BookStoreHomePage extends Component {
                     {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails} valueSender={this.getBookDetails} /> )}
                 </div>
                 <div className="pagination">
-                    <Pagination count={2} shape="rounded" onChange={this.handleChange} />
+                    <Pagination count={Math.ceil(this.state.totalBookCount/this.state.bookPerPage)} shape="rounded" onChange={this.handleChange} />
                 </div>
                 <div className="userfooter">
                     <BookStoreFooter/>
