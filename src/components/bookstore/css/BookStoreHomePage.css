@@ -25,7 +25,6 @@
     width: 84%;
     display: flex;
     flex-flow: wrap;
-    align-items: center;
     justify-content: flex-start;
     min-height: 683px;
 }

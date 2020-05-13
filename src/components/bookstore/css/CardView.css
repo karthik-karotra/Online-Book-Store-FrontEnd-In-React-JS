@@ -18,7 +18,7 @@ button.MuiButtonBase-root.MuiCardActionArea-root{
 
 .MuiCardMedia-root.media{
     width: 40%;
-    height: 160px;
+    height: 175px;
 }
 
 h6.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom {
@@ -45,12 +45,6 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
     background-color: rgb(145,10,10);
     width: 100%;
     border-radius: 0;
-}
-
-button.MuiButtonBase-root.MuiButton-root.MuiButton-contained:disabled{
-    border: 1px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
 }
 
 #centered {

@@ -12,18 +12,7 @@ class CardView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isVisible : false,
-            disable: false
-        }
-    }
-
-    componentDidMount() {
-        this.disableButton();
-    }
-
-    disableButton = () => {
-        if (this.props.bookDetails.quantity == 0) {
-            this.setState({disable : true})
+            isVisible : false
         }
     }
 
@@ -50,7 +39,8 @@ class CardView extends React.Component {
                     <Typography gutterBottom variant="h6">{this.props.bookDetails.bookName}</Typography>
                     <Typography variant="body2" color="textSecondary" component="p">by {this.props.bookDetails.authorName}</Typography>
                     <Typography gutterBottom variant="h6" component="h2">Rs. {this.props.bookDetails.bookPrice}</Typography>
-                    <Button variant="contained" disabled={this.state.disable}>
+                    <Button variant="contained" style={this.props.bookDetails.quantity == 0 ? {backgroundColor:"#cccccc",pointerEvents:"none",color:"black"} : {backgroundColor:"rgb(145,10,10)"}}
+                    >
                         Add To Bag
                     </Button>
                 </CardContent>
