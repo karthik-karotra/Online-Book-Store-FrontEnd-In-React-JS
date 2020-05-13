@@ -40,11 +40,17 @@ h2.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom {
     line-height: 3.35;
 }
 
-button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedSecondary {
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
     color: #fff;
     background-color: rgb(145,10,10);
     width: 100%;
     border-radius: 0;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained:disabled{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
 }
 
 #centered {
