@@ -1,39 +1,61 @@
 .bookIcon {
-    font-size: 36px;
-    padding: 0 0 0 10%;
+    padding: 0 0 0 9%;
+}
+
+svg.MuiSvgIcon-root.bookIcon{
+    font-size: 1.9rem;
 }
 
 .title {
     display: flex;
     padding-left: 1%;
-    font-size: 120%;
 }
 
 .search {
     position: relative;
-    border-radius: 1px;
+    border-radius: 2px;
     background-color: white;
-    text-align: center;
-    margin-left: 30px;
+    margin-left: 35px;;
     width: 30%;
 }
 
 .searchIcon {
-    width: 30px;
+    width: 40px;
     height: 100%;
     position: absolute;
-    pointer-events: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;
-    color: black;
+    color: gray;
 }
 
-.sectionDesktop {
-    display: none;
+.searchText {
+    width:91.6%;
+    margin-left: 41px;
 }
 
-.sectionMobile {
-    display: flex;
+@media only screen and (max-width: 414px) and (max-height: 812px ) {
+    .search {
+        background-color: rebeccapurple;
+        width: 9%;
+        height: 100%;
+    }
+    .searchIcon{
+        background-color: red;
+        width: 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .searchText {
+        background-color: white;
+        width:290px;
+        height: 40px;
+        padding :10px;
+        border: none;
+        outline: none;
+        display: none;
+    }
 }

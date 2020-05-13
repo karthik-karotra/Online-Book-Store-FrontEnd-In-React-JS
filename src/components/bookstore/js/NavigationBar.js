@@ -36,11 +36,12 @@ export default class Header extends React.Component {
                             <div className="searchIcon">
                                 <SearchIcon/>
                             </div>
-                            <InputBase
-                                placeholder="Search Your Book Here"
-                                value={this.state.searchText}
-                                onChange={this.handleChange}
-                            />
+                            <div className="searchText">
+                                <InputBase
+                                    placeholder="Search"
+                                    value={this.state.searchText}
+                                    onChange={this.handleChange}
+                                /></div>
                         </div>
                     </Toolbar>
                 </AppBar>
