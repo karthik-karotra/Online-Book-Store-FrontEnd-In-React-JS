@@ -28,7 +28,9 @@ export default class Header extends React.Component {
             <div>
                 <AppBar position="fixed" style={{backgroundColor: "rgb(150, 0, 0)"}}>
                     <Toolbar>
-                        <MenuBookIcon edge="start" className="bookIcon"/>
+                        <div className="logo">
+                            <MenuBookIcon edge="start" className="bookIcon"/>
+                        </div>
                         <Typography className="title" variant="h6" noWrap>
                             The Country Bookshop
                         </Typography>

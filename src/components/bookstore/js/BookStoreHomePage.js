@@ -5,6 +5,7 @@ import '../css/BookStoreHomePage.css'
 import CardView from "./CardView";
 import BookStoreAxiosService from "../../../service/BookStoreAxiosService";
 import Pagination from "@material-ui/lab/Pagination";
+import NativeSelect from "@material-ui/core/NativeSelect";
 
 export class BookStoreHomePage extends Component {
 
@@ -97,6 +98,16 @@ export class BookStoreHomePage extends Component {
                     <div className="count-and-filter">
                         <div className="count">
                             <h2>Books<a className="book-count">({this.state.totalBookCount} items)</a></h2>
+                        </div>
+                        <div className="filterstyle">
+                            <NativeSelect className="selectfield"
+                                          id="demo-customized-select-native"
+                            >
+                                <option aria-label="sort" selected value=" " >Sort by Relevance </option>
+                                <option>Price:Low To High</option>
+                                <option>Price:High To Low</option>
+                                <option>Newest Arrivals</option>
+                            </NativeSelect>
                         </div>
                     </div>
                 </div>

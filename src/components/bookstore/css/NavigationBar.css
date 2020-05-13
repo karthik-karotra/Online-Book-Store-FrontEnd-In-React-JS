@@ -1,9 +1,15 @@
 .bookIcon {
     padding: 0 0 0 9%;
 }
-
 svg.MuiSvgIcon-root.bookIcon{
-    font-size: 1.9rem;
+    font-size: 2.5rem;
+}
+.logo{
+    width: 10%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
 }
 
 .title {
