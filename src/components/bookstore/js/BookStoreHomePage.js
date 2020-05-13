@@ -20,6 +20,9 @@ export class BookStoreHomePage extends Component {
             bookPerPage: 12,
             searchText: '',
             searchFlag: false,
+            selectedFilter: '',
+            filter: [{label: 'Price: Low To High',sortBy:'bookPrice',sortDirection:'ascending'},{label: 'Price: High To Low',sortBy:'bookPrice',sortDirection:'descending'},{label: 'Newest Arrivals',sortBy:'publishingYear',sortDirection:'descending'}],
+            filterFlag: false
         }
     }
 
@@ -37,7 +40,7 @@ export class BookStoreHomePage extends Component {
     }
 
     handleChange = (event, value) => {
-        if (this.state.searchFlag == false) {
+        if (this.state.searchFlag == false && this.state.filterFlag == false ) {
             this.setState({pageValue: value - 1}, () => {
                 this.displayBooks()
             })
@@ -46,6 +49,12 @@ export class BookStoreHomePage extends Component {
         if (this.state.searchFlag == true) {
             this.setState({pageValue: value - 1}, () => {
                 this.displaySearchedBook()
+            })
+        }
+
+        if( this.state.filterFlag == true){
+            this.setState({pageValue: value - 1}, () => {
+                this.displayFilterBook()
             })
         }
     }
@@ -85,6 +94,22 @@ export class BookStoreHomePage extends Component {
         }
     }
 
+    handleFilter = (event) => {
+        console.log(event.target.value)
+        this.setState({selectedFilter: event.target.value, filterFlag: true }, () => {this.displayFilterBook()})
+    }
+
+    displayFilterBook = () => {
+        new BookStoreAxiosService().getFilterBooks(this.state.pageValue, this.state.filter[this.state.selectedFilter].sortBy, this.state.filter[this.state.selectedFilter].sortDirection)
+            .then((response) => {
+                console.log(response.data)
+                this.setState({bookDetails: response.data.content, totalBookCount: response.data.totalElements});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     componentDidMount() {
         this.displayBooks();
         this.getBooksCount();
@@ -102,11 +127,11 @@ export class BookStoreHomePage extends Component {
                         <div className="filterstyle">
                             <NativeSelect className="selectfield"
                                           id="demo-customized-select-native"
+                                          onChange={this.handleFilter}
+                                          value={this.state.selectedFilter}
                             >
                                 <option aria-label="sort" selected value=" " >Sort by Relevance </option>
-                                <option>Price:Low To High</option>
-                                <option>Price:High To Low</option>
-                                <option>Newest Arrivals</option>
+                                {this.state.filter.map((data, index) => <option value={index}>{data.label}</option>)}
                             </NativeSelect>
                         </div>
                     </div>

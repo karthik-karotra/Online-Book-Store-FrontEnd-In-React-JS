@@ -22,11 +22,13 @@
 }
 
 .flex-container {
-    width: 84%;
+    /*width: 84%;*/
     display: flex;
     flex-flow: wrap;
     justify-content: flex-start;
     min-height: 683px;
+    width:100%;
+    padding-left: 70px;
 }
 
 .flex-container > div {
