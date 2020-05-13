@@ -2,7 +2,7 @@ import Axios from "axios";
 import React from "react";
 import {postURL} from "./Environment";
 
-class AdminAxiosService extends React.Component{
+class AdminAxiosService extends React.Component {
 
     addBookToDatabase(data) {
         return Axios({

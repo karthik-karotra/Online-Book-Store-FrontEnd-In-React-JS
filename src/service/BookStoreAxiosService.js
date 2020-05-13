@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React from "react";
-import {displayBookURL, getBookCountURL} from "./Environment";
+import {displayBookURL, getBookCountURL, getSearchBookURL} from "./Environment";
 
 class BookStoreAxiosService extends React.Component {
 
@@ -15,6 +15,13 @@ class BookStoreAxiosService extends React.Component {
         return Axios({
             method: 'get', headers: {"Content-Type": "application/json"},
             url: getBookCountURL,
+        })
+    }
+
+    getSearchedBooks(pageNo, searchText) {
+        return Axios({
+            method: 'get', headers: {"Content-Type": "application/json"},
+            url: getSearchBookURL + pageNo + "/" + searchText,
         })
     }
 }

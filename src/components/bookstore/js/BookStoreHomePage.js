@@ -11,12 +11,14 @@ export class BookStoreHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookDetails : [],
-            pageValue : 0,
-            totalBookCount : '',
-            description : '',
-            parentFlag : false,
-            bookPerPage : 12
+            bookDetails: [],
+            pageValue: 0,
+            totalBookCount: '',
+            description: '',
+            parentFlag: false,
+            bookPerPage: 12,
+            searchText: '',
+            searchFlag: false,
         }
     }
 
@@ -24,24 +26,62 @@ export class BookStoreHomePage extends Component {
         new BookStoreAxiosService().getBooksFromDatabase(this.state.pageValue)
             .then((response) => {
                 console.log(response.data)
-                this.setState({bookDetails: response.data.bookList});
+                this.setState({bookDetails: response.data.bookList}, () => {
+                    this.getBooksCount()
+                });
             })
-            .catch((error) => {console.log(error)});
+            .catch((error) => {
+                console.log(error)
+            });
     }
 
     handleChange = (event, value) => {
-        this.setState({pageValue : value-1}, () => {this.displayBooks()})
+        if (this.state.searchFlag == false) {
+            this.setState({pageValue: value - 1}, () => {
+                this.displayBooks()
+            })
+        }
+
+        if (this.state.searchFlag == true) {
+            this.setState({pageValue: value - 1}, () => {
+                this.displaySearchedBook()
+            })
+        }
+    }
+
+    displaySearchedBook = () => {
+        new BookStoreAxiosService().getSearchedBooks(this.state.pageValue, this.state.searchText)
+            .then((response) => {
+                console.log(response.data)
+                this.setState({bookDetails: response.data.content, totalBookCount: response.data.totalElements});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
     }
 
     getBookDetails = (getFlagValue, getDescription) => {
-        this.setState({parentFlag : getFlagValue, description : getDescription})
+        this.setState({parentFlag: getFlagValue, description: getDescription})
     }
 
     getBooksCount = () => {
         new BookStoreAxiosService().getCount().then((response) => {
             console.log(response.data);
-            this.setState({totalBookCount : response.data})
+            this.setState({totalBookCount: response.data})
         })
+    }
+
+    sendSearchedText = (text) => {
+        if (text == "") {
+            this.setState({searchFlag: false}, () => {
+                this.displayBooks()
+            })
+        }
+        if (text != "") {
+            this.setState({searchText: text, searchFlag: true}, () => {
+                this.displaySearchedBook()
+            })
+        }
     }
 
     componentDidMount() {
@@ -52,7 +92,7 @@ export class BookStoreHomePage extends Component {
     render() {
         return (
             <div className="container1">
-                <NavigationBar/>
+                <NavigationBar getSearchedText={this.sendSearchedText}/>
                 <div className="count-and-filter-container">
                     <div className="count-and-filter">
                         <div className="count">
@@ -68,11 +108,13 @@ export class BookStoreHomePage extends Component {
                 </div>
                 <div className="flex-container-main">
                     <div className="flex-container">
-                        {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails} valueSender={this.getBookDetails} /> )}
+                        {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails}
+                                                                             valueSender={this.getBookDetails}/>)}
                     </div>
                 </div>
                 <div className="pagination">
-                    <Pagination count={Math.ceil(this.state.totalBookCount/this.state.bookPerPage)} shape="rounded" onChange={this.handleChange} />
+                    <Pagination count={Math.ceil(this.state.totalBookCount / this.state.bookPerPage)} shape="rounded"
+                                onChange={this.handleChange}/>
                 </div>
                 <div className="userfooter">
                     <BookStoreFooter/>

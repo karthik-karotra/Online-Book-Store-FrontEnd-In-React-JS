@@ -1,0 +1,39 @@
+.bookIcon {
+    font-size: 36px;
+    padding: 0 0 0 10%;
+}
+
+.title {
+    display: flex;
+    padding-left: 1%;
+    font-size: 120%;
+}
+
+.search {
+    position: relative;
+    border-radius: 1px;
+    background-color: white;
+    text-align: center;
+    margin-left: 30px;
+    width: 30%;
+}
+
+.searchIcon {
+    width: 30px;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    color: black;
+}
+
+.sectionDesktop {
+    display: none;
+}
+
+.sectionMobile {
+    display: flex;
+}
