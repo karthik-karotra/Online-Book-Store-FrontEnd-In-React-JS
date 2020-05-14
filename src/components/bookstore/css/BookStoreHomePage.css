@@ -151,3 +151,156 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
         width: 90%;
     }
 }
+.container1 {
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    position: relative;
+    height: 100%;
+}
+
+.navbar {
+    width: 100%;
+    height: 8%;
+    position: sticky;
+    z-index: 9999;
+}
+
+.flex-container-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.flex-container {
+    width: 81.3%;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: flex-start;
+    min-height: 589px;
+}
+
+.flex-container > div {
+    width: 300px;
+    margin: 20px;
+    height: 380px;
+    border: 1px solid #F0F0F0;
+}
+
+.userfooter {
+    width: 100%;
+    height: 50%;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+}
+
+button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPaginationItem-rounded.Mui-selected{
+    background-color: rgb(150, 0, 0);
+}
+
+#tooltip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -66%);
+    background-color: #F0F0F0;
+    z-index: 9999;
+    height: 50%;
+    width: 38.2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.description {
+    width : 95%;
+    height: 95%;
+}
+
+.count-and-filter-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 60px;
+}
+
+.count-and-filter {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 81.3%;
+}
+
+.count {
+    width: 300px;
+    margin: 20px;
+    height: 30px;
+}
+
+.book-count {
+    font-size: 15px;
+    color: grey;
+    margin: 5px;
+}
+
+.filterstyle{
+    width: 300px;
+    margin: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.selectfield{
+    background-color: white;
+    width:70%;
+    border: 2px solid #F0F0F0;
+    border-radius: 0.5px;
+    overflow: hidden;
+    padding-left: 5px;
+    height: 12%;
+    font-family: "Arial Rounded MT Bold";
+}
+
+@media only screen and (max-width: 414px) and (max-height: 812px ) {
+    .flex-container {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .count-and-filter{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .selectfield{
+        width: 100%;
+        height: 10%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (min-height: 1024px ) {
+
+    .flex-container {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+}

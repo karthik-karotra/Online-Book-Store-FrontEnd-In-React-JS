@@ -65,3 +65,77 @@ svg.MuiSvgIcon-root.bookIcon{
         display: none;
     }
 }
+.bookIcon {
+    padding: 0 0 0 9%;
+}
+
+svg.MuiSvgIcon-root.bookIcon{
+    font-size: 1.9rem;
+}
+
+h6.MuiTypography-root.title.MuiTypography-h6.MuiTypography-noWrap{
+    width:207px;
+}
+
+.title {
+    display: flex;
+    padding-left: 1%;
+}
+
+.search {
+    position: relative;
+    border-radius: 2px;
+    background-color: white;
+    margin-left: 35px;;
+    width: 30%;
+}
+
+.searchIcon {
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+}
+
+.searchText {
+    width:91.6%;
+    margin-left: 41px;
+}
+
+@media only screen and (max-width: 414px) and (max-height: 812px ) {
+
+    svg.MuiSvgIcon-root.bookIcon{
+        font-size: 1.5rem;
+    }
+
+    h6.MuiTypography-root.title.MuiTypography-h6.MuiTypography-noWrap{
+        font-size: 1.1rem;
+    }
+
+    .search {
+        background-color: rebeccapurple;
+        width: 9%;
+        height: 100%;
+    }
+    .searchIcon{
+        background-color: red;
+        width: 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .searchText {
+        background-color: white;
+        width:290px;
+        height: 40px;
+        padding :10px;
+        border: none;
+        outline: none;
+        display: none;
+    }
+}
