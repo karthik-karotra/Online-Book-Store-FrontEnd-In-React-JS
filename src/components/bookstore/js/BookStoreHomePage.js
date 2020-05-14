@@ -19,10 +19,11 @@ export class BookStoreHomePage extends Component {
             parentFlag: false,
             bookPerPage: 12,
             searchText: '',
+            searchValue: ' ',
             searchFlag: false,
-            selectedFilter: '',
-            filter: [{label: 'Price: Low To High',sortBy:'bookPrice',sortDirection:'ascending'},{label: 'Price: High To Low',sortBy:'bookPrice',sortDirection:'descending'},{label: 'Newest Arrivals',sortBy:'publishingYear',sortDirection:'descending'}],
-            filterFlag: false
+            selectedSearchAndFilter: '',
+            searchAndFilter: ["LOW_TO_HIGH","HIGH_TO_LOW","NEWEST_ARRIVALS"],
+            searchAndFilterFlag: false
         }
     }
 
@@ -40,21 +41,21 @@ export class BookStoreHomePage extends Component {
     }
 
     handleChange = (event, value) => {
-        if (this.state.searchFlag == false && this.state.filterFlag == false ) {
+        if (this.state.searchFlag == false && this.state.searchAndFilterFlag == false) {
             this.setState({pageValue: value - 1}, () => {
                 this.displayBooks()
             })
         }
 
-        if (this.state.searchFlag == true) {
+        if (this.state.searchFlag == true && this.state.searchAndFilterFlag == false)  {
             this.setState({pageValue: value - 1}, () => {
                 this.displaySearchedBook()
             })
         }
 
-        if( this.state.filterFlag == true){
+        if( this.state.searchAndFilterFlag == true){
             this.setState({pageValue: value - 1}, () => {
-                this.displayFilterBook()
+                this.displaySearchAndFilterBook()
             })
         }
     }
@@ -83,27 +84,36 @@ export class BookStoreHomePage extends Component {
 
     sendSearchedText = (text) => {
         if (text == "") {
-            this.setState({searchFlag: false}, () => {
+            this.setState({searchFlag: false, searchValue: ' '}, () => {
                 this.displayBooks()
             })
         }
         if (text != "") {
-            this.setState({searchText: text, searchFlag: true}, () => {
-                this.displaySearchedBook()
+            this.setState({searchText: text, searchFlag: true, searchValue: text}, () => {
+                this.deciderOnlySearchOrSearchSort();
             })
+        }
+    }
+
+    deciderOnlySearchOrSearchSort = () => {
+        if(this.state.searchFlag == true && this.state.searchAndFilterFlag == false) {
+            this.displaySearchedBook();
+        }
+        if(this.state.searchFlag == true && this.state.searchAndFilterFlag == true) {
+            this.displaySearchAndFilterBook();
         }
     }
 
     handleFilter = (event) => {
         console.log(event.target.value)
-        this.setState({selectedFilter: event.target.value, filterFlag: true }, () => {this.displayFilterBook()})
+        this.setState({selectedSearchAndFilter: event.target.value, searchAndFilterFlag: true}, () => {this.displaySearchAndFilterBook()})
     }
 
-    displayFilterBook = () => {
-        new BookStoreAxiosService().getFilterBooks(this.state.pageValue, this.state.filter[this.state.selectedFilter].sortBy, this.state.filter[this.state.selectedFilter].sortDirection)
+    displaySearchAndFilterBook = () => {
+        new BookStoreAxiosService().getSearchAndFilterBooks(this.state.pageValue, this.state.searchValue, this.state.selectedSearchAndFilter)
             .then((response) => {
                 console.log(response.data)
-                this.setState({bookDetails: response.data.content, totalBookCount: response.data.totalElements});
+                this.setState({bookDetails: response.data});
             })
             .catch((error) => {
                 console.log(error)
@@ -128,10 +138,11 @@ export class BookStoreHomePage extends Component {
                             <NativeSelect className="selectfield"
                                           id="demo-customized-select-native"
                                           onChange={this.handleFilter}
+                                          onClick={this.handleFilter}
                                           value={this.state.selectedFilter}
                             >
                                 <option aria-label="sort" selected value=" " >Sort by Relevance </option>
-                                {this.state.filter.map((data, index) => <option value={index}>{data.label}</option>)}
+                                {this.state.searchAndFilter.map((data) => <option value={data}>{data}</option>)}
                             </NativeSelect>
                         </div>
                     </div>

@@ -1,6 +1,12 @@
 import Axios from "axios";
 import React from "react";
-import {displayBookURL, getBookCountURL, getFilterBookURL, getSearchBookURL} from "./Environment";
+import {
+    displayBookURL,
+    getBookCountURL,
+    getFilterBookURL,
+    getSearchAndFilterBookURL,
+    getSearchBookURL
+} from "./Environment";
 
 class BookStoreAxiosService extends React.Component {
 
@@ -24,12 +30,14 @@ class BookStoreAxiosService extends React.Component {
             url: getSearchBookURL + pageNo + "/" + searchText,
         })
     }
-    getFilterBooks(pageNo, sortBy, sortDirection) {
+    getSearchAndFilterBooks(pageNo, searchText, filterAttributes) {
         return Axios({
             method: 'get', headers: {"Content-Type": "application/json"},
-            url: getFilterBookURL + pageNo + "/" + sortBy + "/" + sortDirection,
+            url: getSearchAndFilterBookURL + pageNo + "/" + searchText + "/" + filterAttributes,
         })
     }
+
+
 }
 
 export default BookStoreAxiosService;
