@@ -288,6 +288,7 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
         width: 100%;
         align-items: center;
         justify-content: center;
+        flex-direction: column-reverse;
     }
 
     .selectfield{
