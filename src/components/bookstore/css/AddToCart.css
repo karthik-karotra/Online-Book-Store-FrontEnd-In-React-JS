@@ -1,0 +1,73 @@
+.flex-container-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 100%;
+    margin-left: 100px;
+    margin-top: 70px;
+}
+.flex-container {
+    flex-flow: wrap;
+    justify-content: flex-start;
+    min-height: 683px;
+    width:100%;
+    padding-left: 70px;
+}
+.card1{
+    width:950px;
+    height: 250px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-top: 20px;
+    border: 1px solid gray;
+}
+
+.card2{
+    position: relative;
+    width:950px;
+    min-height: 70px;
+    height: auto;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    border: 1px solid gray;
+}
+.card3{
+    width:950px;
+    height: 70px;
+    margin-left: 30px;
+    border: 1px solid gray;
+}
+.myCart{
+    font-weight: bold;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+.image{
+    padding-left: 40px;
+    width: 80px;
+    height: 100px;
+}
+.bookName{
+    margin-left: 80px;
+    font-size:  17px;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+.authorName{
+    margin-left: 80px;
+    font-weight: 40;
+    padding-bottom: 5px;
+}
+.price{
+    margin-left: 80px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.div1a{
+    float: left;
+}
+.div1b{
+    float: left;
+}
