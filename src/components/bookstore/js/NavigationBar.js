@@ -46,6 +46,9 @@ export default class Header extends React.Component {
                                     onChange={this.handleChange}
                                 /></div>
                         </div>
+                        <div className="addtocarticon">
+                            <LocalGroceryStoreIcon className="carticon"/>
+                        </div>
                     </Toolbar>
                 </AppBar>
             </div>
