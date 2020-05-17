@@ -1,20 +1,32 @@
-.bookIcon {
-    padding: 0 0 0 9%;
+element.style {
 }
+
+.maintoolbar{
+    width:84%;
+    height: fit-content;
+    margin-left: 14%;
+}
+
 svg.MuiSvgIcon-root.bookIcon{
-    font-size: 2.5rem;
+    font-size: 2.0rem;
+    margin-top: 9px;
 }
+
+h6.MuiTypography-root.title.MuiTypography-h6.MuiTypography-noWrap{
+    width:207px;
+}
+
 .logo{
-    width: 10%;
+    width: 5%;
     height: 50px;
     display: flex;
     justify-content: flex-end;
-    padding-top: 10px;
 }
 
 .title {
     display: flex;
     padding-left: 1%;
+    width: 18%;
 }
 
 .search {
@@ -22,7 +34,7 @@ svg.MuiSvgIcon-root.bookIcon{
     border-radius: 2px;
     background-color: white;
     margin-left: 35px;;
-    width: 30%;
+    width: 42%;
 }
 
 .searchIcon {
@@ -41,11 +53,19 @@ svg.MuiSvgIcon-root.bookIcon{
 }
 
 @media only screen and (max-width: 414px) and (max-height: 812px ) {
+    .maintoolbar{
+        width:80%;
+        height: fit-content;
+        margin-left: -1%;
+
+    }
+
     .search {
         background-color: rebeccapurple;
         width: 9%;
         height: 100%;
     }
+
     .searchIcon{
         background-color: red;
         width: 20px;
@@ -64,45 +84,6 @@ svg.MuiSvgIcon-root.bookIcon{
         outline: none;
         display: none;
     }
-}
-.bookIcon {
-    padding: 0 0 0 9%;
-}
-
-svg.MuiSvgIcon-root.bookIcon{
-    font-size: 1.9rem;
-}
-
-h6.MuiTypography-root.title.MuiTypography-h6.MuiTypography-noWrap{
-    width:207px;
-}
-
-.title {
-    display: flex;
-    padding-left: 1%;
-}
-
-.search {
-    position: relative;
-    border-radius: 2px;
-    background-color: white;
-    margin-left: 35px;;
-    width: 30%;
-}
-
-.searchIcon {
-    width: 40px;
-    height: 100%;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: gray;
-}
-
-.searchText {
-    width:91.6%;
-    margin-left: 41px;
 }
 
 @media only screen and (max-width: 414px) and (max-height: 812px ) {

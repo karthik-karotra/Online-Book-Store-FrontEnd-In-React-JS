@@ -6,6 +6,7 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import Typography from "@material-ui/core/Typography";
 import MenuBookIcon from "@material-ui/icons/MenuBookSharp";
+import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 import '../css/NavigationBar.css'
 
 export default class Header extends React.Component {
@@ -27,7 +28,7 @@ export default class Header extends React.Component {
         return (
             <div>
                 <AppBar position="fixed" style={{backgroundColor: "rgb(150, 0, 0)"}}>
-                    <Toolbar>
+                    <Toolbar className="maintoolbar">
                         <div className="logo">
                             <MenuBookIcon edge="start" className="bookIcon"/>
                         </div>
@@ -36,7 +37,7 @@ export default class Header extends React.Component {
                         </Typography>
                         <div className="search">
                             <div className="searchIcon">
-                                <SearchIcon/>
+                                <SearchIcon />
                             </div>
                             <div className="searchText">
                                 <InputBase
