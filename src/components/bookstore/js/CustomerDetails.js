@@ -2,7 +2,7 @@ import React from 'react';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-import './CustomerDetails.css';
+import './../css/CustomerDetails.css';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
@@ -168,7 +168,7 @@ class CustomerDetails extends React.Component {
             status2:true,
             helpertext2:'Required*'
         })
-        var phoneNumberPattern=/^(\+\d{1,3}[- ]?)?\d{10}$/;
+        var phoneNumberPattern=/^[6-9]{1}[0-9]{9}$/;
         this.setState({
             phoneNumber: this.state.phoneNumber.trim()
         })
@@ -176,7 +176,7 @@ class CustomerDetails extends React.Component {
             if(phoneNumberPattern.test(this.state.phoneNumber)==false){
                 this.setState({
                     status2:true,
-                    helpertext2:'Mobile Number Should Be 10 Digit',
+                    helpertext2:'Enter Valid Mobile Number',
                 })
             } else{
                 this.setState({
@@ -202,7 +202,7 @@ class CustomerDetails extends React.Component {
                     status3:true,
                     helpertext3:'Pincode Should Be 6 Digit',
                 })
-            } else{
+             } else{
                 this.setState({
                     status3:false,
                     helpertext3:' ',
@@ -309,37 +309,38 @@ class CustomerDetails extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="content">
-                    <div className="data">
+            <div className="customer-form-container">
+                <div className="form-content">
+                    <div className="customerdetail-textfield">
                         <TextField error={this.state.status1} className="input" id="outlined-basic" value={this.state.customerName} label="Name" variant="outlined"
                                    helperText={this.state.helpertext1} onClick={this.handleChange} onChange={this.handleChange} name="customerName"/>
                         <TextField error={this.state.status2} className="input" id="outlined-basic" label="Phone Number" variant="outlined"
-                                   helperText={this.state.helpertext2} onClick={this.handleChange} onChange={this.handleChange} name="phoneNumber"/>
+                                   value={this.state.phoneNumber} helperText={this.state.helpertext2} onClick={this.handleChange} onChange={this.handleChange} name="phoneNumber"/>
                     </div>
-                    <div className="data">
-                        <TextField error={this.state.status3} className="input" id="outlined-basic" label="Pincode" variant="outlined"
-                                   helperText={this.state.helpertext3} onChange={this.handleChange} onClick={this.onChange} name="pinCode"/>
+                    <div className="customerdetail-textfield">
+                        <TextField error={this.state.status3} className="input" id="outlined-basic" label="Pincode" variant="outlined" autoComplete="off"
+                                   value={this.state.pinCode} helperText={this.state.helpertext3} onChange={this.handleChange} onClick={this.handleChange} name="pinCode"/>
                         <TextField error={this.state.status4} className="input" id="outlined-basic" label="Locality" variant="outlined"
-                                   helperText={this.state.helpertext4} onChange={this.handleChange} onClick={this.handleChange} name="locality"/>
+                                   value={this.state.locality} helperText={this.state.helpertext4} onChange={this.handleChange} onClick={this.handleChange} name="locality"/>
                     </div>
-                    <div className="data2">
-                        <TextField error={this.state.status5} className="input"
+                    <div className="customerdetail-address">
+                        <TextField error={this.state.status5} className="input1"
                                    id="outlined-multiline-flexible" label="Address"
+                                   style={{width:"42.1%"}}
                                    placeholder="Maximum 250 Characters"  multiline rowsMax={3} variant="outlined"
                                    helperText={this.state.helpertext5}
                                    onClick={this.handleChange}
                                    onChange={this.handleChange}
                                    name="address"/>
                     </div>
-                    <div className="data">
-                        <TextField error={this.state.status6} className="input" id="outlined-basic" label="City Town" variant="outlined"
+                    <div className="customerdetail-textfield">
+                        <TextField error={this.state.status6} className="input" id="outlined-basic" label="City/Town" variant="outlined"
                                    helperText={this.state.helpertext6} onClick={this.handleChange} onChange={this.handleChange} name="cityTown"/>
                         <TextField error={this.state.status7} className="input" id="outlined-basic" label="Landmark" variant="outlined"
                                    helperText={this.state.helpertext7} onChange={this.handleChange} onClick={this.handleChange}
                                    name="landmark"/>
                     </div>
-                    <div className="div1">
+                    <div className="radio-button-div">
                         <div className="form">
                             <FormLabel component="legend" className="formlabel">Type </FormLabel>
                         </div>
@@ -351,8 +352,8 @@ class CustomerDetails extends React.Component {
                             </div>
                         </RadioGroup>
                     </div>
-                    <div className="data3">
-                        <Button className="button" variant="contained"
+                    <div className="customerdetail-button">
+                        <Button className="cart-button" variant="contained"
                                 onClick={this.handleSubmmit} style={{backgroundColor: "rgb(145,10,10)"}}>
                             <div className="buttonfont">Continue</div>
                         </Button>
