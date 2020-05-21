@@ -11,7 +11,7 @@ export default class DefaultRoutes extends React.Component {
                 <Switch>
                     <Route path={"/admin"} exact component={AdminFrontPage}/>
                     <Route path={"/homepage"} exact component={BookStoreHomePage}/>
-                    <Route path={"/addtocart"} exact component={AddToCart}/>
+                    <Route path={"/cart"} exact component={AddToCart}/>
                 </Switch>
             </BrowserRouter>
         );

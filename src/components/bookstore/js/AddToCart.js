@@ -1,56 +1,70 @@
 import React from 'react';
 import './../css/AddToCart.css';
 import Button from '@material-ui/core/Button'
-import ak from '../../../assests/images/1-world-best-bf.jpg'
 import CustomerDetails from './CustomerDetails';
 import NavigationBar from "./NavigationBar";
 import BookStoreFooter from "../../util/js/BottomBar";
+import MyCart from "./MyCart";
+import OrderSummary from "./OrderSummary";
 
 class AddToCart extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            myClassName:'cust-details',
-            myClassName2:'placeOrder1'
+            setButtonVisibility: 'visible',
+            setFormVisibility: 'customer-form-disable',
+            setOrderSummaryContainerVisibility: 'books-disable',
+            setOrderSummaryButtonVisibility: 'place-order-button-disable'
         }
     }
-    handlePlaceOrder=()=>{
-        this.setState({myClassName:'cust-details2',
-        myClassName2:'placeOrder2'
-        })
+
+    handlePlaceOrder = () => {
+        this.setState({setButtonVisibility: 'disable', setFormVisibility: 'customer-form'})
     }
+
+    updateOrderSummary = () => {
+        this.setState({ setOrderSummaryContainerVisibility: 'books', setOrderSummaryButtonVisibility: 'place-order-button' })
+    }
+
     render() {
         return (
-            <div className="header">
+            <div className="wrapper">
                 <NavigationBar />
-            <div className="card-container-main">
-                <div className="card-container">
-                    <div className="first-cart">
-                        <div className="myCart">My Cart (2)</div>
-                        <div className="main-division">
-                            <div className="subdivision-img">
-                                <img src={ak} alt="img" className="image" />
+                <div className="cart-body">
+                    <div className="cart-container">
+                        <div className="cart">
+                            <div className="header">
+                                <h3>My Cart(2)</h3>
                             </div>
-                            <div className="subdivision-details">
-                                <div className="bookName">Don't make me think</div>
-                                <div className="authorName">any...</div>
-                                <div className="price">Rs.1500</div>
+                            <div className="books">
+                                    <div className="book-details">
+                                        <MyCart />
+                                    </div>
+                            </div>
+                            <div className="place-order-button">
+                                <Button variant="contained" color="primary" className={this.state.setButtonVisibility} onClick={this.handlePlaceOrder}>Place Order</Button>
                             </div>
                         </div>
-                        <Button style={{ marginLeft: '600px' }} variant="contained" color="primary" className={this.state.myClassName2} onClick={this.handlePlaceOrder}>Place Order</Button>
-                    </div >
-                    <div className="second-cart">
-                        <h3 style={{ marginLeft: '40px', marginTop: '20px' }}>Customer Details</h3>
-                        <div className={this.state.myClassName}>
-                            <CustomerDetails />
+                        <div className="customer-details">
+                            <div className="header"><h3>Customer Details</h3></div>
+                            <div className={this.state.setFormVisibility}>
+                                <CustomerDetails setOrderSummaryDisplayFlag={this.updateOrderSummary} />
+                            </div>
                         </div>
-                    </div>
-                    <div className="third-cart">
-                        <h3 style={{ marginLeft: '40px', marginTop: '20px' }}>Order Summary </h3>
+                        <div className="order-summary">
+                            <div className="header"><h3>Order Summary</h3></div>
+                            <div className={this.state.setOrderSummaryContainerVisibility}>
+                                    <div className="book-details">
+                                        <OrderSummary />
+                                    </div>
+                            </div>
+                            <div className={this.state.setOrderSummaryButtonVisibility}>
+                                <Button variant="contained" color="primary" className='visible'>Checkout</Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-                <div className="userfooter">
+                <div className="cart-footer">
                     <BookStoreFooter/>
                 </div>
             </div>

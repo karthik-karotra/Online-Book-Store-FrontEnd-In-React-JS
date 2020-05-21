@@ -33,21 +33,23 @@ class CustomerDetails extends React.Component {
             landmark:"",
             status7:false,
             helpertext7:' ',
-            button1:''
+            button1:'',
+            radioDefaultValue: 'home',
+            disable: false,
+            buttonClassName: "cart-button-visible",
+            edits: 'edit-disable',
+            summaryFlag: false
         }
     }
 
-    reset=()=>{
-        this.setState({
-            customerName:"",
-            phoneNumber:"",
-            pinCode:"",
-            locality:"",
-            address:"",
-            cityTown:"",
-            landmark:"",
-        })
+    disabedForm = () => {
+        this.setState({disable: true, buttonClassName: "cart-button-disable", edits: 'edit'})
     }
+
+    enableForm = () => {
+        this.setState({disable: false, buttonClassName: "cart-button-visible", edits: 'edit-disable'})
+    }
+
     handleChange=({target})=>{
         if([target.name]=="customerName"){
             this.setState({[target.name]:target.value},
@@ -91,52 +93,64 @@ class CustomerDetails extends React.Component {
                     this.landmark()
                 });
         }
+        if([target.name]=="type"){
+            this.setState({radioDefaultValue:target.value})}
 
     };
 
-    handleSubmmit=()=>{
-        if(this.state.customerName.trim==""){
+    handleSubmits=()=>{
+        if(this.state.customerName.trim() == ""){
             this.setState({
                 status1:true,
                 helpertext1:'Required*'
             });
         }
-        if(this.state.phoneNumber.trim==""){
+        if(this.state.phoneNumber.trim() == ""){
             this.setState({
                 status2:true,
                 helpertext2:'Required*'
             });
         }
-        if(this.state.pinCode.trim==""){
+        if(this.state.pinCode.trim() == ""){
             this.setState({
                 status3:true,
                 helpertext3:'Required*'
             });
         }
-        if(this.state.locality.trim==""){
+        if(this.state.locality.trim() == ""){
             this.setState({
                 status4:true,
                 helpertext4:'Required*'
             });
         }
-        if(this.state.address.trim==""){
+        if(this.state.address.trim() == ""){
             this.setState({
                 status5:true,
                 helpertext5:'Required*'
             });
         }
-        if(this.state.cityTown.trim==""){
+        if(this.state.cityTown.trim() == ""){
             this.setState({
                 status6:true,
                 helpertext6:'Required*'
             });
         }
-        if(this.state.landmark.trim==""){
+        if(this.state.landmark.trim() == ""){
             this.setState({
                 status7:true,
                 helpertext7:'Required*'
             });
         }
+
+
+        if (this.state.customerName.trim() != "" && this.state.phoneNumber.trim() != "" && this.state.pinCode.trim() != "" && this.state.locality.trim() != "" && this.state.address.trim() != "" && this.state.cityTown.trim() != "" && this.state.landmark.trim() != "") {
+            if (this.state.status1 == false && this.state.status2 == false && this.state.status3 == false && this.state.status4 == false && this.state.status5 == false && this.state.status6 == false && this.state.status7 == false) {
+                this.disabedForm();
+                this.props.setOrderSummaryDisplayFlag();
+            }
+        }
+
+
     }
 
     customerName(){
@@ -202,7 +216,7 @@ class CustomerDetails extends React.Component {
                     status3:true,
                     helpertext3:'Pincode Should Be 6 Digit',
                 })
-             } else{
+            } else{
                 this.setState({
                     status3:false,
                     helpertext3:' ',
@@ -307,24 +321,29 @@ class CustomerDetails extends React.Component {
         }
     }
 
+
+
     render() {
         return (
             <div className="customer-form-container">
+                <div className={this.state.edits}><button className="edit-button" onClick={this.enableForm}>Edit</button></div>
                 <div className="form-content">
                     <div className="customerdetail-textfield">
-                        <TextField error={this.state.status1} className="input" id="outlined-basic" value={this.state.customerName} label="Name" variant="outlined"
-                                   helperText={this.state.helpertext1} onClick={this.handleChange} onChange={this.handleChange} name="customerName"/>
-                        <TextField error={this.state.status2} className="input" id="outlined-basic" label="Phone Number" variant="outlined"
-                                   value={this.state.phoneNumber} helperText={this.state.helpertext2} onClick={this.handleChange} onChange={this.handleChange} name="phoneNumber"/>
+                        <TextField error={this.state.status1} className="input" id="outlined-basic" value={this.state.customerName} label="Name" variant="outlined" autoComplete="off"
+                                   helperText={this.state.helpertext1} onClick={this.handleChange} onChange={this.handleChange} name="customerName" disabled={this.state.disable}/>
+                        <TextField error={this.state.status2} className="input" id="outlined-basic" label="Phone Number" variant="outlined" autoComplete="off"
+                                   value={this.state.phoneNumber} helperText={this.state.helpertext2} onClick={this.handleChange} onChange={this.handleChange} name="phoneNumber" disabled={this.state.disable} />
                     </div>
                     <div className="customerdetail-textfield">
                         <TextField error={this.state.status3} className="input" id="outlined-basic" label="Pincode" variant="outlined" autoComplete="off"
-                                   value={this.state.pinCode} helperText={this.state.helpertext3} onChange={this.handleChange} onClick={this.handleChange} name="pinCode"/>
-                        <TextField error={this.state.status4} className="input" id="outlined-basic" label="Locality" variant="outlined"
-                                   value={this.state.locality} helperText={this.state.helpertext4} onChange={this.handleChange} onClick={this.handleChange} name="locality"/>
+                                   value={this.state.pinCode} helperText={this.state.helpertext3} onChange={this.handleChange} onClick={this.handleChange} name="pinCode" disabled={this.state.disable}/>
+                        <TextField error={this.state.status4} className="input" id="outlined-basic" label="Locality" variant="outlined" autoComplete="off"
+                                   value={this.state.locality} helperText={this.state.helpertext4} onChange={this.handleChange} onClick={this.handleChange} name="locality" disabled={this.state.disable}/>
                     </div>
                     <div className="customerdetail-address">
                         <TextField error={this.state.status5} className="input1"
+                                   disabled={this.state.disable}
+                                   autoComplete="off"
                                    id="outlined-multiline-flexible" label="Address"
                                    style={{width:"42.1%"}}
                                    placeholder="Maximum 250 Characters"  multiline rowsMax={3} variant="outlined"
@@ -334,9 +353,9 @@ class CustomerDetails extends React.Component {
                                    name="address"/>
                     </div>
                     <div className="customerdetail-textfield">
-                        <TextField error={this.state.status6} className="input" id="outlined-basic" label="City/Town" variant="outlined"
+                        <TextField error={this.state.status6} className="input" id="outlined-basic" label="City/Town" variant="outlined" disabled={this.state.disable} autoComplete="off"
                                    helperText={this.state.helpertext6} onClick={this.handleChange} onChange={this.handleChange} name="cityTown"/>
-                        <TextField error={this.state.status7} className="input" id="outlined-basic" label="Landmark" variant="outlined"
+                        <TextField error={this.state.status7} className="input" id="outlined-basic" label="Landmark" variant="outlined" disabled={this.state.disable} autoComplete="off"
                                    helperText={this.state.helpertext7} onChange={this.handleChange} onClick={this.handleChange}
                                    name="landmark"/>
                     </div>
@@ -344,20 +363,20 @@ class CustomerDetails extends React.Component {
                         <div className="form">
                             <FormLabel component="legend" className="formlabel">Type </FormLabel>
                         </div>
-                        <RadioGroup aria-label="gender" name="gender1" onChange={this.handleChange}>
+                        <RadioGroup aria-label="type" name="type" value={this.state.radioDefaultValue} onChange={this.handleChange} >
                             <div className="radio">
-                                <FormControlLabel value="home" control={<Radio />} label="Home" />
-                                <FormControlLabel value="work" control={<Radio />} label="Work" />
-                                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                                <FormControlLabel value="home" disabled={this.state.disable} control={<Radio />} label="Home" />
+                                <FormControlLabel value="work" disabled={this.state.disable} control={<Radio />} label="Work" />
+                                <FormControlLabel value="other" disabled={this.state.disable} control={<Radio />} label="Other" />
                             </div>
                         </RadioGroup>
                     </div>
-                    <div className="customerdetail-button">
-                        <Button className="cart-button" variant="contained"
-                                onClick={this.handleSubmmit} style={{backgroundColor: "rgb(145,10,10)"}}>
-                            <div className="buttonfont">Continue</div>
-                        </Button>
-                    </div>
+                </div>
+                <div className="customerdetail-button">
+                    <Button className={this.state.buttonClassName} variant="contained"
+                            onClick={this.handleSubmits} color="primary">
+                        Continue
+                    </Button>
                 </div>
             </div>
         );

@@ -1,4 +1,4 @@
-.header{
+.wrapper{
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -6,99 +6,105 @@
     position: relative;
     height: 100%;
 }
-.card-container-main {
+
+.cart-body {
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
 }
-.card-container {
-    flex-flow: wrap;
-    justify-content: flex-start;
-    min-height: 683px;
-    width:90%;
-    padding-left: 145px;
+
+.cart-container {
+    width: 83%;
+    min-height: 709px;
 }
-.first-cart{
-    width:950px;
-    height: 250px;
-    margin-bottom: 20px;
-    margin-left: 30px;
-    margin-top: 20px;
-    border: 1px solid gray;
+
+.cart {
+    width: 60%;
+    min-height: 255px;
+    margin: 50px;
+    border: 1px solid #DCDCDC;
+    border-radius: 1px;
+    opacity: 1;
 }
-.second-cart{
-    position: relative;
-    width:950px;
-    min-height: 70px;
-    height: auto;
-    margin-bottom: 20px;
-    margin-left: 30px;
-    border: 1px solid gray;
+
+.header {
+    width: 100%;
+    margin-top: 17px;
 }
-.third-cart{
-    width:950px;
-    height: 70px;
-    margin-left: 30px;
-    border: 1px solid gray;
-}
-.myCart{
-    font-weight: bold;
-    padding-bottom: 30px;
-    padding-top: 10px;
-    margin-top: 10px;
+
+.header > h3 {
     margin-left: 40px;
 }
-.image{
-    padding-left: 40px;
-    width: 80px;
-    height: 100px;
+
+.books {
+    width: 100%;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
 }
-.bookName{
-    margin-left: 80px;
-    font-size:  17px;
-    font-weight: 600;
-    padding-bottom: 5px;
-}
-.authorName{
-    margin-left: 80px;
-    font-weight: 40;
-    padding-bottom: 5px;
-}
-.price{
-    margin-left: 80px;
-    font-weight: bold;
-    padding-bottom: 5px;
-}
-.subdivision-img{
-    float: left;
-}
-.subdivision-details{
-    margin-left: 80px;
-}
-button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.placeOrder1 {
-    color: #fff;
-    background-color: rgb(145, 10, 10);
-    width: 20%;
-    border-radius: 0;
-    margin-top: 30px;
-}
-button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.placeOrder2 {
+
+.books-disable {
     display: none;
 }
-.cust-details{
+
+.book-details {
+    width: 390px;
+    height: 140px;
+    margin-left: 40px;
+    margin-top: 25px;
+}
+
+.place-order-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 40px;
+    height: 53px;
+}
+
+.place-order-button-disable {
     display: none;
 }
-cust-details2{
-}
-button.MuiButtonBase-root.MuiButton-root.MuiButton-contained {
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.visible {
     color: #fff;
-    background-color: rgb(145, 10, 10);
     width: 20%;
     border-radius: 0;
-    margin-top: 30px;
+    height: 35px;
 }
-.userfooter {
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.disable {
+    visibility: hidden;
+}
+
+.customer-details {
+    width: 60%;
+    min-height: 60px;
+    margin: 50px;
+    border: 1px solid #DCDCDC;
+    border-radius: 1px;
+    opacity: 1;
+}
+
+.customer-form {;
+    width: 100%;
+    height: 499px;
+}
+
+.customer-form-disable {
+    display: none;
+}
+
+.order-summary {
+    width: 60%;
+    min-height: 60px;
+    margin: 50px;
+    border: 1px solid #DCDCDC;
+    border-radius: 1px;
+    opacity: 1;
+}
+
+.cart-footer {
     width: 100%;
     height: 50%;
 }
