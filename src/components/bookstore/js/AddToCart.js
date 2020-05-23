@@ -5,7 +5,6 @@ import CustomerDetails from './CustomerDetails';
 import NavigationBar from "./NavigationBar";
 import BookStoreFooter from "../../util/js/BottomBar";
 import MyCart from "./MyCart";
-import OrderSummary from "./OrderSummary";
 
 class AddToCart extends React.Component {
     constructor(props) {
