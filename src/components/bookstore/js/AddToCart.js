@@ -38,7 +38,7 @@ class AddToCart extends React.Component {
                             </div>
                             <div className="books">
                                     <div className="book-details">
-                                        <MyCart />
+                                        <MyCart quantityVisibility="quantity-visible" />
                                     </div>
                             </div>
                             <div className="place-order-button">
@@ -55,7 +55,7 @@ class AddToCart extends React.Component {
                             <div className="header"><h3>Order Summary</h3></div>
                             <div className={this.state.setOrderSummaryContainerVisibility}>
                                     <div className="book-details">
-                                        <OrderSummary />
+                                        <MyCart quantityVisibility="quantity-hidden" />
                                     </div>
                             </div>
                             <div className={this.state.setOrderSummaryButtonVisibility}>

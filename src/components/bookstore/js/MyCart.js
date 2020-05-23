@@ -33,7 +33,7 @@ class MyCart extends React.Component {
                     <div className="book-name">Book Name</div>
                     <div className="author-name">by Author Name</div>
                     <div className="price">Rs. 1500</div>
-                    <div className="quantity">
+                    <div className={this.props.quantityVisibility}>
                         <div className="increment-decrement">
                             <button className="minus-plus" onClick={this.decrement}><RemoveCircleOutlineIcon /></button>
                             <input type="number" className="number" value={this.state.quantityValue} />

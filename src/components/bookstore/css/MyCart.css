@@ -44,11 +44,16 @@
     font-weight: bold;
 }
 
-.quantity {
+.quantity-visible {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.quantity-hidden {
+    height: 100%;
+    visibility: hidden;
 }
 
 .increment-decrement {
