@@ -16,6 +16,13 @@ function get(url) {
     })
 }
 
+function deleteData(url) {
+    return Axios({
+        method: 'delete', headers: { 'token': localStorage.getItem('token') },
+        url: `${URL.apiURL}${url}`,
+    })
+}
+
 function update(url) {
     return Axios({
         method: 'put', headers: {"Content-Type": "application/json"},
@@ -23,4 +30,4 @@ function update(url) {
     })
 }
 
-export {post, get, update}
+export {post, get, deleteData, update}

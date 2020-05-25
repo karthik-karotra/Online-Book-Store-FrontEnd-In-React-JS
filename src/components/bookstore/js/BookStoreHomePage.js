@@ -6,6 +6,7 @@ import CardView from "./CardView";
 import BookStoreAxiosService from "../../../service/BookStoreAxiosService";
 import Pagination from "@material-ui/lab/Pagination";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import OrderBookAxiosService from "../../../service/OrderBookAxiosService";
 
 export class BookStoreHomePage extends Component {
 
@@ -30,7 +31,6 @@ export class BookStoreHomePage extends Component {
     displayBooks = () => {
         new BookStoreAxiosService().getBooksFromDatabase(this.state.pageValue)
             .then((response) => {
-                console.log(response.data)
                 this.setState({bookDetails: response.data.bookList}, () => {
                     this.getBooksCount()
                 });
@@ -81,7 +81,6 @@ export class BookStoreHomePage extends Component {
     displaySearchAndFilterBook = () => {
         new BookStoreAxiosService().getSearchAndFilterBooks(this.state.pageValue, this.state.searchValue, this.state.selectedSearchAndFilter)
             .then((response) => {
-                console.log(response.data)
                 if (response.data == 'No Books For Searched String Were Found') {
                     this.setState({bookDetails: [], totalBookCount: 0})
                 }
@@ -89,6 +88,31 @@ export class BookStoreHomePage extends Component {
                     this.setState({bookDetails: response.data.content, totalBookCount: response.data.totalElements});
                 }
             })
+    }
+
+    getBagDetails = (bookid) => {
+        const data = {
+            bookId:bookid,
+            quantity: 1
+        }
+        new OrderBookAxiosService().setBagBookDetails(data).then(()=>{
+            this.displayBooks()
+        })
+    }
+
+    cartBookDetails = () => {
+        new OrderBookAxiosService().myCart().then((response) => {
+            console.log(response.data.data)
+            if (response.data == "No Books Found In Cart") {
+                this.setState({cartDetails: []})
+            } else {
+                this.setState({cartDetails: response.data.data});
+            }
+        })
+    }
+
+    updateCount = () => {
+        this.cartBookDetails();
     }
 
     componentDidMount() {
@@ -99,7 +123,7 @@ export class BookStoreHomePage extends Component {
     render() {
         return (
             <div className="container1">
-                <NavigationBar getSearchedText={this.sendSearchedText}/>
+                <NavigationBar getSearchedText={this.sendSearchedText} count={this.state.cartDetails.length} />
                 <div className="count-and-filter-container">
                     <div className="count-and-filter">
                         <div className="count">
@@ -127,7 +151,7 @@ export class BookStoreHomePage extends Component {
                 <div className="flex-container-main">
                     <div className="flex-container">
                         {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails}
-                                                                             valueSender={this.getBookDetails}/>)}
+                                                                             saveBagDetails={this.getBagDetails} sendItemCount={this.updateCount} />)}
                     </div>
                 </div>
                 <div className="pagination">
