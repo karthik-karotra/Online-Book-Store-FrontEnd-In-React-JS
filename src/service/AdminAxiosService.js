@@ -1,15 +1,9 @@
-import Axios from "axios";
-import React from "react";
-import {postURL} from "./Environment";
+import {post} from './Service'
 
-class AdminAxiosService extends React.Component {
+class AdminAxiosService {
 
     addBookToDatabase(data) {
-        return Axios({
-            method: 'post', headers: {"Content-Type": "application/json"},
-            url: postURL,
-            data: JSON.stringify(data),
-        })
+        return (post(data, 'admin/book'))
     }
 }
 

@@ -41,38 +41,17 @@ export class BookStoreHomePage extends Component {
     }
 
     handleChange = (event, value) => {
-        if (this.state.searchFlag == false && this.state.searchAndFilterFlag == false) {
+        if (this.state.searchAndFilterFlag === false) {
             this.setState({pageValue: value - 1}, () => {
                 this.displayBooks()
+                window.scrollTo(0, 0);
             })
         }
-
-        if (this.state.searchFlag == true && this.state.searchAndFilterFlag == false)  {
-            this.setState({pageValue: value - 1}, () => {
-                this.displaySearchedBook()
-            })
-        }
-
-        if( this.state.searchAndFilterFlag == true){
+        if( this.state.searchAndFilterFlag === true){
             this.setState({pageValue: value - 1}, () => {
                 this.displaySearchAndFilterBook()
             })
         }
-    }
-
-    displaySearchedBook = () => {
-        new BookStoreAxiosService().getSearchedBooks(this.state.pageValue, this.state.searchText)
-            .then((response) => {
-                console.log(response.data)
-                this.setState({bookDetails: response.data.content, totalBookCount: response.data.totalElements});
-            })
-            .catch((error) => {
-                console.log(error)
-            });
-    }
-
-    getBookDetails = (getFlagValue, getDescription) => {
-        this.setState({parentFlag: getFlagValue, description: getDescription})
     }
 
     getBooksCount = () => {
@@ -83,41 +62,33 @@ export class BookStoreHomePage extends Component {
     }
 
     sendSearchedText = (text) => {
-        if (text == "") {
-            this.setState({searchFlag: false, searchValue: ' '}, () => {
+        if (text === "") {
+            this.setState({searchValue: ' '}, () => {
                 this.displayBooks()
             })
         }
-        if (text != "") {
-            this.setState({searchText: text, searchFlag: true, searchValue: text}, () => {
-                this.deciderOnlySearchOrSearchSort();
+        if (text !== "") {
+            this.setState({searchText: text, searchValue: text}, () => {
+                this.displaySearchAndFilterBook();
             })
-        }
-    }
-
-    deciderOnlySearchOrSearchSort = () => {
-        if(this.state.searchFlag == true && this.state.searchAndFilterFlag == false) {
-            this.displaySearchedBook();
-        }
-        if(this.state.searchFlag == true && this.state.searchAndFilterFlag == true) {
-            this.displaySearchAndFilterBook();
         }
     }
 
     handleFilter = (event) => {
-        console.log(event.target.value)
-        this.setState({selectedSearchAndFilter: event.target.value, searchAndFilterFlag: true}, () => {this.displaySearchAndFilterBook()})
+        this.setState({selectedSearchAndFilter: event.target.value}, () => {this.displaySearchAndFilterBook()})
     }
 
     displaySearchAndFilterBook = () => {
         new BookStoreAxiosService().getSearchAndFilterBooks(this.state.pageValue, this.state.searchValue, this.state.selectedSearchAndFilter)
             .then((response) => {
                 console.log(response.data)
-                this.setState({bookDetails: response.data});
+                if (response.data == 'No Books For Searched String Were Found') {
+                    this.setState({bookDetails: [], totalBookCount: 0})
+                }
+                else {
+                    this.setState({bookDetails: response.data.content, totalBookCount: response.data.totalElements});
+                }
             })
-            .catch((error) => {
-                console.log(error)
-            });
     }
 
     componentDidMount() {
