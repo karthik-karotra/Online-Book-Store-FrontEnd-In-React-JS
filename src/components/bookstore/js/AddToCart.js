@@ -66,6 +66,19 @@ class AddToCart extends React.Component {
         this.setTotalPrice();
     }
 
+    handleCheckout = () => {
+        new CustomerDetailsAxiosService().setCustomerDetails(this.state.customerData).then(response => {
+            console.log(response)
+            new OrderBookAxiosService().placeOrder().then(response => {
+                console.log(response.data)
+            });
+        })
+            .catch(error => {
+                console.log(error)
+            });
+
+    }
+
     setTotalPrice = () => {
         let price = this.state.bookDetails.map((books, index) => {
             return (books.book.bookPrice * books.quantity)
