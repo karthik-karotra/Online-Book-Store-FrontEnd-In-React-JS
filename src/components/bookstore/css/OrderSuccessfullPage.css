@@ -1,0 +1,84 @@
+.success-container {
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    position: relative;
+    height: 100%;
+}
+
+.success {
+    width: 100%;
+    min-height: 709px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.success-cards {
+    min-width: 350px;
+    height: 450px;
+    /* margin: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.MuiCardMedia-root.success-media{
+    width: 82%;
+    height: 213px;
+}
+
+.user-details {
+    min-width: 850px;
+    height: 120px;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+}
+
+table, th, td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+}
+
+th {
+    height: 40px;
+    background-color: #dddddd;
+    border: #dddddd;
+}
+
+td {
+    text-align: center;
+}
+
+#address {
+    padding: 10px;
+    max-width: 220px;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#address-hover {
+    font-size: large;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.success-button {
+    color: #fff;
+    background-color: rgb(145, 10, 10);
+    width: 30%;
+    border-radius: 1px;
+    margin: 30px;
+    margin-left: 35%;
+}
+
+.userfooter {
+    width: 100%;
+    height: 50%;
+}
