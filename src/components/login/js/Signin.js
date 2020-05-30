@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TextField from "@material-ui/core/TextField";
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
+import LoginAndRegistrationAxios from '../../../service/LoginAndRegistrationAxios';
 import {withRouter} from 'react-router';
 
 class Signin extends Component {
@@ -54,7 +55,30 @@ class Signin extends Component {
                     email: this.state.email,
                     password: this.state.password,
                 }
+                new LoginAndRegistrationAxios().loginUser(data).then((response) => {
+                    console.log(response.headers);
+                    if (response.data == "LOGIN SUCCESSFUL") {
+                        // alert("")
+                        localStorage.setItem('token', response.headers.authorization)
+                        this.setState({
+                            severity: "success",
+                            snackbaropen: true,
+                            snackbarmsg: response.data
+                        }, ()=> {this.setData(this.state.severity,this.state.snackbaropen,this.state.snackbarmsg)});
+                        setTimeout(() => { this.props.history.push("/"); }, 2000);
+                        window.location.reload(true);
+                    } else {
+                        this.setState({
+                            severity: "error",
+                            snackbaropen: true,
+                            snackbarmsg: response.data
+                        }, ()=> {this.setData(this.state.severity,this.state.snackbaropen,this.state.snackbarmsg)});
+                    }
 
+                })
+                    .catch((error) => {
+                        // console.log(error)
+                    })
             }
         }
     }

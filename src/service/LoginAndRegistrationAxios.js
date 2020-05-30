@@ -11,6 +11,14 @@ class LoginAndRegistrationAxios extends React.Component {
         })
     }
 
+    loginUser(data) {
+        return Axios({
+            method: 'post', headers: {"Content-Type": "application/json"},
+            url: "http://localhost:8080/user/login",
+            data: JSON.stringify(data),
+        })
+    }
+
 }
 
 export default LoginAndRegistrationAxios;
