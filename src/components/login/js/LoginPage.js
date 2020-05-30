@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import Login from '../../../assests/images/Login.png';
 import Signin from './Signin';
+import LoginAndRegistrationAxios from '../../../service/LoginAndRegistrationAxios';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from '@material-ui/icons/Close';
@@ -104,6 +105,27 @@ class LoginPage extends Component {
                     phoneNo: this.state.phoneNumber,
                     status: false,
                 }
+                new LoginAndRegistrationAxios().addUser(data).then((response) => {
+                    // console.log(response.data);
+                    if (`${response.data.message}` === "Registration Successfull !! Please Check Your Registered Email For Email Verification") {
+                        this.setState({
+                            severity: "success",
+                            snackbaropen: true,
+                            snackbarmsg: response.data.message,
+                            loginChecked:true,signupChecked:false
+                        }, this.reset());
+                    } else {
+                        this.setState({
+                            severity: "error",
+                            snackbaropen: true,
+                            snackbarmsg: response.data
+                        });
+                    }
+
+                })
+                    .catch((error) => {
+                        // console.log(error)
+                    })
             }
         }
 
