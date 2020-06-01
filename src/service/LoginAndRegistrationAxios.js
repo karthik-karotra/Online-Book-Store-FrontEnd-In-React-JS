@@ -19,6 +19,23 @@ class LoginAndRegistrationAxios extends React.Component {
         })
     }
 
+    verifyEmail(token) {
+        return Axios({
+            method: 'get', headers: {"Content-Type": "application/json"},
+            url: `http://localhost:8080/user/register/confirmation/${token}`,
+            data: JSON.stringify(),
+        })
+    }
+
+    resend(email) {
+        return Axios({
+            method: 'post', headers: {"Content-Type": "application/json"},
+            url: "http://localhost:8080/user/register/resend/confirmation/"+email,
+            data: JSON.stringify(),
+        })
+    }
+
+
 }
 
 export default LoginAndRegistrationAxios;

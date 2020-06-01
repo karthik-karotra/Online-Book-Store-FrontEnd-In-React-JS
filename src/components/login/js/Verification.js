@@ -5,6 +5,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
+import LoginAndRegistrationAxios from "../../../service/LoginAndRegistrationAxios";
 import {ThemeProvider} from "@material-ui/styles";
 import {createMuiTheme} from "@material-ui/core";
 import NavigationBar from "../../util/js/NavigationBar";
@@ -28,6 +29,17 @@ class Verification extends React.Component {
 
     snackbarClose = (event) => {
         this.setState({snackbaropen: false});
+    }
+
+    resendEmail(){
+        new LoginAndRegistrationAxios().verifyEmail(this.props.location.search).then((response) => {
+            console.log(response.data);
+            if (`${response.data}` === "Account Verified") {
+                this.setState({ accountVerification: 'account-verified' })
+            } else {
+                this.setState({ verificationUnsuccessfull: 'verification-unsuccessfull' })
+            }
+        })
     }
 
     handleChange=(e)=>{
@@ -66,12 +78,31 @@ class Verification extends React.Component {
             });
         }
         if (this.state.email.trim() !== "" && this.state.status == false) {
-
+            new LoginAndRegistrationAxios().resend(this.state.email).then((response) => {
+                if (response.data == "Verification Link Has Been Sent To Your Account")
+                {
+                    this.setState({
+                        severity: "success",
+                        snackbaropen: true,
+                        snackbarmsg: response.data
+                    })
+                } else {
+                    this.setState({
+                        severity: "error",
+                        snackbaropen: true,
+                        snackbarmsg: response.data
+                    });
+                }
+            });
         }
     }
 
     login = () => {
         this.props.history.push("/login");
+    }
+
+    componentDidMount() {
+        this.resendEmail();
     }
 
     render() {
