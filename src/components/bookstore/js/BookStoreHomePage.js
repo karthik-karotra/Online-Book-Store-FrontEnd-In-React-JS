@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import NavigationBar from "./NavigationBar";
+import NavigationBar from "../../util/js/NavigationBar";
 import BookStoreFooter from "../../util/js/BottomBar";
 import '../css/BookStoreHomePage.css'
 import CardView from "./CardView";
