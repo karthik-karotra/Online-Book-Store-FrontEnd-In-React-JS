@@ -35,6 +35,13 @@ class LoginAndRegistrationAxios extends React.Component {
         })
     }
 
+    forgotPassword(email) {
+        return Axios({
+            method: 'post', headers: {"Content-Type": "application/json"},
+            url: "http://localhost:8080/user/forgot/password//"+email,
+            data: JSON.stringify(),
+        })
+    }
 
 }
 

@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import '../css/forgot.css';
 import NavigationBar from "../../util/js/NavigationBar";
+import LoginAndRegistrationAxios from "../../../service/LoginAndRegistrationAxios";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import {Link} from "react-router-dom";
@@ -60,6 +61,24 @@ class ForgotPassword extends React.Component{
                 helperText1:'Required*'
             });
         }
+        new LoginAndRegistrationAxios().forgotPassword(this.state.email).then((response) => {
+            if (`${response.data}` === "We've Sent A Password Reset Link To Your Email Address") {
+                this.setState({
+                    severity: "success",
+                    snackbaropen: true,
+                    snackbarmsg: response.data,
+                })
+            } else {
+                this.setState({
+                    severity: "error",
+                    snackbaropen: true,
+                    snackbarmsg: response.data
+                });
+            }
+        })
+            .catch((error) => {
+                console.log(error)
+            });
     }
 
 
