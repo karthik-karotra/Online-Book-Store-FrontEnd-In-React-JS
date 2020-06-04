@@ -43,6 +43,14 @@ class LoginAndRegistrationAxios extends React.Component {
         })
     }
 
+    resetPassword(data,token) {
+        return Axios({
+            method: 'post', headers: {"Content-Type": "application/json"},
+            url: "http://localhost:8080/user/reset/password/"+token,
+            data: data,
+        })
+    }
+
 }
 
 export default LoginAndRegistrationAxios;

@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import '../css/ResetPassword.css';
 import NavigationBar from "../../util/js/NavigationBar";
+import LoginAndRegistrationAxios from "../../../service/LoginAndRegistrationAxios";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import {Link} from "react-router-dom";
@@ -58,7 +59,26 @@ class ResetPassword extends React.Component{
         if(this.state.password.trim().length>0 && this.state.confirmPassword.trim().length>0){
             const data = { password: this.state.password}
             if (this.state.status1==false && this.state.status2==false){
-
+                new LoginAndRegistrationAxios().resetPassword(data,this.props.location.search).then((response) => {
+                    console.log(response.data)
+                    if (`${response.data}` === "Password Reseted Successfully") {
+                        this.setState({
+                            severity: "success",
+                            snackbaropen: true,
+                            snackbarmsg: response.data,
+                        })
+                        setTimeout(() => { this.props.history.push("/login"); }, 2000);
+                    } else {
+                        this.setState({
+                            severity: "error",
+                            snackbaropen: true,
+                            snackbarmsg: "Something Went Wrong!!"
+                        });
+                    }
+                })
+                    .catch((error) => {
+                        console.log(error)
+                    });
             }
         }
     }
@@ -154,7 +174,6 @@ class ResetPassword extends React.Component{
                         <Link to="/login" ><button className="reset-create-button">CREATE ACCOUNT</button></Link>
                     </div>
                 </div>
-
             </div>
         );
     }
