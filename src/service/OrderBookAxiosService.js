@@ -1,13 +1,17 @@
-import {post, get, deleteData, update} from './Service';
+import {post, tokenPost, get, deleteData, update} from './Service';
 
 class OrderBookAxiosService {
 
     setBagBookDetails(data) {
-        return (post(data, 'cart/' + data.quantity + '/' + data.bookId))
+        return (post(data, 'cart/' + data.quantity +'/'+ data.bookId))
     }
 
     myCart() {
         return (get('cart/'))
+    }
+
+    setOrderDetails(data) {
+        return (post(data, 'order/'))
     }
 
     deleteBooksFromCartDatabase(id) {
@@ -15,7 +19,17 @@ class OrderBookAxiosService {
     }
 
     updateQuantity(bookCartId, quantity) {
-        return (update('cart/' + bookCartId + '/' + quantity))
+        return (update('cart/' + bookCartId +'/'+ quantity))
+    }
+
+    placeOrder(){
+        return (tokenPost('bookstore/order'))
+    }
+
+    getOrderedBooks() {
+        return (get('bookstore/order'))
     }
 
 }
+
+export default OrderBookAxiosService;

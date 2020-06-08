@@ -3,16 +3,23 @@ import URL from '../config/UrlConstant';
 
 function post(data, url) {
     return Axios({
-        method: 'post', headers: {"Content-Type": "application/json"},
+        method: 'post', headers: { 'token': localStorage.getItem('token') },
         url: `${URL.apiURL}${url}`,
         data: data
     })
 }
 
+function tokenPost(url) {
+    return Axios({
+        method: 'post', headers: { 'token': localStorage.getItem('token') },
+        url: `${URL.apiURL}${url}`
+    })
+}
+
 function get(url) {
     return Axios({
-        method: 'get', headers: {"Content-Type": "application/json"},
-        url: `${URL.apiURL}${url}`
+        method: 'get', headers: { 'token': localStorage.getItem('token') },
+        url: `${URL.apiURL}${url}`,
     })
 }
 
@@ -25,9 +32,9 @@ function deleteData(url) {
 
 function update(url) {
     return Axios({
-        method: 'put', headers: {"Content-Type": "application/json"},
+        method: 'put', headers: { 'token': localStorage.getItem('token') },
         url: `${URL.apiURL}${url}`,
     })
 }
 
-export {post, get, deleteData, update}
+export {post, tokenPost, get, deleteData, update}
