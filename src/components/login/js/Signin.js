@@ -20,7 +20,7 @@ class Signin extends Component {
             helpertext2:' ',
         }
     }
-
+                
     handleChange=({target})=>{
         if([target.name]=="email"){
             this.setState({[target.name]:target.value},
@@ -31,7 +31,7 @@ class Signin extends Component {
         if([target.name]=="password"){
             this.setState({[target.name]:target.value},
                 ()=>{
-                    this.passwordValidation()
+                     this.passwordValidation()
                 });
         }
     };
@@ -74,7 +74,7 @@ class Signin extends Component {
                             snackbarmsg: response.data
                         }, ()=> {this.setData(this.state.severity,this.state.snackbaropen,this.state.snackbarmsg)});
                     }
-
+                    
                 })
                     .catch((error) => {
                         // console.log(error)
@@ -146,37 +146,38 @@ class Signin extends Component {
         });
 
         return (
-            <div className="sign-in-htm">
-                <ThemeProvider theme={theme}>
-                    <div className="group1">
-                        <TextField error={this.state.status1}
-                                   value={this.state.email}
-                                   helperText={this.state.helpertext1}
-                                   onClick={this.handleChange}
-                                   onChange={this.handleChange}
-                                   id="userName" label="Email Id *"
-                                   variant="outlined"
-                                   fullWidth autoComplete="off" name="email"/>
-                    </div>
-                    <div className="group1">
-                        <TextField error={this.state.status2}
-                                   value={this.state.password}
-                                   helperText={this.state.helpertext2}
-                                   onClick={this.handleChange}
-                                   onChange={this.handleChange}
-                                   id="passWord" label="Password *"
-                                   type="password" variant="outlined"
-                                   fullWidth autoComplete="off" name="password" />
-                    </div>
-                    <div className="foot-lnk">
-                        <a href="/forgotpassword">Forgot Password?</a>
-                    </div>
-                    <div className="group1">
-                        <button className="login-button" variant="contained" onClick={this.handleSubmmit}>Login</button>
-                    </div>
-                </ThemeProvider>
-            </div>
-        );
-    }
-}
-export default withRouter(Signin);
+                <div className="sign-in-htm">
+                    <ThemeProvider theme={theme}>
+                        <div className="group1">
+                            <TextField error={this.state.status1}
+                                        value={this.state.email}
+                                        helperText={this.state.helpertext1}
+                                        onClick={this.handleChange} 
+                                        onChange={this.handleChange}
+                                        id="userName" label="Email Id *" 
+                                        variant="outlined" 
+                                        fullWidth autoComplete="off" name="email"/>
+                        </div>
+                        <div className="group1">
+                            <TextField error={this.state.status2}
+                                        value={this.state.password}
+                                        helperText={this.state.helpertext2}
+                                        onClick={this.handleChange} 
+                                        onChange={this.handleChange}
+                                        id="passWord" label="Password *" 
+                                        type="password" variant="outlined" 
+                                        fullWidth autoComplete="off" name="password" />
+                        </div>
+                        <div className="foot-lnk">
+                            <a href="/forgotpassword">Forgot Password?</a>
+                        </div>
+                        <div className="group1">
+                            <button className="login-button" variant="contained" onClick={this.handleSubmmit}>Login</button>
+                        </div>
+                    </ThemeProvider>
+                </div>
+                 );
+            }
+        }
+    export default withRouter(Signin);
+            

@@ -111,7 +111,7 @@ class ForgotPassword extends React.Component{
                             <div className="forgot-textfield">
                                 <ThemeProvider theme={theme}>
                                     <TextField error={this.state.status1} helperText={this.state.helperText1}
-                                               className="forgot-password-textfield" label="Email"
+                                        className="forgot-password-textfield" label="Email"
                                                value={this.state.email} variant="outlined" onChange={this.handleChange} />
                                 </ThemeProvider>
                                 <button className="forgot-submit-button" onClick={this.handleSubmit}>Reset Password</button>

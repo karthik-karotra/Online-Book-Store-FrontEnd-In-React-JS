@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/AdminFrontPage.css';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
-import AdminTopNavigationBar from "./AdminTopNavigationBar";
+import NavigationBar from "../../util/js/NavigationBar";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
 import AdminAxiosService from "../../../service/AdminAxiosService";
@@ -40,7 +40,9 @@ class AdminFrontPage extends React.Component {
             helpertext6: ' ',
             helpertext7: ' ',
             helpertext8: ' ',
-            button11: ''
+            button11: '',
+            setImageURL: '',
+            imageURL: ''
         }
     }
 
@@ -62,61 +64,57 @@ class AdminFrontPage extends React.Component {
     }
 
     handleSubmmit = () => {
-        if (this.state.isbn.trim() == "") {
+        if (this.state.isbn.trim() === "") {
             this.setState({
                 status1: true,
                 helpertext1: 'Required*'
             });
         }
-        if (this.state.bookName.trim() == "") {
+        if (this.state.bookName.trim() === "") {
             this.setState({
                 status2: true,
                 helpertext2: 'Required*'
             });
         }
-        if (this.state.authorName.trim() == "") {
+        if (this.state.authorName.trim() === "") {
             this.setState({
                 status3: true,
                 helpertext3: 'Required*'
             });
         }
-        if (this.state.bookPrice.trim() == "") {
+        if (this.state.bookPrice.trim() === "") {
             this.setState({
                 status4: true,
                 helpertext4: 'Required*'
             });
         }
-        if (this.state.quantity.trim() == "") {
+        if (this.state.quantity.trim() === "") {
             this.setState({
                 status5: true,
                 helpertext5: 'Required*'
             });
         }
-        if (this.state.publishingYear.trim() == "") {
+        if (this.state.publishingYear.trim() === "") {
             this.setState({
                 status6: true,
                 helpertext6: 'Required*'
             });
         }
-        if (this.state.bookImageSource.trim() == "") {
+        if (this.state.bookImageSource.trim() === "") {
             this.setState({
                 status7: true,
                 helpertext7: 'Required*'
             });
         }
-        if (this.state.bookDetails.trim() == "") {
+        if (this.state.bookDetails.trim() === "") {
             this.setState({
                 status8: true,
                 helpertext8: 'Required*'
             });
         }
 
-        if (this.state.isbn.trim() != "" && this.state.bookName.trim() != "" && this.state.authorName.trim() != "" && this.state.bookPrice.trim() != "" && this.state.quantity.trim() != "" && this.state.publishingYear.trim() != "" && this.state.bookImageSource.trim() != "" && this.state.bookDetails.trim() != "") {
-            if (this.state.status1 == false && this.state.status2 == false && this.state.status3 == false && this.state.status4 == false && this.state.status5 == false && this.state.status6 == false && this.state.status7 == false && this.state.status8 == false) {
-                var path = `${this.state.bookImageSource}`;
-                var newPath = `${path.replace("C:\\fakepath\\", "")}`;
-                newPath = `${newPath}`
-                var imagePath = newPath.trim();
+        if (this.state.isbn.trim() !== "" && this.state.bookName.trim() !== "" && this.state.authorName.trim() !== "" && this.state.bookPrice.trim() !== "" && this.state.quantity.trim() !== "" && this.state.publishingYear.trim() !== "" && this.state.bookImageSource.trim() !== "" && this.state.bookDetails.trim() !== "") {
+            if (this.state.status1 === false && this.state.status2 === false && this.state.status3 === false && this.state.status4 === false && this.state.status5 === false && this.state.status6 === false && this.state.status7 === false && this.state.status8 === false) {
                 const data = {
                     isbn: this.state.isbn,
                     bookName: this.state.bookName,
@@ -124,12 +122,12 @@ class AdminFrontPage extends React.Component {
                     bookPrice: this.state.bookPrice,
                     quantity: this.state.quantity,
                     bookDetails: this.state.bookDetails,
-                    bookImageSource: imagePath,
+                    bookImageSource: this.state.imageURL,
                     publishingYear: this.state.publishingYear
                 }
                 new AdminAxiosService().addBookToDatabase(data).then((response) => {
                     console.log(response.data);
-                    if (response.data.message == "ADDED SUCCESSFULLY") {
+                    if (response.data.message === "ADDED SUCCESSFULLY") {
                         this.setState({
                             severity: "success",
                             snackbaropen: true,
@@ -141,7 +139,7 @@ class AdminFrontPage extends React.Component {
                         this.setState({
                             severity: "error",
                             snackbaropen: true,
-                            snackbarmsg: response.data.message
+                            snackbarmsg: response.data
                         });
                     }
                 })
@@ -192,18 +190,28 @@ class AdminFrontPage extends React.Component {
                 });
         }
         if ([target.name] == "bookImageSource") {
-            this.setState({[target.name]: target.value},
+            this.setState({[target.name]: target.value, setImageURL: target.files[0]},
                 () => {
                     this.bookImageSource()
                 });
         }
         if ([target.name] == "bookDetails") {
-            this.setState({[target.name]: target.value},
-                () => {
-                    this.bookDetails()
-                });
+            this.setState({[target.name]: target.value},() => { this.bookDetails() 
+            });
         }
     };
+
+    getImageURL = () => {
+        console.log(this.state.setImageURL)
+        const formData = new FormData();
+        formData.append('file',this.state.setImageURL);
+        new AdminAxiosService().addImage(formData).then(response=>{
+            console.log(response.data)
+            this.setState({imageURL: response.data})
+        }).catch(response=>{
+            console.log(response)
+        })
+    }
 
     isbn() {
         this.setState({
@@ -215,8 +223,8 @@ class AdminFrontPage extends React.Component {
         this.setState({
             isbn: this.state.isbn.trim()
         })
-        if (this.state.isbn.trim() != "") {
-            if (isbnNumberPattern.test(this.state.isbn) == false) {
+        if (this.state.isbn.trim() !== "") {
+            if (isbnNumberPattern.test(this.state.isbn) === false) {
                 this.setState({
                     status1: true,
                     helpertext1: 'Should Be 10 Digit Number',
@@ -237,8 +245,8 @@ class AdminFrontPage extends React.Component {
             helpertext2: 'Required*',
         })
         var validNamePattern = /^.{3,50}$/;
-        if (this.state.bookName.trim() != "") {
-            if (validNamePattern.test(this.state.bookName) == false) {
+        if (this.state.bookName.trim() !== "") {
+            if (validNamePattern.test(this.state.bookName) === false) {
                 this.setState({
                     status2: true,
                     helpertext2: 'Min 2 characters & max 50 characters',
@@ -258,8 +266,8 @@ class AdminFrontPage extends React.Component {
             helpertext3: 'Required*',
         })
         var validNamePattern = /^([a-zA-Z]{3,}[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*)$/;
-        if (this.state.authorName.trim() != "") {
-            if (validNamePattern.test(this.state.authorName) == false) {
+        if (this.state.authorName.trim() !== "") {
+            if (validNamePattern.test(this.state.authorName) === false) {
                 this.setState({
                     status3: true,
                     helpertext3: 'Min 2 characters',
@@ -283,8 +291,8 @@ class AdminFrontPage extends React.Component {
             bookPrice: this.state.bookPrice.trim()
         })
 
-        if (this.state.bookPrice.trim() != "") {
-            if (validNumberPattern.test(this.state.bookPrice) == false) {
+        if (this.state.bookPrice.trim() !== "") {
+            if (validNumberPattern.test(this.state.bookPrice) === false) {
                 this.setState({
                     status4: true,
                     helpertext4: 'Should Be Greater Than Zero',
@@ -308,8 +316,8 @@ class AdminFrontPage extends React.Component {
             quantity: this.state.quantity.trim()
         })
 
-        if (this.state.quantity.trim() != "") {
-            if (validNumberPattern.test(this.state.quantity) == false) {
+        if (this.state.quantity.trim() !== "") {
+            if (validNumberPattern.test(this.state.quantity) === false) {
                 this.setState({
                     status5: true,
                     helpertext5: 'Should Be Greater Than Zero',
@@ -333,8 +341,8 @@ class AdminFrontPage extends React.Component {
             publishingYear: this.state.publishingYear.trim()
         })
 
-        if (this.state.publishingYear.trim() != "") {
-            if (publishingYearPattern.test(this.state.publishingYear) == false) {
+        if (this.state.publishingYear.trim() !== "") {
+            if (publishingYearPattern.test(this.state.publishingYear) === false) {
                 this.setState({
                     status6: true,
                     helpertext6: 'Should Be Greater Than 999',
@@ -354,7 +362,7 @@ class AdminFrontPage extends React.Component {
             this.setState({
                 status7: false,
                 helpertext7: ' ',
-            })
+            }, () => {this.getImageURL()})
         } else {
             this.setState({
                 status7: true,
@@ -364,7 +372,7 @@ class AdminFrontPage extends React.Component {
     }
 
     bookDetails() {
-        if (this.state.bookDetails.trim() != "") {
+        if (this.state.bookDetails.trim() !== "") {
             this.setState({
                 status8: false,
                 helpertext8: ' ',
@@ -376,8 +384,8 @@ class AdminFrontPage extends React.Component {
             })
         }
         var validDescriptionPattern = /^.{0,1000}$/;
-        if (this.state.bookDetails.trim() != "") {
-            if (validDescriptionPattern.test(this.state.bookDetails) == false) {
+        if (this.state.bookDetails.trim() !== "") {
+            if (validDescriptionPattern.test(this.state.bookDetails) === false) {
                 this.setState({
                     status8: true,
                     helpertext8: 'Maximum 1000 Characters',
@@ -395,7 +403,7 @@ class AdminFrontPage extends React.Component {
     render() {
         return (
             <div>
-                <AdminTopNavigationBar/>
+                <NavigationBar />
                 <div className="container">
                     <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={this.state.snackbaropen}
                               autoHideDuration={4000} onClose={this.snackbarClose}>
@@ -443,16 +451,16 @@ class AdminFrontPage extends React.Component {
                                        onClick={this.handleChange} onChange={this.handleChange}
                                        name="publishingYear"/>
                         </div>
-                        <div className="data2">
+                        <div className="data">
                             <TextField error={this.state.status7} helperText={this.state.helpertext7} className="input"
-                                       id="outlined-basic" label="" variant="outlined"
+                                       id="outlined-basic" label="" variant="outlined" style={{width:'95%'}}
                                        value={this.state.bookImageSource} type="file" accept="file_extension|image/*"
                                        onClick={this.handleChange} onChange={this.handleChange}
                                        name="bookImageSource"/>
                         </div>
-                        <div className="data2">
+                        <div className="data">
                             <TextField error={this.state.status8} helperText={this.state.helpertext8} className="input"
-                                       id="outlined-multiline-static" label="Description"
+                                       id="outlined-multiline-static" label="Description" style={{width:'95%'}}
                                        placeholder="Maximum 1000 Characters" multiline rows={2} variant="outlined"
                                        value={this.state.bookDetails} onClick={this.handleChange}
                                        onChange={this.handleChange}

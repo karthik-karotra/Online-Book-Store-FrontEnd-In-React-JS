@@ -22,160 +22,7 @@
 }
 
 .flex-container {
-    /*width: 84%;*/
-    display: flex;
-    flex-flow: wrap;
-    justify-content: flex-start;
-    min-height: 683px;
-    width:100%;
-    padding-left: 70px;
-}
-
-.flex-container > div {
-    width: 300px;
-    margin: 20px;
-    height: 380px;
-    border: 1px solid #F0F0F0;
-}
-
-.userfooter {
-    width: 100%;
-    height: 50%;
-}
-
-.pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-}
-
-button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPaginationItem-rounded.Mui-selected{
-    background-color: rgb(150, 0, 0);
-}
-
-#tooltip {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -66%);
-    background-color: #F0F0F0;
-    z-index: 9999;
-    height: 50%;
-    width: 38.2%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.visible {
-    visibility: visible;
-}
-
-.hidden {
-    visibility: hidden;
-}
-
-.description {
-    width : 95%;
-    height: 95%;
-}
-
-.count-and-filter-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    height: 60px;
-}
-.filterstyle{
-    width:20%;
-    margin-right: 60px;
-    justify-content: flex-end;
-    display: flex;
-}
-.selectfield{
-    background-color: white;
-    width:70%;
-    border: 2px solid #F0F0F0;
-    border-radius: 0.5px;
-    overflow: hidden;
-    padding-left: 5px;
-    height: 12%;
-    font-family: "Arial Rounded MT Bold";
-}
-
-.count-and-filter {
-    display: flex;
-    flex-flow: wrap;
-    align-items: center;
-    justify-content: space-between;
-    width: 90%;
-}
-
-.count {
-    width: 300px;
-    margin: 20px;
-    height: 30px;
-}
-
-.book-count {
-    font-size: 15px;
-    color: grey;
-    margin: 5px;
-}
-
-@media only screen and (max-width: 414px) and (max-height: 812px ) {
-    .flex-container {
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .count-and-filter{
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-@media only screen and (min-width: 768px) and (min-height: 1024px ) {
-
-    .flex-container {
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .count-and-filter{
-        width: 90%;
-    }
-}
-.container1 {
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    margin-top: 60px;
-    position: relative;
-    height: 100%;
-}
-
-.navbar {
-    width: 100%;
-    height: 8%;
-    position: sticky;
-    z-index: 9999;
-}
-
-.flex-container-main {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-}
-
-.flex-container {
-    width: 81.3%;
+    width: 81.4%;
     display: flex;
     flex-flow: wrap;
     justify-content: flex-start;
@@ -203,28 +50,7 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
 
 button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPaginationItem-rounded.Mui-selected{
     background-color: rgb(150, 0, 0);
-}
-
-#tooltip {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -66%);
-    background-color: #F0F0F0;
-    z-index: 9999;
-    height: 50%;
-    width: 38.2%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.visible {
-    visibility: visible;
-}
-
-.hidden {
-    visibility: hidden;
+    color: white;
 }
 
 .description {
@@ -241,10 +67,23 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
 
 .count-and-filter {
     display: flex;
-    flex-flow: wrap;
     align-items: center;
     justify-content: space-between;
-    width: 81.3%;
+    width: 81.4%;
+}
+
+.image-not-found{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 38.2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
 }
 
 .count {
@@ -268,7 +107,7 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
 
 .selectfield{
     background-color: white;
-    width:70%;
+    width:60%;
     border: 2px solid #F0F0F0;
     border-radius: 0.5px;
     overflow: hidden;
@@ -277,7 +116,25 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
     font-family: "Arial Rounded MT Bold";
 }
 
-@media only screen and (max-width: 414px) and (max-height: 812px ) {
+::-webkit-scrollbar {
+    width: 24px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 0px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #bfbfbf; 
+    border-radius: 0px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #bfbfbf; 
+  }
+
+@media only screen and (max-width: 414px) and (max-height: 823px ) {
     .flex-container {
         width: 100%;
         align-items: center;
@@ -298,10 +155,27 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
 }
 
 @media only screen and (min-width: 768px) and (min-height: 1024px ) {
-
     .flex-container {
         width: 100%;
         align-items: center;
         justify-content: center;
+    }
+
+    .count-and-filter{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media only screen and (width: 1024px) and (height: 1366px ) {
+    .flex-container > div {
+        width: 299px;
+    }
+    .count {
+        width: 470px;
+    }
+    .filterstyle{
+        width: 470px;
     }
 }

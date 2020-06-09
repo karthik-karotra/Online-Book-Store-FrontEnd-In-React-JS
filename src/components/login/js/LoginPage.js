@@ -49,19 +49,19 @@ class LoginPage extends Component {
         if(`${[target.name]}`==="password"){
             this.setState({[target.name]:target.value},
                 ()=>{
-                    this.passwordValidation()
+                     this.passwordValidation()
                 });
         }
         if(`${[target.name]}`==="fullName"){
             this.setState({[target.name]:target.value},
                 ()=>{
-                    this.userNameValidation()
+                     this.userNameValidation()
                 });
         }
         if(`${[target.name]}`==="phoneNumber"){
             this.setState({[target.name]:target.value},
                 ()=>{
-                    this.phoneNumberValidation()
+                     this.phoneNumberValidation()
                 });
         }
 
@@ -74,7 +74,7 @@ class LoginPage extends Component {
                 helpertext3:'Required*'
             });
         }
-        if(this.state.email.trim().length===0){
+        if(this.state.email.trim().length===0){  
             this.setState({
                 status1:true,
                 helpertext1:'Required*'
@@ -86,7 +86,7 @@ class LoginPage extends Component {
                 helpertext2:'Required*'
             });
         }
-
+        
         if(this.state.phoneNumber.trim().length===0){
             this.setState({
                 status4:true,
@@ -121,7 +121,7 @@ class LoginPage extends Component {
                             snackbarmsg: response.data
                         });
                     }
-
+                    
                 })
                     .catch((error) => {
                         // console.log(error)
@@ -177,7 +177,7 @@ class LoginPage extends Component {
                 })
             }
         }
-    }
+    }    
     userNameValidation(){
         this.setState({
             status3:true,
@@ -274,91 +274,91 @@ class LoginPage extends Component {
         // console.log(this.state.helperText);
         return (
             <div className="hero" style={url === '' ? {backgroundColor: "transparent"} : {backgroundColor: "#b3b3b3"}}>
-                <div className="crossiconinlogin" onClick={this.getThisEvent} style={url === '' ? {visibility: "visible"} : {visibility: "hidden"}}><CloseIcon /></div>
+            <div className="crossiconinlogin" onClick={this.getThisEvent} style={url === '' ? {visibility: "visible"} : {visibility: "hidden"}}><CloseIcon /></div>
                 <div className="user-login-form">
-                    <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={this.state.snackbaropen}
+                <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={this.state.snackbaropen}
                               autoHideDuration={4000} onClose={this.snackbarClose}>
                         <Alert onClose={this.snackbarClose} severity={this.state.severity} variant={"filled"}>
                             {<span id="message-id">{this.state.snackbarmsg}</span>}
                         </Alert>
-                    </Snackbar>
-                    <Card className="form-box" style={{borderRadius: "5%", backgroundColor: " #f2f2f2"}}>
-                        <img src={Login} className="login-img"/>
-                        <div style={{marginLeft: "70px", marginTop: "3%"}}>
-                            <h3 style={{fontWeight: "bold"}}>
-                                THE COUNTRY BOOK SHOP
-                            </h3>
-                        </div>
-                    </Card>
+                </Snackbar>
+                <Card className="form-box" style={{borderRadius: "5%", backgroundColor: " #f2f2f2"}}>
+                    <img src={Login} className="login-img"/>
+                    <div style={{marginLeft: "70px", marginTop: "3%"}}>
+                        <h3 style={{fontWeight: "bold"}}>
+                            THE COUNTRY BOOK SHOP
+                        </h3>
+                    </div>
+                </Card>
 
 
-                    <Card className="login-box" style={{borderRadius: "2%", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.5)"}}>
-                        <div className="login-wrap">
-                            <div className="login-html">
-                                <input id="tab-1" type="radio" name="login" className="sign-in" checked={this.state.loginChecked} onClick={this.handleTabSelection} /><label
-                                htmlFor="tab-1" className="tab1">Login</label>
-                                <input id="tab-2" type="radio" name="signup" className="sign-up" checked={this.state.signupChecked} onClick={this.handleTabSelection}/>
-                                <label htmlFor="tab-2" className="tab2">SignUp</label>
-                                <div className="login-form">
-                                    <Signin sendData={this.getData} />
-                                    {/*Sigun Up*/}
-                                    <div className="sign-up-htm">
-                                        <ThemeProvider theme={theme}>
-                                            <div className="group">
-                                                <TextField error={this.state.status3}
-                                                           name="fullName"
-                                                           value={this.state.fullName}
-                                                           helperText={this.state.helpertext3}
-                                                           onClick={this.handleChange}
-                                                           onChange={this.handleChange}
-                                                           id="userName" label="Full Name"
-                                                           variant="outlined"
-                                                           fullWidth required autoComplete="off"
-                                                />
-                                            </div>
-                                            <div className="group">
-                                                <TextField error={this.state.status1}
-                                                           name="email"
-                                                           value={this.state.email}
-                                                           helperText={this.state.helpertext1}
-                                                           onClick={this.handleChange}
-                                                           onChange={this.handleChange}
-                                                           id="userName" label="Email Id *"
-                                                           variant="outlined" fullWidth
-                                                           autoComplete="off" />
-                                            </div>
-                                            <div className="group">
-                                                <TextField error={this.state.status2}
-                                                           name="password"
-                                                           value={this.state.password}
-                                                           id="password" type="password"
-                                                           helperText={this.state.helpertext2}
-                                                           onClick={this.handleChange}
-                                                           onChange={this.handleChange}
-                                                           id="userName" label="Password *"
-                                                           variant="outlined" fullWidth
-                                                           autoComplete="off" />
-                                            </div>
-                                            <div className="group">
-                                                <TextField error={this.state.status4}
-                                                           name="phoneNumber"
-                                                           value={this.state.phoneNumber}
-                                                           helperText={this.state.helpertext4}
-                                                           onClick={this.handleChange}
-                                                           onChange={this.handleChange}
-                                                           id="userName" label="Phone Number *"
-                                                           variant="outlined" fullWidth
-                                                           autoComplete="off" />
-                                            </div>
-                                            <div className="group">
-                                                <button className="login-button" onClick={this.handleSubmmit}>Sign Up</button>
-                                            </div>
-                                        </ThemeProvider>
+                <Card className="login-box" style={{borderRadius: "2%", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.5)"}}>
+                    <div className="login-wrap">
+                        <div className="login-html">
+                            <input id="tab-1" type="radio" name="login" className="sign-in" checked={this.state.loginChecked} onClick={this.handleTabSelection} /><label
+                            htmlFor="tab-1" className="tab1">Login</label>
+                            <input id="tab-2" type="radio" name="signup" className="sign-up" checked={this.state.signupChecked} onClick={this.handleTabSelection}/>
+                            <label htmlFor="tab-2" className="tab2">SignUp</label>
+                            <div className="login-form">
+                                <Signin sendData={this.getData} />
+                               {/*Sigun Up*/}
+                                <div className="sign-up-htm">
+                                    <ThemeProvider theme={theme}>
+                                    <div className="group">
+                                        <TextField error={this.state.status3}
+                                        name="fullName"
+                                        value={this.state.fullName}
+                                        helperText={this.state.helpertext3}
+                                        onClick={this.handleChange} 
+                                        onChange={this.handleChange}
+                                        id="userName" label="Full Name" 
+                                        variant="outlined" 
+                                        fullWidth required autoComplete="off" 
+                                         />
                                     </div>
+                                    <div className="group">
+                                        <TextField error={this.state.status1}
+                                        name="email"
+                                        value={this.state.email}
+                                        helperText={this.state.helpertext1}
+                                        onClick={this.handleChange} 
+                                        onChange={this.handleChange}
+                                        id="userName" label="Email Id *" 
+                                        variant="outlined" fullWidth 
+                                        autoComplete="off" />
+                                    </div>
+                                    <div className="group">
+                                        <TextField error={this.state.status2}
+                                        name="password"
+                                        value={this.state.password}
+                                        id="password" type="password"
+                                        helperText={this.state.helpertext2}
+                                        onClick={this.handleChange} 
+                                        onChange={this.handleChange}
+                                        id="userName" label="Password *" 
+                                        variant="outlined" fullWidth 
+                                        autoComplete="off" />
+                                    </div>
+                                    <div className="group">
+                                        <TextField error={this.state.status4}
+                                        name="phoneNumber"
+                                        value={this.state.phoneNumber}
+                                        helperText={this.state.helpertext4}
+                                        onClick={this.handleChange} 
+                                        onChange={this.handleChange}
+                                        id="userName" label="Phone Number *" 
+                                        variant="outlined" fullWidth 
+                                        autoComplete="off" />
+                                    </div>
+                                    <div className="group">
+                                        <button className="login-button" onClick={this.handleSubmmit}>Sign Up</button>
+                                    </div>
+                                </ThemeProvider>
                                 </div>
                             </div>
                         </div>
-                    </Card>
+                    </div>
+                </Card>
                 </div>
             </div>
         );

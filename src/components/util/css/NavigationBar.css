@@ -144,8 +144,8 @@ span.MuiBadge-badge.MuiBadge-anchorOriginTopRightRectangle.MuiBadge-colorSeconda
         height: 100%;
     }
 
-    .searchIcon{
-        width: 30px;
+     .searchIcon{
+         width: 30px;
     }
     .searchText {
         background-color: white;
@@ -164,7 +164,7 @@ span.MuiBadge-badge.MuiBadge-anchorOriginTopRightRectangle.MuiBadge-colorSeconda
 
     .searchBox{
         display: flex;
-        width: 500px;
+         width: 500px;
         height: 30px;
         margin-left: -25%;
     }

@@ -1,6 +1,7 @@
 .hero {
     width: 100%;
     height: 100%;
+    /* background-color: #b3b3b3; */
     background-position: center;
     background-size: cover;
     position: absolute;
@@ -56,6 +57,10 @@
     margin-top: 40px;
     border-radius: 50%;
 }
+
+/* *, :after, :before {
+    box-sizing: border-box
+} */
 
 .clearfix:after, .clearfix:before {
     content: '';
@@ -283,7 +288,7 @@ input#userName, input#passWord {
         box-shadow: 0 8px 16px 0 rgba(255, 0, 0, 0.8);
         position: absolute;
         margin-left: 0;
-
+        
     }
     .user-login-form{
         width: 100%;
@@ -292,15 +297,15 @@ input#userName, input#passWord {
         display:flex;
         justify-content: center;
     }
-    .login-html .tab1 {
-        font-size: 22px;
-        margin-right: 80px;
-        padding-bottom: 5px;
-        display: inline-block;
-        color: gray;
-        border-bottom: 4px solid transparent;
-        cursor: pointer;
-    }
+.login-html .tab1 {
+    font-size: 22px;
+    margin-right: 80px;
+    padding-bottom: 5px;
+    display: inline-block;
+    color: gray;
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+}
     .login-html .tab2 {
         font-size: 20px;
     }
@@ -329,7 +334,7 @@ input#userName, input#passWord {
         height: 100%;
         position: absolute;
     }
-
+    
     .login-html .tab1 {
         margin-right: 115px;
         padding-bottom: 5px;
@@ -348,6 +353,7 @@ input#userName, input#passWord {
     .user-login-form{
         margin-top: 0;
         margin-left: 13%;
+        /* display:flex; */
     }
 }
 @media (min-width:200px) and (max-width:320px){

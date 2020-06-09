@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
 import LoginAndRegistrationAxios from "../../../service/LoginAndRegistrationAxios";
+import {Link} from "react-router-dom";
 import {ThemeProvider} from "@material-ui/styles";
 import {createMuiTheme} from "@material-ui/core";
 import NavigationBar from "../../util/js/NavigationBar";
@@ -119,7 +120,7 @@ class Verification extends React.Component {
             <div className="verification-container">
                 <NavigationBar />
                 <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={this.state.snackbaropen}
-                          autoHideDuration={4000} onClose={this.snackbarClose}>
+                    autoHideDuration={4000} onClose={this.snackbarClose}>
                     <Alert onClose={this.snackbarClose} severity={this.state.severity} variant={"filled"}>
                         {<span id="message-id">{this.state.snackbarmsg}</span>}
                     </Alert>
@@ -128,7 +129,7 @@ class Verification extends React.Component {
                     <CheckCircleIcon className="tick" />
                     <div className="verified">
                         <div className="verified-header">Verified!</div>
-                        <div className="verified-message">Your email id is successfully verified!</div>
+                        <div className="verified-message">Your email id is successfully verified!</div>                    
                     </div>
                     <div className="login-button">
                         <button className="redirect-button" onClick={this.login}>Login</button>
@@ -144,14 +145,14 @@ class Verification extends React.Component {
                         </div>
                     </div>
                     <div className="token-expired-form">
-                        <div className="expired-form">
-                            <div className="textField">
-                                <ThemeProvider theme={theme}>
-                                    <TextField id="outlined-basic" className="email" label="Email" variant="outlined" error={this.state.status} helperText={this.state.errorMessage} value={this.state.email} onChange={this.handleChange} />
-                                </ThemeProvider>
+                            <div className="expired-form">
+                                <div className="textField">
+                                    <ThemeProvider theme={theme}>
+                                        <TextField id="outlined-basic" className="email" label="Email" variant="outlined" error={this.state.status} helperText={this.state.errorMessage} value={this.state.email} onChange={this.handleChange} />
+                                    </ThemeProvider>
+                                </div>
+                                <button className="resend-email" onClick={this.handleVerify}>Resend Email</button>
                             </div>
-                            <button className="resend-email" onClick={this.handleVerify}>Resend Email</button>
-                        </div>
                     </div>
                 </div>
             </div>

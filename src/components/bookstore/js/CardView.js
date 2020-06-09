@@ -25,9 +25,9 @@ class CardView extends React.Component {
         if ( this.setBagItemsState() != 'Go To Cart') {
             this.props.saveBagDetails(this.props.bookDetails.id)
         }
-
+        
     }
-
+    
 
     setBagItemsState=()=>{
         for(var i = 0; i < this.props.cartDetails.length; i++){
@@ -55,8 +55,8 @@ class CardView extends React.Component {
                     <Typography gutterBottom variant="h6" component="h2">Rs. {this.props.bookDetails.bookPrice}</Typography>
                     <Button variant="contained" className={this.setBagItemsState() === 'Add To Bag' ? 'card-button-before-click':'card-button-after-click'} onClick={this.handleChange}
                             style={this.props.bookDetails.quantity === 0 ? {backgroundColor:"#cccccc",pointerEvents:"none",color:"black"} : {backgroundColor:"rgb(145,10,10)"}}>
-                        {this.setBagItemsState()}
-                    </Button>
+                            {this.setBagItemsState()}
+                            </Button>
                 </CardContent>
             </Card>
         )

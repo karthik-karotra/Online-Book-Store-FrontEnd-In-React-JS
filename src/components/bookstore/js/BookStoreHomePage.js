@@ -7,6 +7,10 @@ import BookStoreAxiosService from "../../../service/BookStoreAxiosService";
 import Pagination from "@material-ui/lab/Pagination";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import OrderBookAxiosService from "../../../service/OrderBookAxiosService";
+import imagek from '../../../assests/images/booknotfound.jpg';
+import CardMedia from '@material-ui/core/CardMedia';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CustomerDetailsAxiosService from "../../../service/CustomerDetailsAxiosService";
 
 export class BookStoreHomePage extends Component {
 
@@ -16,22 +20,23 @@ export class BookStoreHomePage extends Component {
             bookDetails: [],
             pageValue: 0,
             totalBookCount: '',
-            description: '',
-            parentFlag: false,
             bookPerPage: 12,
             searchText: '',
             searchValue: ' ',
             searchFlag: false,
-            selectedSearchAndFilter: '',
-            searchAndFilter: ["LOW_TO_HIGH","HIGH_TO_LOW","NEWEST_ARRIVALS"],
-            searchAndFilterFlag: false
+            selectedSearchAndFilter: 'NEWEST_ARRIVALS',
+            searchAndFilterFlag: false,
+            cartDetails: [],
+            isLoaded: false,
+            userName: ''
         }
     }
 
     displayBooks = () => {
         new BookStoreAxiosService().getBooksFromDatabase(this.state.pageValue)
             .then((response) => {
-                this.setState({bookDetails: response.data.bookList}, () => {
+                this.cartBookDetails()
+                this.setState({bookDetails: response.data.data}, () => {
                     this.getBooksCount()
                 });
             })
@@ -56,8 +61,7 @@ export class BookStoreHomePage extends Component {
 
     getBooksCount = () => {
         new BookStoreAxiosService().getCount().then((response) => {
-            console.log(response.data);
-            this.setState({totalBookCount: response.data})
+            this.setState({totalBookCount: response.data, isLoaded: true})
         })
     }
 
@@ -81,6 +85,7 @@ export class BookStoreHomePage extends Component {
     displaySearchAndFilterBook = () => {
         new BookStoreAxiosService().getSearchAndFilterBooks(this.state.pageValue, this.state.searchValue, this.state.selectedSearchAndFilter)
             .then((response) => {
+                console.log(response.data)
                 if (response.data == 'No Books For Searched String Were Found') {
                     this.setState({bookDetails: [], totalBookCount: 0})
                 }
@@ -109,21 +114,29 @@ export class BookStoreHomePage extends Component {
                 this.setState({cartDetails: response.data.data});
             }
         })
-    }
+    } 
 
     updateCount = () => {
         this.cartBookDetails();
     }
 
+    getCustomerDetails() {
+        new CustomerDetailsAxiosService().getCustomerDetails().then((response) => {
+            console.log(response.data)
+            this.setState({userName: response.data.data.fullName})
+        });
+    }
+
     componentDidMount() {
         this.displayBooks();
         this.getBooksCount();
+        this.getCustomerDetails();
     }
 
     render() {
         return (
             <div className="container1">
-                <NavigationBar getSearchedText={this.sendSearchedText} count={this.state.cartDetails.length} />
+                <NavigationBar getSearchedText={this.sendSearchedText} count={this.state.cartDetails.length} getFullName={this.state.userName} />
                 <div className="count-and-filter-container">
                     <div className="count-and-filter">
                         <div className="count">
@@ -136,22 +149,22 @@ export class BookStoreHomePage extends Component {
                                           onClick={this.handleFilter}
                                           value={this.state.selectedFilter}
                             >
-                                <option aria-label="sort" selected value=" " >Sort by Relevance </option>
-                                {this.state.searchAndFilter.map((data) => <option value={data}>{data}</option>)}
+                                <option aria-label="sort" selected value="" >Sort by</option>
+                                <option aria-label="sort" value="LOW_TO_HIGH" >Price: Low To High</option>
+                                <option aria-label="sort" value="HIGH_TO_LOW" >Price: High To Low</option>
+                                <option aria-label="sort" value="NEWEST_ARRIVALS" >Newest Arrivals</option>
                             </NativeSelect>
                         </div>
                     </div>
                 </div>
-                <div id="tooltip" className={this.state.parentFlag === true ? 'visible' : 'hidden'}>
-                    <div className="description">
-                        <h2>Book Detail</h2>
-                        <p>{this.state.description}</p>
-                    </div>
-                </div>
                 <div className="flex-container-main">
                     <div className="flex-container">
-                        {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails}
-                                                                             saveBagDetails={this.getBagDetails} sendItemCount={this.updateCount} />)}
+                    {this.state.isLoaded == false ? <CircularProgress className="image-not-found" /> :
+                    <div className="image-not-found" style={this.state.totalBookCount == 0 && this.state.isLoaded == true ? {visibility: "visible"} : {visibility: "hidden"}}>
+                        <CardMedia className="media" image={imagek}/>
+                    </div>
+                    }
+                        {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails} cartDetails={this.state.cartDetails} saveBagDetails={this.getBagDetails} sendItemCount={this.updateCount} />)}
                     </div>
                 </div>
                 <div className="pagination">
@@ -167,3 +180,4 @@ export class BookStoreHomePage extends Component {
 }
 
 export default BookStoreHomePage
+ 

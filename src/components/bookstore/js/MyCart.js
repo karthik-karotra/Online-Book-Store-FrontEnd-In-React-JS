@@ -12,13 +12,13 @@ class MyCart extends React.Component {
             quantityValue: this.props.bookDetails.quantity
         }
     }
-
+    
     increment = () =>{
-        this.setState({quantityValue: this.state.quantityValue+1}, () => {this.updateQuantity()} )
+    this.setState({quantityValue: this.state.quantityValue+1}, () => {this.updateQuantity()} )
     }
-
+    
     decrement = () =>{
-        this.setState({quantityValue:this.state.quantityValue-1}, () => {this.updateQuantity()} )
+    this.setState({quantityValue:this.state.quantityValue-1}, () => {this.updateQuantity()} )
     }
 
     handleRemove=()=>{

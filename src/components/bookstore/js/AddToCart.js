@@ -61,22 +61,24 @@ class AddToCart extends React.Component {
             pincode:pinCode,
             type: radioDefaultValue.toUpperCase()
         }
+        console.log(data1)
         this.setState({customerData: data1})
         this.cartBookDetails();
         this.setTotalPrice();
+        console.log(this.state.totalPrice)
     }
 
     handleCheckout = () => {
-        new CustomerDetailsAxiosService().setCustomerDetails(this.state.customerData).then(response => {
+        new CustomerDetailsAxiosService().setCustomerDetails(this.state.customerData).then(response => { 
             console.log(response)
             new OrderBookAxiosService().placeOrder().then(response => {
                 console.log(response.data)
             });
         })
-            .catch(error => {
-                console.log(error)
-            });
-
+        .catch(error => {
+            console.log(error)
+        });
+        
     }
 
     setTotalPrice = () => {
@@ -101,14 +103,14 @@ class AddToCart extends React.Component {
                 <div className="cart-body">
                     <div className="cart-container">
                         <div className="breadcrumbs">
-                            <Breadcrumbs aria-label="breadcrumb">
-                                <Link color="inherit" to="/">
-                                    Home
-                                </Link>
-                                <Link color="inherit" href="#" style={{fontWeight: 'bold', color: "black"}}>
-                                    My cart
-                                </Link>
-                            </Breadcrumbs>
+                        <Breadcrumbs aria-label="breadcrumb">
+                            <Link color="inherit" to="/">
+                                Home
+                            </Link>
+                            <Link color="inherit" href="#" style={{fontWeight: 'bold', color: "black"}}>
+                                My cart
+                            </Link>
+                        </Breadcrumbs>
                         </div>
                         <div className="cart">
                             <div className="header">
@@ -119,15 +121,15 @@ class AddToCart extends React.Component {
                                     <div>
                                         <div className="empty-cart">
                                             <img className="empty-cart-image" src={require("../../../assests/images/NoItem.jpg")}
-                                                 alt="Cart Is Empty"/>
+                                            alt="Cart Is Empty"/>
                                         </div>
                                     </div>
                                     :
                                     this.state.bookDetails.map(bookDetails =>
-                                        <div className="book-details">
-                                            <MyCart bookDetails={bookDetails} quantityVisibility="quantity-visible" callDisplay={this.callDisplayCartBooks} disableOperator={this.state.operatorSetDisable} />
-                                        </div>
-                                    )
+                                    <div className="book-details">
+                                        <MyCart bookDetails={bookDetails} quantityVisibility="quantity-visible" callDisplay={this.callDisplayCartBooks} disableOperator={this.state.operatorSetDisable} />
+                                    </div>
+                                    ) 
                                 }
                             </div>
                             <div className="place-order-button">
@@ -150,8 +152,8 @@ class AddToCart extends React.Component {
                                 )}
                             </div>
                             <div className={this.state.setOrderSummaryButtonVisibility}>
-                                <p className={this.state.setPriceVisibility}>Subtotal ({this.state.bookDetails.length} items): Rs. {this.state.totalPrice}</p>
-                                <Link to="/successfull" style={{textDecoration: 'none'}}><Button variant="contained" color="primary" className='visible' onClick={this.handleCheckout}>Place Order</Button></Link>
+                            <p className={this.state.setPriceVisibility}>Subtotal ({this.state.bookDetails.length} items): Rs. {this.state.totalPrice}</p>
+                            <Link to="/successfull" style={{textDecoration: 'none'}}><Button variant="contained" color="primary" className='visible' onClick={this.handleCheckout}>Place Order</Button></Link>
                             </div>
                         </div>
                     </div>

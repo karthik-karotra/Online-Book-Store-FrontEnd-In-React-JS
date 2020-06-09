@@ -6,17 +6,20 @@ import './../css/CustomerDetails.css';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
+// import { createMuiTheme } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 class CustomerDetails extends React.Component {
 
     constructor(props){
         super(props);
         this.state={
-            customerName:"",
-            status1:false,
-            helpertext1:' ',
-            phoneNumber:"",
-            status2:false,
+            // customerName:"",
+            // status1:false,
+            // helpertext1:' ',
+            // phoneNumber:"",
+            // status2:false,
             helpertext2:' ',
             pinCode:"",
             status3:false,
@@ -38,7 +41,8 @@ class CustomerDetails extends React.Component {
             disable: false,
             buttonClassName: "cart-button-visible",
             edits: 'edit-disable',
-            summaryFlag: false
+            summaryFlag: false,
+            buttonColor: 'rgb(161, 68, 68)'
         }
     }
 
@@ -51,18 +55,18 @@ class CustomerDetails extends React.Component {
     }
 
     handleChange=({target})=>{
-        if([target.name]=="customerName"){
-            this.setState({[target.name]:target.value},
-                ()=>{
-                    this.customerName()
-                });
-        }
-        if([target.name]=="phoneNumber"){
-            this.setState({[target.name]:target.value},
-                ()=>{
-                    this.phoneNumber()
-                });
-        }
+        // if([target.name] == "customerName"){
+        //     this.setState({[target.name]:target.value},
+        //         ()=>{
+        //             this.customerName()
+        //         });
+        // }
+        // if([target.name]=="phoneNumber"){
+        //     this.setState({[target.name]:target.value},
+        //         ()=>{
+        //             this.phoneNumber()
+        //         });
+        // }
         if([target.name]=="pinCode"){
             this.setState({[target.name]:target.value},
                 ()=>{
@@ -95,47 +99,48 @@ class CustomerDetails extends React.Component {
         }
         if([target.name]=="type"){
             this.setState({radioDefaultValue:target.value})}
+            this.getBackgroundColor();
 
     };
 
     handleSubmits=()=>{
-        if(this.state.customerName.trim() == ""){
-            this.setState({
-                status1:true,
-                helpertext1:'Required*'
-            });
-        }
-        if(this.state.phoneNumber.trim() == ""){
-            this.setState({
-                status2:true,
-                helpertext2:'Required*'
-            });
-        }
-        if(this.state.pinCode.trim() == ""){
+        // if(this.state.customerName.trim() === ""){
+        //     this.setState({
+        //         status1:true,
+        //         helpertext1:'Required*'
+        //     });
+        // }
+        // if(this.state.phoneNumber.trim() === ""){
+        //     this.setState({
+        //         status2:true,
+        //         helpertext2:'Required*'
+        //     });
+        // }
+        if(this.state.pinCode.trim() === ""){
             this.setState({
                 status3:true,
                 helpertext3:'Required*'
             });
         }
-        if(this.state.locality.trim() == ""){
+        if(this.state.locality.trim() === ""){
             this.setState({
                 status4:true,
                 helpertext4:'Required*'
             });
         }
-        if(this.state.address.trim() == ""){
+        if(this.state.address.trim() === ""){
             this.setState({
                 status5:true,
                 helpertext5:'Required*'
             });
         }
-        if(this.state.cityTown.trim() == ""){
+        if(this.state.cityTown.trim() === ""){
             this.setState({
                 status6:true,
                 helpertext6:'Required*'
             });
         }
-        if(this.state.landmark.trim() == ""){
+        if(this.state.landmark.trim() === ""){
             this.setState({
                 status7:true,
                 helpertext7:'Required*'
@@ -143,63 +148,64 @@ class CustomerDetails extends React.Component {
         }
 
 
-        if (this.state.customerName.trim() != "" && this.state.phoneNumber.trim() != "" && this.state.pinCode.trim() != "" && this.state.locality.trim() != "" && this.state.address.trim() != "" && this.state.cityTown.trim() != "" && this.state.landmark.trim() != "") {
-            if (this.state.status1 == false && this.state.status2 == false && this.state.status3 == false && this.state.status4 == false && this.state.status5 == false && this.state.status6 == false && this.state.status7 == false) {
+        if (this.state.pinCode.trim() !== "" && this.state.locality.trim() !== "" && this.state.address.trim() !== "" && this.state.cityTown.trim() !== "" && this.state.landmark.trim() !== "") {
+            if (this.state.status3 === false && this.state.status4 === false && this.state.status5 === false && this.state.status6 === false && this.state.status7 === false) {
                 this.disabedForm();
                 this.props.setOrderSummaryDisplayFlag();
+                this.props.getMeCustumerDetails(this.state.address,this.state.cityTown,this.state.landmark,this.state.locality,this.state.pinCode,this.state.radioDefaultValue);
             }
         }
 
 
     }
 
-    customerName(){
-        this.setState({
-            status1:true,
-            helpertext1:'Required*'
-        })
-        var customerNamePattern=/^([a-zA-Z]{3,}[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*)$/;
-        this.setState({
-            customerName: this.state.customerName.trim()
-        })
-        if(this.state.customerName.trim()!=""){
-            if(customerNamePattern.test(this.state.customerName)==false){
-                this.setState({
-                    status1:true,
-                    helpertext1:'It Contain Minimum 2 Characters',
-                })
-            } else{
-                this.setState({
-                    status1:false,
-                    helpertext1:' ',
-                })
-            }
-        }
-    }
+    // customerName(){
+    //     this.setState({
+    //         status1:true,
+    //         helpertext1:'Required*',
+    //     })
+    //     var customerNamePattern=/^([a-zA-Z]{3,}[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*)$/;
+    //     this.setState({
+    //         customerName: this.state.customerName.trim()
+    //     })
+    //     if(this.state.customerName.trim() !== ""){
+    //         if(customerNamePattern.test(this.state.customerName) === false){
+    //             this.setState({
+    //                 status1:true,
+    //                 helpertext1:'It Contain Minimum 2 Characters',
+    //             })
+    //         } else{
+    //             this.setState({
+    //                 status1:false,
+    //                 helpertext1:' ',
+    //             })
+    //         }
+    //     }
+    // }
 
-    phoneNumber(){
-        this.setState({
-            status2:true,
-            helpertext2:'Required*'
-        })
-        var phoneNumberPattern=/^[6-9]{1}[0-9]{9}$/;
-        this.setState({
-            phoneNumber: this.state.phoneNumber.trim()
-        })
-        if(this.state.phoneNumber.trim()!=""){
-            if(phoneNumberPattern.test(this.state.phoneNumber)==false){
-                this.setState({
-                    status2:true,
-                    helpertext2:'Enter Valid Mobile Number',
-                })
-            } else{
-                this.setState({
-                    status2:false,
-                    helpertext2:' ',
-                })
-            }
-        }
-    }
+    // phoneNumber(){
+    //     this.setState({
+    //         status2:true,
+    //         helpertext2:'Required*'
+    //     })
+    //     var phoneNumberPattern=/^[6-9]{1}[0-9]{9}$/;
+    //     this.setState({
+    //         phoneNumber: this.state.phoneNumber.trim()
+    //     })
+    //     if(this.state.phoneNumber.trim() !== ""){
+    //         if(phoneNumberPattern.test(this.state.phoneNumber) === false){
+    //             this.setState({
+    //                 status2:true,
+    //                 helpertext2:'Enter Valid Mobile Number',
+    //             })
+    //         } else{
+    //             this.setState({
+    //                 status2:false,
+    //                 helpertext2:' ',
+    //             })
+    //         }
+    //     }
+    // }
 
     pinCode(){
         this.setState({
@@ -210,13 +216,13 @@ class CustomerDetails extends React.Component {
         this.setState({
             pinCode: this.state.pinCode.trim()
         })
-        if(this.state.pinCode.trim()!=""){
-            if(pinCodePattern.test(this.state.pinCode)==false){
+        if(this.state.pinCode.trim() !== ""){
+            if(pinCodePattern.test(this.state.pinCode) === false){
                 this.setState({
                     status3:true,
                     helpertext3:'Pincode Should Be 6 Digit',
                 })
-            } else{
+             } else{
                 this.setState({
                     status3:false,
                     helpertext3:' ',
@@ -234,8 +240,8 @@ class CustomerDetails extends React.Component {
         this.setState({
             locality: this.state.locality.trim()
         })
-        if(this.state.locality.trim()!=""){
-            if(localityPattern.test(this.state.locality)==false){
+        if(this.state.locality.trim() !== ""){
+            if(localityPattern.test(this.state.locality) === false){
                 this.setState({
                     status4:true,
                     helpertext4:'It Contains Minimum 3 Characters',
@@ -258,8 +264,8 @@ class CustomerDetails extends React.Component {
         this.setState({
             address: this.state.address.trim()
         })
-        if(this.state.address.trim()!=""){
-            if(addressPattern.test(this.state.address)==false){
+        if(this.state.address.trim() !== ""){
+            if(addressPattern.test(this.state.address) === false){
                 this.setState({
                     status5:true,
                     helpertext5:'It Contains Maximum 250 Characters',
@@ -277,13 +283,14 @@ class CustomerDetails extends React.Component {
         this.setState({
             status6:true,
             helpertext6:'Required*'
+
         })
         var cityTownPattern=/^([a-zA-Z]{3,}[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*)$/;
         this.setState({
             cityTown: this.state.cityTown.trim()
         })
-        if(this.state.cityTown.trim()!=""){
-            if(cityTownPattern.test(this.state.cityTown)==false){
+        if(this.state.cityTown.trim() !== ""){
+            if(cityTownPattern.test(this.state.cityTown) === false){
                 this.setState({
                     status6:true,
                     helpertext6:'It Contains Minimum 3 Characters',
@@ -306,8 +313,8 @@ class CustomerDetails extends React.Component {
         this.setState({
             landmark: this.state.landmark.trim()
         })
-        if(this.state.landmark.trim()!=""){
-            if(landmarkPattern.test(this.state.landmark)==false){
+        if(this.state.landmark.trim() !== ""){
+            if(landmarkPattern.test(this.state.landmark)===false){
                 this.setState({
                     status7:true,
                     helpertext7:'It Contains Minimum 3 Characters',
@@ -321,18 +328,40 @@ class CustomerDetails extends React.Component {
         }
     }
 
+    getBackgroundColor() {
+        if (this.state.pinCode.trim() !== "" && this.state.locality.trim() !== "" && this.state.address.trim() !== "" && this.state.cityTown.trim() !== "" && this.state.landmark.trim() !== "") {
+            if (this.state.status3 === false && this.state.status4 === false && this.state.status5 === false && this.state.status6 === false && this.state.status7 === false) {
+                this.setState({buttonColor: 'rgb(145, 10, 10)'})
+            }
+        }
+        else {
+            this.setState({buttonColor: 'rgb(161, 68, 68)'})
+        }
+    }
 
 
     render() {
+        const theme = createMuiTheme({
+            palette: {
+                primary: {
+                    main: '#910A0A'
+                },
+            },
+        })
         return (
             <div className="customer-form-container">
                 <div className={this.state.edits}><button className="edit-button" onClick={this.enableForm}>Edit</button></div>
                 <div className="form-content">
                     <div className="customerdetail-textfield">
-                        <TextField error={this.state.status1} className="input" id="outlined-basic" value={this.state.customerName} label="Name" variant="outlined" autoComplete="off"
-                                   helperText={this.state.helpertext1} onClick={this.handleChange} onChange={this.handleChange} name="customerName" disabled={this.state.disable}/>
-                        <TextField error={this.state.status2} className="input" id="outlined-basic" label="Phone Number" variant="outlined" autoComplete="off"
-                                   value={this.state.phoneNumber} helperText={this.state.helpertext2} onClick={this.handleChange} onChange={this.handleChange} name="phoneNumber" disabled={this.state.disable} />
+                    <ThemeProvider theme={theme}>
+                        <TextField error={this.state.status1} className="input" id="outlined-basic" label="Name" InputLabelProps={{
+                            shrink: true,
+                            }} value={this.props.customerDetails.fullName} variant="outlined" autoComplete="off"
+                                   helperText={this.state.helpertext1} onClick={this.handleChange} onChange={this.handleChange} name="customerName" disabled/></ThemeProvider>
+                        <TextField error={this.state.status2} label="Phone Number" InputLabelProps={{
+                            shrink: true,
+                            }} className="input" id="outlined-basic" variant="outlined" autoComplete="off"
+                                   value={this.props.customerDetails.phoneNo} helperText={this.state.helpertext2} onClick={this.handleChange} onChange={this.handleChange} name="phoneNumber" disabled />
                     </div>
                     <div className="customerdetail-textfield">
                         <TextField error={this.state.status3} className="input" id="outlined-basic" label="Pincode" variant="outlined" autoComplete="off"
@@ -365,16 +394,19 @@ class CustomerDetails extends React.Component {
                         </div>
                         <RadioGroup aria-label="type" name="type" value={this.state.radioDefaultValue} onChange={this.handleChange} >
                             <div className="radio">
-                                <FormControlLabel value="home" disabled={this.state.disable} control={<Radio />} label="Home" />
-                                <FormControlLabel value="work" disabled={this.state.disable} control={<Radio />} label="Work" />
-                                <FormControlLabel value="other" disabled={this.state.disable} control={<Radio />} label="Other" />
-                            </div>
+                                <FormControlLabel value="home" disabled={this.state.disable} control={<Radio style={{color: '#910A0A'}} />} label="Home" />
+                                <FormControlLabel value="work" disabled={this.state.disable} control={<Radio style={{color: '#910A0A'}} />} label="Work" />
+                                <FormControlLabel value="other" disabled={this.state.disable} control={<Radio style={{color: '#910A0A'}} />} label="Other" />
+                                </div>
                         </RadioGroup>
                     </div>
                 </div>
                 <div className="customerdetail-button">
                     <Button className={this.state.buttonClassName} variant="contained"
-                            onClick={this.handleSubmits} color="primary">
+                        style={{backgroundColor: this.state.buttonColor}}
+                        disabled={!this.state.pinCode
+                            && !this.state.locality && !this.state.address && !this.state.cityTown && !this.state.landmark}
+                        onClick={this.handleSubmits}>
                         Continue
                     </Button>
                 </div>

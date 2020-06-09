@@ -154,7 +154,7 @@ class ResetPassword extends React.Component{
                 </Snackbar>
                 <div className="reset-container-main">
                     <div className="reset-header">
-                        <h1>Reset Your Password?</h1>
+                    <h1>Reset Your Password?</h1>
                     </div>
                     <div className="reset-form-container">
                         <div className="reset-form">
@@ -163,8 +163,8 @@ class ResetPassword extends React.Component{
                             </div>
                             <div className="reset-textfield">
                                 <ThemeProvider theme={theme}>
-                                    <TextField error={this.state.status1} helperText={this.state.helperText1} type="password" className="reset-password-textfield" label="Password" variant="outlined" onChange={this.handleChange} name="password" />
-                                    <TextField error={this.state.status2} helperText={this.state.helperText2} type="password" className="reset-password-textfield" label="Confirm Password" variant="outlined" onChange={this.handleChange} name="confirmPassword"/>
+                                <TextField error={this.state.status1} helperText={this.state.helperText1} type="password" className="reset-password-textfield" label="Password" variant="outlined" onChange={this.handleChange} name="password" />
+                                <TextField error={this.state.status2} helperText={this.state.helperText2} type="password" className="reset-password-textfield" label="Confirm Password" variant="outlined" onChange={this.handleChange} name="confirmPassword"/>
                                 </ThemeProvider>
                                 <button className="submit-button" onClick={this.handleSubmit}>Submit</button>
                             </div>
@@ -174,6 +174,7 @@ class ResetPassword extends React.Component{
                         <Link to="/login" ><button className="reset-create-button">CREATE ACCOUNT</button></Link>
                     </div>
                 </div>
+                
             </div>
         );
     }

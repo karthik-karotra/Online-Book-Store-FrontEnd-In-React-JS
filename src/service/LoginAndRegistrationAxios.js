@@ -29,11 +29,11 @@ class LoginAndRegistrationAxios extends React.Component {
 
     resend(email) {
         return Axios({
-            method: 'post', headers: {"Content-Type": "application/json"},
-            url: "http://localhost:8080/user/register/resend/confirmation/"+email,
-            data: JSON.stringify(),
+        method: 'post', headers: {"Content-Type": "application/json"},
+        url: "http://localhost:8080/user/register/resend/confirmation/"+email,
+        data: JSON.stringify(),
         })
-    }
+        }
 
     forgotPassword(email) {
         return Axios({
@@ -42,7 +42,7 @@ class LoginAndRegistrationAxios extends React.Component {
             data: JSON.stringify(),
         })
     }
-
+        
     resetPassword(data,token) {
         return Axios({
             method: 'post', headers: {"Content-Type": "application/json"},
@@ -50,6 +50,7 @@ class LoginAndRegistrationAxios extends React.Component {
             data: data,
         })
     }
+        
 
 }
 
