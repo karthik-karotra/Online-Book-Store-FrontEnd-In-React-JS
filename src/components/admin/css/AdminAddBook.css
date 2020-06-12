@@ -1,11 +1,9 @@
 .container {
+    height: 709px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white;
-    height: 94vh;
-    background-size: cover;
-    overflow: hidden;
 }
 
 .content {
@@ -19,7 +17,7 @@
     border-radius: 2px;
     border: 2px solid gray;
     padding-bottom: 20px;
-    margin-top: 60px;
+    /* margin-top: 60px; */
 }
 
 .input {
@@ -96,7 +94,7 @@ input[type="file"]::-webkit-file-upload-button {
     left: -120px;
 }
 
-@media only screen and (max-width: 780px) and (max-height: 1050px ) {
+@media only screen and (max-width: 360px) and (max-height: 823px ) {
     .MuiToolbar-root {
         display: flex;
         position: relative;
@@ -109,7 +107,7 @@ input[type="file"]::-webkit-file-upload-button {
         align-items: center;
         justify-content: center;
         background-color: white;
-        height: 100vh;
+        height: 529px;
         background-size: cover;
     }
 
@@ -195,12 +193,21 @@ input[type="file"]::-webkit-file-upload-button {
     }
 }
 
+@media only screen and (width: 768px) and (height: 1024px ) {
+    .container{
+        height: 912px;
+    }
+}
+
 @media only screen and (min-width: 1000px) and (min-height: 1300px ) {
     .MuiToolbar-root {
         display: flex;
         position: relative;
         align-items: center;
         left: -40px;
+    }
+    .container{
+        height: 1255px;
     }
 
     .content {

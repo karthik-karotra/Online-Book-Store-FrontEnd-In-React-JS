@@ -2,12 +2,10 @@ import React from 'react';
 import '../css/AdminAddBook.css';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
-import NavigationBar from "../../util/js/NavigationBar";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
 import AdminAxiosService from "../../../service/AdminAxiosService";
 import '../../bookstore/css/BookStoreHomePage.css'
-import BookStoreFooter from "../../util/js/BottomBar";
 
 class AdminAddBook extends React.Component {
     constructor(props) {
@@ -196,7 +194,7 @@ class AdminAddBook extends React.Component {
                 });
         }
         if ([target.name] == "bookDetails") {
-            this.setState({[target.name]: target.value},() => { this.bookDetails() 
+            this.setState({[target.name]: target.value},() => { this.bookDetails()
             });
         }
     };
@@ -403,7 +401,6 @@ class AdminAddBook extends React.Component {
     render() {
         return (
             <div>
-                <NavigationBar />
                 <div className="container">
                     <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={this.state.snackbaropen}
                               autoHideDuration={4000} onClose={this.snackbarClose}>
@@ -453,14 +450,14 @@ class AdminAddBook extends React.Component {
                         </div>
                         <div className="data">
                             <TextField error={this.state.status7} helperText={this.state.helpertext7} className="input"
-                                       id="outlined-basic" label="" variant="outlined" style={{width:'95%'}}
+                                       id="outlined-basic" label="" variant="outlined" style={{width:'90%'}}
                                        value={this.state.bookImageSource} type="file" accept="file_extension|image/*"
                                        onClick={this.handleChange} onChange={this.handleChange}
                                        name="bookImageSource"/>
                         </div>
                         <div className="data">
                             <TextField error={this.state.status8} helperText={this.state.helpertext8} className="input"
-                                       id="outlined-multiline-static" label="Description" style={{width:'95%'}}
+                                       id="outlined-multiline-static" label="Description" style={{width:'90%'}}
                                        placeholder="Maximum 1000 Characters" multiline rows={2} variant="outlined"
                                        value={this.state.bookDetails} onClick={this.handleChange}
                                        onChange={this.handleChange}
@@ -472,14 +469,8 @@ class AdminAddBook extends React.Component {
                                 <div className="buttonfont">Add Book</div>
                             </Button>
                         </div>
-                        {/*<div className="userfooter">*/}
-                        {/*    <BottomBar/>*/}
-                        {/*</div>*/}
                     </div>
                 </div>
-                {/*<div className="userfooter">*/}
-                    <BookStoreFooter />
-                {/*</div>*/}
             </div>
         );
     }
