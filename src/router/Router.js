@@ -1,6 +1,6 @@
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 import React from "react";
-import AdminFrontPage from "../components/admin/js/AdminFrontPage";
+import AdminAddBook from "../components/admin/js/AdminAddBook";
 import BookStoreHomePage from "../components/bookstore/js/BookStoreHomePage";
 import AddToCart from "../components/bookstore/js/AddToCart";
 import OrderSuccessfullPage from '../components/bookstore/js/OrderSuccessfullPage';
@@ -28,7 +28,7 @@ export default class DefaultRoutes extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path={"/admin"} exact component={AdminFrontPage}/>
+                    <Route path={"/admin"} exact component={AdminAddBook}/>
                     <Route path={"/"} exact component={BookStoreHomePage}/>
                     <Route path={"/cart"} exact component={AddToCart}/>
                     <Route path={"/successfull"} exact component={OrderSuccessfullPage}/>

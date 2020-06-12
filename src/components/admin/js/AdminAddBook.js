@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/AdminFrontPage.css';
+import '../css/AdminAddBook.css';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import NavigationBar from "../../util/js/NavigationBar";
@@ -9,7 +9,7 @@ import AdminAxiosService from "../../../service/AdminAxiosService";
 import '../../bookstore/css/BookStoreHomePage.css'
 import BookStoreFooter from "../../util/js/BottomBar";
 
-class AdminFrontPage extends React.Component {
+class AdminAddBook extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -485,4 +485,4 @@ class AdminFrontPage extends React.Component {
     }
 }
 
-export default AdminFrontPage;
+export default AdminAddBook;
