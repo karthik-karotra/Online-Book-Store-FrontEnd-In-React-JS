@@ -1,0 +1,134 @@
+.track-order-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.track-order-header{
+    width: 100%;
+    height: 15%;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: row;
+}
+
+.id{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.update-button{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Calibri;
+    color:white;
+    font-size: 17px;
+}
+
+.order-id-details-disable{
+    display: none;
+}
+
+.order-id-details{
+    width: 99.4%;
+    height: 45%;
+    /* background-color: saddlebrown; */
+    display: flex;
+    justify-content: center;
+    border: 1px solid #F5F5F5;
+}
+
+.details-of-order{
+    width: 77%;
+    height: 100%;
+    /* background-color: seagreen; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.sumarry{
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: large;
+}
+
+.date{
+    font-family: Calibri;
+    font-size: large;
+}
+
+.subitem{
+    font-family: Calibri;
+    font-size: large;
+}
+
+.prices{
+    font-family: Calibri;
+    font-size: large;
+}
+
+.status-track-disable{
+    display: none;
+}
+
+.status-track{
+    width: 99.4%;
+    height: 45%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #F5F5F5;
+}
+
+.level-of-status{
+    width: 77%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.update-header{
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: large;
+}
+
+.checkbox-containers{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 25%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkbox-wrapper{
+    width: 49%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #F5F5F5;
+    justify-content: space-between;
+}
+
+.checkbox-status{
+    margin-left: 6%;
+}
+
+.checkbox-level{
+    margin-right: 6%;
+}
+
+.stepper{
+    width: 100%;
+    height: 30%;
+}
