@@ -11,10 +11,11 @@ import EmailIcon from '@material-ui/icons/Email';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import StepConnector from '@material-ui/core/StepConnector';
+import AdminAxiosService from '../../../service/AdminAxiosService';
 
 class AdminTrackOrder extends React.Component {
 
-    constructor(props) {
+    constructor(props){
         super(props);
         this.state = {
             steps: ['Ordered', 'Packed', 'Shipped', 'Delivered'],
@@ -25,6 +26,14 @@ class AdminTrackOrder extends React.Component {
             updatePanel: 'status-track-disable',
             updateColor: '#F5F5F5',
             colorUpdate: 'black',
+            isPacked: false,
+            isShipped: false,
+            isDelivered: false,
+            packedDisabled: false,
+            shippedDisabled: false,
+            deliveredDisabled: false,
+            details:[],
+            totalPrice: 0
         }
     }
 
@@ -36,7 +45,83 @@ class AdminTrackOrder extends React.Component {
         this.setState({orderColor: '#F5F5F5', colorOrder: 'black', colorUpdate: 'white',updateColor: 'rgb(145,10,10)',orderId: 'order-id-details-disable', updatePanel: 'status-track'})
     }
 
+    getOrderStatus = () => {
+        if(this.props.orderDetails.orderStatus == "ORDERED") {
+            this.setState({packedDisabled:false, shippedDisabled:true, deliveredDisabled:true })
+        }
+        if(this.props.orderDetails.orderStatus == "PACKED"){
+            this.setState({isPacked:true, packedDisabled:false, shippedDisabled:false, deliveredDisabled: true})
+        }
+        if(this.props.orderDetails.orderStatus == "SHIPPED"){
+            this.setState({isPacked:true, isShipped:true,packedDisabled:true, deliveredDisabled:false})
+        }
+        if(this.props.orderDetails.orderStatus == "DELIVERED"){
+            this.setState({isPacked:true, isShipped:true, isDelivered:true, packedDisabled: true,shippedDisabled:true})
+        }
+    }
+
+    handleChange = ({target}) => {
+        if ([target.name] == "isPacked") {
+            if(this.state.isPacked == true) {
+                this.setState({isPacked: false, shippedDisabled: true, activeStep: this.state.activeStep-1});
+                this.setOrderStatus("ORDERED");
+            }
+            if(this.state.isPacked == false){
+                this.setState({isPacked: true, shippedDisabled: false, activeStep: this.state.activeStep+1});
+                this.setOrderStatus([target.value]);
+            }
+        }
+        if ([target.name] == "isShipped") {
+            if(this.state.isShipped == true) {
+                this.setState({isShipped: false,packedDisabled: false ,deliveredDisabled: true,activeStep: this.state.activeStep-1});
+                this.setOrderStatus("PACKED");
+            }
+            if(this.state.isShipped == false){
+                this.setState({isShipped: true,packedDisabled: true ,deliveredDisabled: false,activeStep: this.state.activeStep+1});
+                this.setOrderStatus([target.value]);
+            }
+        }
+        if ([target.name] == "isDelivered") {
+            if(this.state.isDelivered == true) {
+                this.setState({isDelivered: false, shippedDisabled: false, activeStep: this.state.activeStep-1});
+                this.setOrderStatus("SHIPPED");
+            }
+            if(this.state.isDelivered == false){
+                this.setState({isDelivered: true, shippedDisabled: true, activeStep: this.state.activeStep+1});
+                this.setOrderStatus([target.value]);
+            }
+        }
+    }
+
+    setOrderStatus = (orderStatus) => {
+        new AdminAxiosService().updateOrderStatus(this.props.orderDetails.id, orderStatus).then((response) => {
+            console.log(response)
+        })
+    }
+
+    updateOrderStatus = () => {
+        for(var i=0; i<this.state.steps.length; i++){
+            if(this.state.steps[i].toUpperCase() == this.props.orderDetails.orderStatus){
+                this.setState({activeStep: i})
+                break;
+            }
+        }
+    }
+
+    getTotalPrice = () => {
+        for(var i=0; i<this.props.orderDetails.orderProduct.length; i++){
+            this.setState({totalPrice: this.state.totalPrice+this.props.orderDetails.orderProduct[i].book.bookPrice*this.props.orderDetails.orderProduct[i].quantity})
+        }
+    }
+
+    componentDidMount() {
+        this.getTotalPrice();
+        this.updateOrderStatus();
+        this.getOrderStatus();
+    }
+
     render() {
+
         const ColorlibConnector = withStyles({
             alternativeLabel: {
                 top: 22,
