@@ -194,7 +194,8 @@ class AdminAddBook extends React.Component {
                 });
         }
         if ([target.name] == "bookDetails") {
-            this.setState({[target.name]: target.value},() => { this.bookDetails()
+            this.setState({[target.name]: target.value}, () => {
+                this.bookDetails()
             });
         }
     };
@@ -202,11 +203,11 @@ class AdminAddBook extends React.Component {
     getImageURL = () => {
         console.log(this.state.setImageURL)
         const formData = new FormData();
-        formData.append('file',this.state.setImageURL);
-        new AdminAxiosService().addImage(formData).then(response=>{
+        formData.append('file', this.state.setImageURL);
+        new AdminAxiosService().addImage(formData).then(response => {
             console.log(response.data)
             this.setState({imageURL: response.data})
-        }).catch(response=>{
+        }).catch(response => {
             console.log(response)
         })
     }
@@ -360,7 +361,9 @@ class AdminAddBook extends React.Component {
             this.setState({
                 status7: false,
                 helpertext7: ' ',
-            }, () => {this.getImageURL()})
+            }, () => {
+                this.getImageURL()
+            })
         } else {
             this.setState({
                 status7: true,
@@ -450,14 +453,14 @@ class AdminAddBook extends React.Component {
                         </div>
                         <div className="data">
                             <TextField error={this.state.status7} helperText={this.state.helpertext7} className="input"
-                                       id="outlined-basic" label="" variant="outlined" style={{width:'90%'}}
+                                       id="outlined-basic" label="" variant="outlined" style={{width: '90%'}}
                                        value={this.state.bookImageSource} type="file" accept="file_extension|image/*"
                                        onClick={this.handleChange} onChange={this.handleChange}
                                        name="bookImageSource"/>
                         </div>
                         <div className="data">
                             <TextField error={this.state.status8} helperText={this.state.helpertext8} className="input"
-                                       id="outlined-multiline-static" label="Description" style={{width:'90%'}}
+                                       id="outlined-multiline-static" label="Description" style={{width: '90%'}}
                                        placeholder="Maximum 1000 Characters" multiline rows={2} variant="outlined"
                                        value={this.state.bookDetails} onClick={this.handleChange}
                                        onChange={this.handleChange}

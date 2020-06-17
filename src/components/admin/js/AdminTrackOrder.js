@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/AdminTrackOrder.css';
 import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import {makeStyles, withStyles} from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -15,7 +15,7 @@ import AdminAxiosService from '../../../service/AdminAxiosService';
 
 class AdminTrackOrder extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             steps: ['Ordered', 'Packed', 'Shipped', 'Delivered'],
@@ -32,62 +32,92 @@ class AdminTrackOrder extends React.Component {
             packedDisabled: false,
             shippedDisabled: false,
             deliveredDisabled: false,
-            details:[],
+            details: [],
             totalPrice: 0
         }
     }
 
     order = () => {
-        this.setState({orderColor: 'rgb(145,10,10)', colorOrder: 'white', colorUpdate: 'black',updateColor: '#F5F5F5', orderId: 'order-id-details', updatePanel: 'status-track-disable'})
+        this.setState({
+            orderColor: 'rgb(145,10,10)',
+            colorOrder: 'white',
+            colorUpdate: 'black',
+            updateColor: '#F5F5F5',
+            orderId: 'order-id-details',
+            updatePanel: 'status-track-disable'
+        })
     }
 
     updateStatusPanel = () => {
-        this.setState({orderColor: '#F5F5F5', colorOrder: 'black', colorUpdate: 'white',updateColor: 'rgb(145,10,10)',orderId: 'order-id-details-disable', updatePanel: 'status-track'})
+        this.setState({
+            orderColor: '#F5F5F5',
+            colorOrder: 'black',
+            colorUpdate: 'white',
+            updateColor: 'rgb(145,10,10)',
+            orderId: 'order-id-details-disable',
+            updatePanel: 'status-track'
+        })
     }
 
     getOrderStatus = () => {
-        if(this.props.orderDetails.orderStatus == "ORDERED") {
-            this.setState({packedDisabled:false, shippedDisabled:true, deliveredDisabled:true })
+        if (this.props.orderDetails.orderStatus == "ORDERED") {
+            this.setState({packedDisabled: false, shippedDisabled: true, deliveredDisabled: true})
         }
-        if(this.props.orderDetails.orderStatus == "PACKED"){
-            this.setState({isPacked:true, packedDisabled:false, shippedDisabled:false, deliveredDisabled: true})
+        if (this.props.orderDetails.orderStatus == "PACKED") {
+            this.setState({isPacked: true, packedDisabled: false, shippedDisabled: false, deliveredDisabled: true})
         }
-        if(this.props.orderDetails.orderStatus == "SHIPPED"){
-            this.setState({isPacked:true, isShipped:true,packedDisabled:true, deliveredDisabled:false})
+        if (this.props.orderDetails.orderStatus == "SHIPPED") {
+            this.setState({isPacked: true, isShipped: true, packedDisabled: true, deliveredDisabled: false})
         }
-        if(this.props.orderDetails.orderStatus == "DELIVERED"){
-            this.setState({isPacked:true, isShipped:true, isDelivered:true, packedDisabled: true,shippedDisabled:true})
+        if (this.props.orderDetails.orderStatus == "DELIVERED") {
+            this.setState({
+                isPacked: true,
+                isShipped: true,
+                isDelivered: true,
+                packedDisabled: true,
+                shippedDisabled: true
+            })
         }
     }
 
     handleChange = ({target}) => {
         if ([target.name] == "isPacked") {
-            if(this.state.isPacked == true) {
-                this.setState({isPacked: false, shippedDisabled: true, activeStep: this.state.activeStep-1});
+            if (this.state.isPacked == true) {
+                this.setState({isPacked: false, shippedDisabled: true, activeStep: this.state.activeStep - 1});
                 this.setOrderStatus("ORDERED");
             }
-            if(this.state.isPacked == false){
-                this.setState({isPacked: true, shippedDisabled: false, activeStep: this.state.activeStep+1});
+            if (this.state.isPacked == false) {
+                this.setState({isPacked: true, shippedDisabled: false, activeStep: this.state.activeStep + 1});
                 this.setOrderStatus([target.value]);
             }
         }
         if ([target.name] == "isShipped") {
-            if(this.state.isShipped == true) {
-                this.setState({isShipped: false,packedDisabled: false ,deliveredDisabled: true,activeStep: this.state.activeStep-1});
+            if (this.state.isShipped == true) {
+                this.setState({
+                    isShipped: false,
+                    packedDisabled: false,
+                    deliveredDisabled: true,
+                    activeStep: this.state.activeStep - 1
+                });
                 this.setOrderStatus("PACKED");
             }
-            if(this.state.isShipped == false){
-                this.setState({isShipped: true,packedDisabled: true ,deliveredDisabled: false,activeStep: this.state.activeStep+1});
+            if (this.state.isShipped == false) {
+                this.setState({
+                    isShipped: true,
+                    packedDisabled: true,
+                    deliveredDisabled: false,
+                    activeStep: this.state.activeStep + 1
+                });
                 this.setOrderStatus([target.value]);
             }
         }
         if ([target.name] == "isDelivered") {
-            if(this.state.isDelivered == true) {
-                this.setState({isDelivered: false, shippedDisabled: false, activeStep: this.state.activeStep-1});
+            if (this.state.isDelivered == true) {
+                this.setState({isDelivered: false, shippedDisabled: false, activeStep: this.state.activeStep - 1});
                 this.setOrderStatus("SHIPPED");
             }
-            if(this.state.isDelivered == false){
-                this.setState({isDelivered: true, shippedDisabled: true, activeStep: this.state.activeStep+1});
+            if (this.state.isDelivered == false) {
+                this.setState({isDelivered: true, shippedDisabled: true, activeStep: this.state.activeStep + 1});
                 this.setOrderStatus([target.value]);
             }
         }
@@ -100,8 +130,8 @@ class AdminTrackOrder extends React.Component {
     }
 
     updateOrderStatus = () => {
-        for(var i=0; i<this.state.steps.length; i++){
-            if(this.state.steps[i].toUpperCase() == this.props.orderDetails.orderStatus){
+        for (var i = 0; i < this.state.steps.length; i++) {
+            if (this.state.steps[i].toUpperCase() == this.props.orderDetails.orderStatus) {
                 this.setState({activeStep: i})
                 break;
             }
@@ -109,8 +139,8 @@ class AdminTrackOrder extends React.Component {
     }
 
     getTotalPrice = () => {
-        for(var i=0; i<this.props.orderDetails.orderProduct.length; i++){
-            this.setState({totalPrice: this.state.totalPrice+this.props.orderDetails.orderProduct[i].book.bookPrice*this.props.orderDetails.orderProduct[i].quantity})
+        for (var i = 0; i < this.props.orderDetails.orderProduct.length; i++) {
+            this.setState({totalPrice: this.state.totalPrice + this.props.orderDetails.orderProduct[i].book.bookPrice * this.props.orderDetails.orderProduct[i].quantity})
         }
     }
 
@@ -171,13 +201,13 @@ class AdminTrackOrder extends React.Component {
 
         function ColorlibStepIcon(props) {
             const classes = useColorlibStepIconStyles();
-            const { active, completed } = props;
+            const {active, completed} = props;
 
             const icons = {
-                1: <LocalGroceryStoreIcon />,
-                2: <EmailIcon />,
-                3: <LocalShippingIcon />,
-                4: <PersonPinCircleIcon />,
+                1: <LocalGroceryStoreIcon/>,
+                2: <EmailIcon/>,
+                3: <LocalShippingIcon/>,
+                4: <PersonPinCircleIcon/>,
             };
 
             return (
@@ -207,11 +237,20 @@ class AdminTrackOrder extends React.Component {
             icon: PropTypes.node,
         };
 
-        return(
+        return (
             <div className="track-order-wrapper">
                 <div className="track-order-header">
-                    <div className="id" style={{cursor: 'default',backgroundColor:this.state.orderColor,color:this.state.colorOrder}} onClick={this.order}>Order Id. : {this.props.orderDetails.id}</div>
-                    <div className="update-button" style={{cursor: 'default',backgroundColor:this.state.updateColor,color:this.state.colorUpdate}} onClick={this.updateStatusPanel}>Update Order Status</div>
+                    <div className="id" style={{
+                        cursor: 'default',
+                        backgroundColor: this.state.orderColor,
+                        color: this.state.colorOrder
+                    }} onClick={this.order}>Order Id. : {this.props.orderDetails.id}</div>
+                    <div className="update-button" style={{
+                        cursor: 'default',
+                        backgroundColor: this.state.updateColor,
+                        color: this.state.colorUpdate
+                    }} onClick={this.updateStatusPanel}>Update Order Status
+                    </div>
                 </div>
                 <div className={this.state.orderId}>
                     <div className="details-of-order">
@@ -223,31 +262,42 @@ class AdminTrackOrder extends React.Component {
                 </div>
                 <div className={this.state.updatePanel}>
                     <div className="level-of-status">
-                        <div className="update-header">Update order Status : </div>
+                        <div className="update-header">Update order Status :</div>
                         <div className="checkbox-containers">
                             <div className="checkbox-wrapper">
                                 <div className="checkbox-status">Ordered</div>
-                                <div className="checkbox-level"><input type="checkbox" id="ordered" name="ordered" value="ORDERED" checked disabled /></div>
+                                <div className="checkbox-level"><input type="checkbox" id="ordered" name="ordered"
+                                                                       value="ORDERED" checked disabled/></div>
                             </div>
                             <div className="checkbox-wrapper">
                                 <div className="checkbox-status">Packed</div>
-                                <div className="checkbox-level"><input type="checkbox" id="packed" name="isPacked" value="PACKED" checked={this.state.isPacked} onClick={this.handleChange} disabled={this.state.packedDisabled} /></div>
+                                <div className="checkbox-level"><input type="checkbox" id="packed" name="isPacked"
+                                                                       value="PACKED" checked={this.state.isPacked}
+                                                                       onClick={this.handleChange}
+                                                                       disabled={this.state.packedDisabled}/></div>
                             </div>
                         </div>
                         <div className="checkbox-containers">
                             <div className="checkbox-wrapper">
                                 <div className="checkbox-status">Shipped</div>
-                                <div className="checkbox-level"><input type="checkbox" id="shipped" name="isShipped" value="SHIPPED" checked={this.state.isShipped} onClick={this.handleChange} disabled={this.state.shippedDisabled} /></div>
+                                <div className="checkbox-level"><input type="checkbox" id="shipped" name="isShipped"
+                                                                       value="SHIPPED" checked={this.state.isShipped}
+                                                                       onClick={this.handleChange}
+                                                                       disabled={this.state.shippedDisabled}/></div>
                             </div>
                             <div className="checkbox-wrapper">
                                 <div className="checkbox-status">Delivered</div>
-                                <div className="checkbox-level"><input type="checkbox" id="delivered" name="isDelivered" value="DELIVERED" checked={this.state.isDelivered} onClick={this.handleChange} disabled={this.state.deliveredDisabled} /></div>
+                                <div className="checkbox-level"><input type="checkbox" id="delivered" name="isDelivered"
+                                                                       value="DELIVERED"
+                                                                       checked={this.state.isDelivered}
+                                                                       onClick={this.handleChange}
+                                                                       disabled={this.state.deliveredDisabled}/></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="stepper">
-                    <Stepper activeStep={this.state.activeStep} connector={<ColorlibConnector />} alternativeLabel>
+                    <Stepper activeStep={this.state.activeStep} connector={<ColorlibConnector/>} alternativeLabel>
                         {this.state.steps.map((label) => (
                             <Step key={label}>
                                 <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>

@@ -12,16 +12,20 @@ class MyCart extends React.Component {
             quantityValue: this.props.bookDetails.quantity
         }
     }
-    
-    increment = () =>{
-    this.setState({quantityValue: this.state.quantityValue+1}, () => {this.updateQuantity()} )
-    }
-    
-    decrement = () =>{
-    this.setState({quantityValue:this.state.quantityValue-1}, () => {this.updateQuantity()} )
+
+    increment = () => {
+        this.setState({quantityValue: this.state.quantityValue + 1}, () => {
+            this.updateQuantity()
+        })
     }
 
-    handleRemove=()=>{
+    decrement = () => {
+        this.setState({quantityValue: this.state.quantityValue - 1}, () => {
+            this.updateQuantity()
+        })
+    }
+
+    handleRemove = () => {
         new OrderBookAxiosService().deleteBooksFromCartDatabase(this.props.bookDetails.bookCartID).then((response) => {
             this.props.callDisplay();
         })
@@ -31,7 +35,7 @@ class MyCart extends React.Component {
     }
 
     updateQuantity = () => {
-        console.log(this.props.bookDetails.bookCartID+" "+this.state.quantityValue)
+        console.log(this.props.bookDetails.bookCartID + " " + this.state.quantityValue)
         new OrderBookAxiosService().updateQuantity(this.props.bookDetails.bookCartID, this.state.quantityValue)
     }
 
@@ -40,7 +44,7 @@ class MyCart extends React.Component {
             <div className="details">
                 <div className="book-image">
                     <div className="image">
-                        <img src={this.props.bookDetails.book.bookImage} alt="img" className="image" />
+                        <img src={this.props.bookDetails.book.bookImage} alt="img" className="image"/>
                     </div>
                 </div>
                 <div className="book-description">
@@ -49,10 +53,22 @@ class MyCart extends React.Component {
                     <div className="price">Rs. {this.props.bookDetails.book.bookPrice * this.state.quantityValue}</div>
                     <div className={this.props.quantityVisibility}>
                         <div className="increment-decrement">
-                            <button className="minus-plus" onClick={this.decrement} style={ this.state.quantityValue < 2 || this.props.disableOperator ? {pointerEvents: 'none'} : {pointerEvents: 'auto'} }><RemoveCircleOutlineIcon style={ this.state.quantityValue < 2 || this.props.disableOperator ? {color: "grey"} : {color: "rgb(145, 10, 10)"}}  /></button>
-                            <input type="number" className="number" value={this.state.quantityValue} />
-                            <button className="minus-plus" onClick={this.increment} style={ this.state.quantityValue == this.props.bookDetails.book.quantity || this.state.quantityValue >= 5 || this.props.disableOperator ? {pointerEvents: 'none'} : {pointerEvents: 'auto'} }><AddCircleOutlineIcon style={ this.state.quantityValue == this.props.bookDetails.book.quantity || this.state.quantityValue >= 5 || this.props.disableOperator ? {color: "grey"} : {color: "rgb(145, 10, 10)"} }/></button>
-                            <button className="remove" style={this.props.disableOperator ? {pointerEvents: 'none',color:"grey"} : {pointerEvents: 'auto'}} onClick={this.handleRemove}>Remove</button>
+                            <button className="minus-plus" onClick={this.decrement}
+                                    style={this.state.quantityValue < 2 || this.props.disableOperator ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}}>
+                                <RemoveCircleOutlineIcon
+                                    style={this.state.quantityValue < 2 || this.props.disableOperator ? {color: "grey"} : {color: "rgb(145, 10, 10)"}}/>
+                            </button>
+                            <input type="number" className="number" value={this.state.quantityValue}/>
+                            <button className="minus-plus" onClick={this.increment}
+                                    style={this.state.quantityValue == this.props.bookDetails.book.quantity || this.state.quantityValue >= 5 || this.props.disableOperator ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}}>
+                                <AddCircleOutlineIcon
+                                    style={this.state.quantityValue == this.props.bookDetails.book.quantity || this.state.quantityValue >= 5 || this.props.disableOperator ? {color: "grey"} : {color: "rgb(145, 10, 10)"}}/>
+                            </button>
+                            <button className="remove" style={this.props.disableOperator ? {
+                                pointerEvents: 'none',
+                                color: "grey"
+                            } : {pointerEvents: 'auto'}} onClick={this.handleRemove}>Remove
+                            </button>
                         </div>
                     </div>
                 </div>

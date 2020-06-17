@@ -1,56 +1,31 @@
-import Axios from 'axios';
-import React from "react";
+import {post, get} from './Service'
 
-class LoginAndRegistrationAxios extends React.Component {
+class LoginAndRegistrationAxios {
 
     addUser(data) {
-        return Axios({
-            method: 'post', headers: {"Content-Type": "application/json"},
-            url: "http://localhost:8080/user/register",
-            data: JSON.stringify(data),
-        })
+        return (post(data, 'user/register'))
     }
 
     loginUser(data) {
-        return Axios({
-            method: 'post', headers: {"Content-Type": "application/json"},
-            url: "http://localhost:8080/user/login",
-            data: JSON.stringify(data),
-        })
+        return (post(data, 'user/login'))
     }
 
     verifyEmail(token) {
-        return Axios({
-            method: 'get', headers: {"Content-Type": "application/json"},
-            url: `http://localhost:8080/user/register/confirmation/${token}`,
-            data: JSON.stringify(),
-        })
+        return (get(`user/register/confirmation/${token}`))
     }
 
     resend(email) {
-        return Axios({
-        method: 'post', headers: {"Content-Type": "application/json"},
-        url: "http://localhost:8080/user/register/resend/confirmation/"+email,
-        data: JSON.stringify(),
-        })
-        }
+        return (post(email, `user/register/resend/confirmation/${email}`))
+    }
 
     forgotPassword(email) {
-        return Axios({
-            method: 'post', headers: {"Content-Type": "application/json"},
-            url: "http://localhost:8080/user/forgot/password//"+email,
-            data: JSON.stringify(),
-        })
+        return (post(email, `user/forgot/password/${email}`))
     }
-        
-    resetPassword(data,token) {
-        return Axios({
-            method: 'post', headers: {"Content-Type": "application/json"},
-            url: "http://localhost:8080/user/reset/password/"+token,
-            data: data,
-        })
+
+    resetPassword(data, token) {
+        return (post(data, `user/reset/password/${token}`))
     }
-        
+
 
 }
 

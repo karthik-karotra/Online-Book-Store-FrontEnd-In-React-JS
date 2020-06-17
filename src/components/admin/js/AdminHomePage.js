@@ -35,17 +35,29 @@ class AdminHomePage extends React.Component {
     }
 
     addBook = () => {
-        this.setState({isOpen: false, updateTrackOrder: 'track-container-main-disable', updateBookPanel: 'order-count-disable', pagination: 'admin-pagination-disable', addBookPanel: 'block'})
+        this.setState({
+            isOpen: false,
+            updateTrackOrder: 'track-container-main-disable',
+            updateBookPanel: 'order-count-disable',
+            pagination: 'admin-pagination-disable',
+            addBookPanel: 'block'
+        })
     }
 
     updateOrderStatus = () => {
-        this.setState({isOpen: false, addBookPanel: 'none',updateBookPanel: 'order-count', updateTrackOrder: 'track-container-main', pagination: 'admin-pagination'})
+        this.setState({
+            isOpen: false,
+            addBookPanel: 'none',
+            updateBookPanel: 'order-count',
+            updateTrackOrder: 'track-container-main',
+            pagination: 'admin-pagination'
+        })
     }
 
     trackOrder = () => {
         new AdminAxiosService().trackOrder(this.state.pageValue).then((response) => {
             console.log(response.data)
-            if(response.data.message == 'Response Successful') {
+            if (response.data.message == 'Response Successful') {
                 this.setState({orderDetails: response.data.data, totalOrderCount: response.data.data.length})
             } else {
                 this.setState({orderDetails: []})
@@ -60,24 +72,26 @@ class AdminHomePage extends React.Component {
         })
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.trackOrder();
     }
 
     render() {
-        return(
+        return (
             <div className="admin-container">
-                <AppBar position="fixed" style={{backgroundColor:'rgb(145,10,10)'}}>
+                <AppBar position="fixed" style={{backgroundColor: 'rgb(145,10,10)'}}>
                     <Toolbar className="menu-bar">
                         <IconButton edge="start" color="inherit" aria-label="menu">
-                            <MenuBookIcon style={{fontSize:"30px"}} />
+                            <MenuBookIcon style={{fontSize: "30px"}}/>
                         </IconButton>
                         <Typography variant="h6">
                             The Country Book Shop
                         </Typography>
                         <div className="menu">
-                            <div><UpdateSharpIcon titleAccess="Update Order Status" onClick={this.updateOrderStatus} style={{fontSize:"xx-large"}} /></div>
-                            <div><AddIcon titleAccess="Add Book" onClick={this.addBook} style={{fontSize:"xx-large"}} /></div>
+                            <div><UpdateSharpIcon titleAccess="Update Order Status" onClick={this.updateOrderStatus}
+                                                  style={{fontSize: "xx-large"}}/></div>
+                            <div><AddIcon titleAccess="Add Book" onClick={this.addBook} style={{fontSize: "xx-large"}}/>
+                            </div>
                         </div>
                     </Toolbar>
                 </AppBar>
@@ -88,22 +102,23 @@ class AdminHomePage extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="panel-container" style={{display:this.state.addBookPanel}}>
+                <div className="panel-container" style={{display: this.state.addBookPanel}}>
                     <div className='panel'>
                         <div className="add-book-panel">
-                            <AdminAddBook />
+                            <AdminAddBook/>
                         </div>
                     </div>
                 </div>
                 <div className={this.state.updateTrackOrder}>
                     <div className="track-container">
                         {this.state.orderDetails.map((orderDetails, index) =>
-                            <AdminTrackOrder orderDetails={orderDetails} />
+                            <AdminTrackOrder orderDetails={orderDetails}/>
                         )}
                     </div>
                 </div>
                 <div className={this.state.pagination}>
-                    <Pagination count={Math.ceil(this.state.totalOrderCount / this.state.orderPerPage)} shape="rounded" onChange={this.handlePageChange}/>
+                    <Pagination count={Math.ceil(this.state.totalOrderCount / this.state.orderPerPage)} shape="rounded"
+                                onChange={this.handlePageChange}/>
                 </div>
                 <div className="userfooter">
                     <BookStoreFooter/>

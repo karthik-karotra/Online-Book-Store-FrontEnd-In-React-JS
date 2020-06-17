@@ -52,7 +52,7 @@ export class BookStoreHomePage extends Component {
                 window.scrollTo(0, 0);
             })
         }
-        if( this.state.searchAndFilterFlag === true){
+        if (this.state.searchAndFilterFlag === true) {
             this.setState({pageValue: value - 1}, () => {
                 this.displaySearchAndFilterBook()
             })
@@ -79,7 +79,9 @@ export class BookStoreHomePage extends Component {
     }
 
     handleFilter = (event) => {
-        this.setState({selectedSearchAndFilter: event.target.value}, () => {this.displaySearchAndFilterBook()})
+        this.setState({selectedSearchAndFilter: event.target.value}, () => {
+            this.displaySearchAndFilterBook()
+        })
     }
 
     displaySearchAndFilterBook = () => {
@@ -88,8 +90,7 @@ export class BookStoreHomePage extends Component {
                 console.log(response.data)
                 if (response.data == 'No Books For Searched String Were Found') {
                     this.setState({bookDetails: [], totalBookCount: 0})
-                }
-                else {
+                } else {
                     this.setState({bookDetails: response.data.content, totalBookCount: response.data.totalElements});
                 }
             })
@@ -97,10 +98,10 @@ export class BookStoreHomePage extends Component {
 
     getBagDetails = (bookid) => {
         const data = {
-            bookId:bookid,
+            bookId: bookid,
             quantity: 1
         }
-        new OrderBookAxiosService().setBagBookDetails(data).then(()=>{
+        new OrderBookAxiosService().setBagBookDetails(data).then(() => {
             this.displayBooks()
         })
     }
@@ -114,7 +115,7 @@ export class BookStoreHomePage extends Component {
                 this.setState({cartDetails: response.data.data});
             }
         })
-    } 
+    }
 
     updateCount = () => {
         this.cartBookDetails();
@@ -123,7 +124,11 @@ export class BookStoreHomePage extends Component {
     getCustomerDetails() {
         new CustomerDetailsAxiosService().getCustomerDetails().then((response) => {
             console.log(response.data)
-            this.setState({userName: response.data.data.fullName})
+            if (response.data.message == "Response Successful") {
+                this.setState({userName: response.data.data.fullName})
+            } else {
+                this.setState({userName: ""})
+            }
         });
     }
 
@@ -136,7 +141,8 @@ export class BookStoreHomePage extends Component {
     render() {
         return (
             <div className="container1">
-                <NavigationBar getSearchedText={this.sendSearchedText} count={this.state.cartDetails.length} getFullName={this.state.userName} />
+                <NavigationBar getSearchedText={this.sendSearchedText} count={this.state.cartDetails.length}
+                               getFullName={this.state.userName}/>
                 <div className="count-and-filter-container">
                     <div className="count-and-filter">
                         <div className="count">
@@ -149,22 +155,26 @@ export class BookStoreHomePage extends Component {
                                           onClick={this.handleFilter}
                                           value={this.state.selectedFilter}
                             >
-                                <option aria-label="sort" selected value="" >Sort by</option>
-                                <option aria-label="sort" value="LOW_TO_HIGH" >Price: Low To High</option>
-                                <option aria-label="sort" value="HIGH_TO_LOW" >Price: High To Low</option>
-                                <option aria-label="sort" value="NEWEST_ARRIVALS" >Newest Arrivals</option>
+                                <option aria-label="sort" selected value="">Sort by</option>
+                                <option aria-label="sort" value="LOW_TO_HIGH">Price: Low To High</option>
+                                <option aria-label="sort" value="HIGH_TO_LOW">Price: High To Low</option>
+                                <option aria-label="sort" value="NEWEST_ARRIVALS">Newest Arrivals</option>
                             </NativeSelect>
                         </div>
                     </div>
                 </div>
                 <div className="flex-container-main">
                     <div className="flex-container">
-                    {this.state.isLoaded == false ? <CircularProgress className="image-not-found" /> :
-                    <div className="image-not-found" style={this.state.totalBookCount == 0 && this.state.isLoaded == true ? {visibility: "visible"} : {visibility: "hidden"}}>
-                        <CardMedia className="media" image={imagek}/>
-                    </div>
-                    }
-                        {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails} cartDetails={this.state.cartDetails} saveBagDetails={this.getBagDetails} sendItemCount={this.updateCount} />)}
+                        {this.state.isLoaded == false ? <CircularProgress className="image-not-found"/> :
+                            <div className="image-not-found"
+                                 style={this.state.totalBookCount == 0 && this.state.isLoaded == true ? {visibility: "visible"} : {visibility: "hidden"}}>
+                                <CardMedia className="media" image={imagek}/>
+                            </div>
+                        }
+                        {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails}
+                                                                             cartDetails={this.state.cartDetails}
+                                                                             saveBagDetails={this.getBagDetails}
+                                                                             sendItemCount={this.updateCount}/>)}
                     </div>
                 </div>
                 <div className="pagination">

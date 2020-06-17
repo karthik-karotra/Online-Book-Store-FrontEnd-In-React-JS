@@ -99,7 +99,7 @@ class CustomerDetails extends React.Component {
         }
         if([target.name]=="type"){
             this.setState({radioDefaultValue:target.value})}
-            this.getBackgroundColor();
+        this.getBackgroundColor();
 
     };
 
@@ -222,7 +222,7 @@ class CustomerDetails extends React.Component {
                     status3:true,
                     helpertext3:'Pincode Should Be 6 Digit',
                 })
-             } else{
+            } else{
                 this.setState({
                     status3:false,
                     helpertext3:' ',
@@ -353,20 +353,20 @@ class CustomerDetails extends React.Component {
                 <div className={this.state.edits}><button className="edit-button" onClick={this.enableForm}>Edit</button></div>
                 <div className="form-content">
                     <div className="customerdetail-textfield">
-                    <ThemeProvider theme={theme}>
-                        <TextField error={this.state.status1} className="input" id="outlined-basic" label="Name" InputLabelProps={{
-                            shrink: true,
-                            }} value={this.props.customerDetails.fullName} variant="outlined" autoComplete="off"
-                                   helperText={this.state.helpertext1} onClick={this.handleChange} onChange={this.handleChange} name="customerName" disabled/></ThemeProvider>
+                        <ThemeProvider theme={theme}>
+                            <TextField error={this.state.status1} className="input" id="outlined-basic" label="Name" InputLabelProps={{
+                                shrink: true,
+                            }} style={{width:'44.8%'}} value={this.props.customerDetails.fullName} variant="outlined" autoComplete="off"
+                                       helperText={this.state.helpertext1} onClick={this.handleChange} onChange={this.handleChange} name="customerName" disabled/></ThemeProvider>
                         <TextField error={this.state.status2} label="Phone Number" InputLabelProps={{
                             shrink: true,
-                            }} className="input" id="outlined-basic" variant="outlined" autoComplete="off"
+                        }} style={{width:'44.8%'}} className="input" id="outlined-basic" variant="outlined" autoComplete="off"
                                    value={this.props.customerDetails.phoneNo} helperText={this.state.helpertext2} onClick={this.handleChange} onChange={this.handleChange} name="phoneNumber" disabled />
                     </div>
                     <div className="customerdetail-textfield">
-                        <TextField error={this.state.status3} className="input" id="outlined-basic" label="Pincode" variant="outlined" autoComplete="off"
+                        <TextField error={this.state.status3} style={{width:'44.8%'}} className="input" id="outlined-basic" label="Pincode" variant="outlined" autoComplete="off"
                                    value={this.state.pinCode} helperText={this.state.helpertext3} onChange={this.handleChange} onClick={this.handleChange} name="pinCode" disabled={this.state.disable}/>
-                        <TextField error={this.state.status4} className="input" id="outlined-basic" label="Locality" variant="outlined" autoComplete="off"
+                        <TextField error={this.state.status4} style={{width:'44.8%'}} className="input" id="outlined-basic" label="Locality" variant="outlined" autoComplete="off"
                                    value={this.state.locality} helperText={this.state.helpertext4} onChange={this.handleChange} onClick={this.handleChange} name="locality" disabled={this.state.disable}/>
                     </div>
                     <div className="customerdetail-address">
@@ -382,9 +382,9 @@ class CustomerDetails extends React.Component {
                                    name="address"/>
                     </div>
                     <div className="customerdetail-textfield">
-                        <TextField error={this.state.status6} className="input" id="outlined-basic" label="City/Town" variant="outlined" disabled={this.state.disable} autoComplete="off"
+                        <TextField error={this.state.status6} style={{width:'44.8%'}} className="input" id="outlined-basic" label="City/Town" variant="outlined" disabled={this.state.disable} autoComplete="off"
                                    helperText={this.state.helpertext6} onClick={this.handleChange} onChange={this.handleChange} name="cityTown"/>
-                        <TextField error={this.state.status7} className="input" id="outlined-basic" label="Landmark" variant="outlined" disabled={this.state.disable} autoComplete="off"
+                        <TextField error={this.state.status7} style={{width:'44.8%'}} className="input" id="outlined-basic" label="Landmark" variant="outlined" disabled={this.state.disable} autoComplete="off"
                                    helperText={this.state.helpertext7} onChange={this.handleChange} onClick={this.handleChange}
                                    name="landmark"/>
                     </div>
@@ -397,16 +397,16 @@ class CustomerDetails extends React.Component {
                                 <FormControlLabel value="home" disabled={this.state.disable} control={<Radio style={{color: '#910A0A'}} />} label="Home" />
                                 <FormControlLabel value="work" disabled={this.state.disable} control={<Radio style={{color: '#910A0A'}} />} label="Work" />
                                 <FormControlLabel value="other" disabled={this.state.disable} control={<Radio style={{color: '#910A0A'}} />} label="Other" />
-                                </div>
+                            </div>
                         </RadioGroup>
                     </div>
                 </div>
                 <div className="customerdetail-button">
                     <Button className={this.state.buttonClassName} variant="contained"
-                        style={{backgroundColor: this.state.buttonColor}}
-                        disabled={!this.state.pinCode
+                            style={{backgroundColor: this.state.buttonColor}}
+                            disabled={!this.state.pinCode
                             && !this.state.locality && !this.state.address && !this.state.cityTown && !this.state.landmark}
-                        onClick={this.handleSubmits}>
+                            onClick={this.handleSubmits}>
                         Continue
                     </Button>
                 </div>

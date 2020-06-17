@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,6 @@
 
 .cart-body {
     display: flex;
-    /* flex-direction: row; */
     justify-content: center;
     width: 100%;
     min-height: 709px;
@@ -17,14 +16,11 @@
 
 .cart-container {
     width: 83%;
-    /* min-height: 709px; */
 }
 
 .breadcrumbs {
     width: 60%;
-    /* min-height: 10px; */
     margin: 50px;
-    /* border: 1px solid #DCDCDC; */
     border-radius: 1px;
     opacity: 1;
 }
@@ -73,31 +69,31 @@
     height: 100%;
 }
 
-.empty-cart-image{
+.empty-cart-image {
     height: 137px;
 }
 
-.books-scrollbar:hover{
+.books-scrollbar:hover {
     overflow-y: auto;
 }
 
 .books-scrollbar::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  .books-scrollbar::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+}
+
+.books-scrollbar::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
     border-radius: 1px;
-  }
-  
-  .books-scrollbar::-webkit-scrollbar-thumb {
-    background: #bfbfbf; 
+}
+
+.books-scrollbar::-webkit-scrollbar-thumb {
+    background: #bfbfbf;
     border-radius: 1px;
-  }
-  
-  .books-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #bfbfbf; 
-  }
+}
+
+.books-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #bfbfbf;
+}
 
 .books-disable {
     display: none;
@@ -123,10 +119,9 @@
 
 button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.visible {
     color: #fff;
-    /* width: 20%; */
     border-radius: 0;
     height: 35px;
-    background-color: rgb(145,10,10);
+    background-color: rgb(145, 10, 10);
 }
 
 button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.disable {
@@ -181,7 +176,7 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.disable {
     .cart-body {
         min-height: 527px;
     }
-    
+
     .cart-container {
         width: 100%;
         display: flex;
@@ -199,7 +194,7 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.disable {
     }
 
     .cart {
-        width: 90%; 
+        width: 90%;
         margin: 0;
         margin-top: 25px;
     }
@@ -207,7 +202,7 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.disable {
     .header {
         margin-top: 17px;
     }
-    
+
     .header > h3 {
         margin-left: 20px;
     }
@@ -228,13 +223,13 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.disable {
     }
 
     .customer-details {
-        width: 90%; 
+        width: 90%;
         margin: 0;
         margin-top: 25px;
     }
 
     .order-summary {
-        width: 90%; 
+        width: 90%;
         margin: 0;
         margin-top: 25px;
         margin-bottom: 25px;
@@ -264,14 +259,17 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.disable {
         border: 2px solid #DCDCDC;
         width: 85%;
     }
+
     .customer-details {
         border: 2px solid #DCDCDC;
         width: 85%;
     }
+
     .order-summary {
         border: 2px solid #DCDCDC;
         width: 85%;
     }
+
     .total-price {
         font-size: 15px;
         margin-top: 1.4%;
@@ -292,14 +290,17 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.disable {
         border: 2px solid #DCDCDC;
         width: 90%;
     }
+
     .customer-details {
         border: 2px solid #DCDCDC;
         width: 90%;
     }
+
     .order-summary {
         border: 2px solid #DCDCDC;
         width: 90%;
     }
+
     .total-price {
         font-size: 17px;
         margin-top: 1.4%;

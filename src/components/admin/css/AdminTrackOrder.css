@@ -1,11 +1,11 @@
-.track-order-wrapper{
+.track-order-wrapper {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.track-order-header{
+.track-order-header {
     width: 100%;
     height: 15%;
     background-color: #F5F5F5;
@@ -13,7 +13,7 @@
     flex-direction: row;
 }
 
-.id{
+.id {
     width: 50%;
     height: 100%;
     display: flex;
@@ -21,22 +21,22 @@
     align-items: center;
 }
 
-.update-button{
+.update-button {
     width: 50%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Calibri;
-    color:white;
+    color: white;
     font-size: 17px;
 }
 
-.order-id-details-disable{
+.order-id-details-disable {
     display: none;
 }
 
-.order-id-details{
+.order-id-details {
     width: 99.4%;
     height: 45%;
     /* background-color: saddlebrown; */
@@ -45,7 +45,7 @@
     border: 1px solid #F5F5F5;
 }
 
-.details-of-order{
+.details-of-order {
     width: 77%;
     height: 100%;
     /* background-color: seagreen; */
@@ -54,32 +54,32 @@
     justify-content: space-around;
 }
 
-.sumarry{
+.sumarry {
     font-family: Calibri;
     font-weight: bold;
     font-size: large;
 }
 
-.date{
+.date {
     font-family: Calibri;
     font-size: large;
 }
 
-.subitem{
+.subitem {
     font-family: Calibri;
     font-size: large;
 }
 
-.prices{
+.prices {
     font-family: Calibri;
     font-size: large;
 }
 
-.status-track-disable{
+.status-track-disable {
     display: none;
 }
 
-.status-track{
+.status-track {
     width: 99.4%;
     height: 45%;
     display: flex;
@@ -87,7 +87,7 @@
     border: 1px solid #F5F5F5;
 }
 
-.level-of-status{
+.level-of-status {
     width: 77%;
     height: 100%;
     display: flex;
@@ -95,13 +95,13 @@
     justify-content: space-around;
 }
 
-.update-header{
+.update-header {
     font-family: Calibri;
     font-weight: bold;
     font-size: large;
 }
 
-.checkbox-containers{
+.checkbox-containers {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -110,7 +110,7 @@
     justify-content: space-between;
 }
 
-.checkbox-wrapper{
+.checkbox-wrapper {
     width: 49%;
     height: 100%;
     display: flex;
@@ -120,15 +120,15 @@
     justify-content: space-between;
 }
 
-.checkbox-status{
+.checkbox-status {
     margin-left: 6%;
 }
 
-.checkbox-level{
+.checkbox-level {
     margin-right: 6%;
 }
 
-.stepper{
+.stepper {
     width: 100%;
     height: 30%;
 }

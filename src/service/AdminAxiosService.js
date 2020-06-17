@@ -1,4 +1,4 @@
-import {post, get} from './Service'
+import {post, get, update} from './Service'
 
 class AdminAxiosService {
 
@@ -11,9 +11,12 @@ class AdminAxiosService {
     }
 
     trackOrder(pageValue) {
-        return (get('admin/orders/'+pageValue))
+        return (get('admin/orders/' + pageValue))
     }
 
+    updateOrderStatus(orderId, orderStatus) {
+        return (update('admin/order/status/' + orderId + '/' + orderStatus))
+    }
 }
 
 export default AdminAxiosService

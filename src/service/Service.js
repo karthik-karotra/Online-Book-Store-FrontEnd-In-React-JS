@@ -3,7 +3,7 @@ import URL from '../config/UrlConstant';
 
 function post(data, url) {
     return Axios({
-        method: 'post', headers: { 'token': localStorage.getItem('token') },
+        method: 'post', headers: {'token': localStorage.getItem('token')},
         url: `${URL.apiURL}${url}`,
         data: data
     })
@@ -11,28 +11,28 @@ function post(data, url) {
 
 function tokenPost(url) {
     return Axios({
-        method: 'post', headers: { 'token': localStorage.getItem('token') },
+        method: 'post', headers: {'token': localStorage.getItem('token')},
         url: `${URL.apiURL}${url}`
     })
 }
 
 function get(url) {
     return Axios({
-        method: 'get', headers: { 'token': localStorage.getItem('token') },
+        method: 'get', headers: {'token': localStorage.getItem('token')},
         url: `${URL.apiURL}${url}`,
     })
 }
 
 function deleteData(url) {
     return Axios({
-        method: 'delete', headers: { 'token': localStorage.getItem('token') },
+        method: 'delete', headers: {'token': localStorage.getItem('token')},
         url: `${URL.apiURL}${url}`,
     })
 }
 
 function update(url) {
     return Axios({
-        method: 'put', headers: { 'token': localStorage.getItem('token') },
+        method: 'put', headers: {'token': localStorage.getItem('token')},
         url: `${URL.apiURL}${url}`,
     })
 }

@@ -1,7 +1,6 @@
 .hero {
     width: 100%;
     height: 100%;
-    /* background-color: #b3b3b3; */
     background-position: center;
     background-size: cover;
     position: absolute;
@@ -10,7 +9,7 @@
     overflow: hidden;
 }
 
-.crossiconinlogin{
+.crossiconinlogin {
     position: absolute;
     margin-left: 31%;
     transform: translate(1000%, 50%);
@@ -21,10 +20,10 @@
     border-radius: 15px;
 }
 
-.user-login-form{
+.user-login-form {
     margin-top: 5%;
     margin-left: 17%;
-    display:flex;
+    display: flex;
 }
 
 .form-box {
@@ -58,10 +57,6 @@
     border-radius: 50%;
 }
 
-/* *, :after, :before {
-    box-sizing: border-box
-} */
-
 .clearfix:after, .clearfix:before {
     content: '';
     display: table
@@ -90,11 +85,11 @@ a {
     padding: 24px 110px 47px 29px;
 }
 
-#userName{
+#userName {
     height: 10px;
 }
 
-#passWord{
+#passWord {
     height: 10px;
 }
 
@@ -109,7 +104,7 @@ a {
     backface-visibility: hidden;
 }
 
-.login-html .sign-in-htm{
+.login-html .sign-in-htm {
     top: 12%;
     left: 0;
     right: 0;
@@ -176,7 +171,7 @@ a {
 .login-form .group .label,
 .login-form .group .input,
 .login-form .group .login-button,
-.login-form .group1 .login-button{
+.login-form .group1 .login-button {
     width: 100%;
     color: #fff;
     font-size: 110%;
@@ -185,7 +180,7 @@ a {
 
 .login-form .group .input,
 .login-form .group .login-button,
-.login-form .group1 .login-button{
+.login-form .group1 .login-button {
     border: none;
     padding: 10px 10px;
 }
@@ -201,11 +196,12 @@ a {
     font-size: 10px;
 }
 
-.login-button{
+.login-button {
     outline: none;
 }
+
 .login-form .group .login-button,
-.login-form .group1 .login-button{
+.login-form .group1 .login-button {
     background: rgb(165, 42, 42);
     border-radius: 5px;
     cursor: pointer;
@@ -240,7 +236,7 @@ a {
     right: 0;
 }
 
-p#userName1-helper-text{
+p#userName1-helper-text {
     margin-top: 0;
 }
 
@@ -268,7 +264,7 @@ p#userName1-helper-text{
 .foot-lnk {
     text-align: right;
     font-size: 15px;
-    color: 	#696969;
+    color: #696969;
     margin-bottom: 7%;
     margin-top: -10px;
 }
@@ -277,10 +273,11 @@ input#userName, input#passWord {
     padding: 20px 14px;
 }
 
-@media (max-width: 600px){
-    .form-box{
+@media (max-width: 600px) {
+    .form-box {
         display: none;
     }
+
     .login-box {
         height: 465px;
         width: 90%;
@@ -288,53 +285,61 @@ input#userName, input#passWord {
         box-shadow: 0 8px 16px 0 rgba(255, 0, 0, 0.8);
         position: absolute;
         margin-left: 0;
-        
+
     }
-    .user-login-form{
+
+    .user-login-form {
         width: 100%;
         margin-left: 0;
         margin-top: -15%;
-        display:flex;
+        display: flex;
         justify-content: center;
     }
-.login-html .tab1 {
-    font-size: 22px;
-    margin-right: 80px;
-    padding-bottom: 5px;
-    display: inline-block;
-    color: gray;
-    border-bottom: 4px solid transparent;
-    cursor: pointer;
-}
+
+    .login-html .tab1 {
+        font-size: 22px;
+        margin-right: 80px;
+        padding-bottom: 5px;
+        display: inline-block;
+        color: gray;
+        border-bottom: 4px solid transparent;
+        cursor: pointer;
+    }
+
     .login-html .tab2 {
         font-size: 20px;
     }
+
     .login-html {
         width: 100%;
         height: 100%;
         position: absolute;
         padding: 24px 20px 47px 20px;
     }
-    .login-form{
+
+    .login-form {
         width: 87%;
     }
 }
-@media (min-width: 767px) and (max-width:1024px){
-    .user-login-form{
+
+@media (min-width: 767px) and (max-width: 1024px) {
+    .user-login-form {
         margin-top: 25%;
         margin-left: 35%;
-        display:flex;
+        display: flex;
     }
+
     .form-box {
         width: 610px;
     }
+
     .login-html {
         padding: 24px 24px 47px 24px;
         width: 100%;
         height: 100%;
         position: absolute;
     }
-    
+
     .login-html .tab1 {
         margin-right: 115px;
         padding-bottom: 5px;
@@ -344,20 +349,22 @@ input#userName, input#passWord {
         cursor: pointer;
         font-size: 22px;
     }
-    .login-form{
+
+    .login-form {
         width: 89%;
     }
 }
 
-@media (width: 1024px) and (width:1366px){
-    .user-login-form{
+@media (width: 1024px) and (width: 1366px) {
+    .user-login-form {
         margin-top: 0;
         margin-left: 13%;
         /* display:flex; */
     }
 }
-@media (min-width:200px) and (max-width:320px){
+
+@media (min-width: 200px) and (max-width: 320px) {
     .login-html .tab1 {
-        margin-right:40px;
+        margin-right: 40px;
     }
 }

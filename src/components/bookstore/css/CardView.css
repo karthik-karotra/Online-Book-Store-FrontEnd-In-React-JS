@@ -1,13 +1,13 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
 }
 
-.cards:hover{
+.cards:hover {
     box-shadow: 3px 3px #E0E0E0;
 }
 
-.info{
+.info {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -22,7 +22,7 @@
     color: transparent;
 }
 
-.data-tooltip{
+.data-tooltip {
     z-index: 1;
     position: absolute;
     padding: 20px;
@@ -30,7 +30,7 @@
     min-height: 340px;
     background-color: rgb(145, 10, 10);
     border: 1px solid #ccc;
-    visibility:hidden;
+    visibility: hidden;
     margin-top: 30%;
     color: white;
     opacity: 0.8;
@@ -43,11 +43,11 @@
     color: white;
 }
 
-.info:hover +.data-tooltip {
+.info:hover + .data-tooltip {
     visibility: visible;
 }
 
-button.MuiButtonBase-root.MuiCardActionArea-root{
+button.MuiButtonBase-root.MuiCardActionArea-root {
     width: 100%;
     display: block;
     text-align: inherit;
@@ -56,14 +56,14 @@ button.MuiButtonBase-root.MuiCardActionArea-root{
     display: flex;
 }
 
-.MuiCardMedia-root.media{
+.MuiCardMedia-root.media {
     width: 40%;
     height: 175px;
 }
 
 h6.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom {
     font-size: 1.1rem;
-    font-family:  Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: left;
 }
@@ -82,17 +82,17 @@ h2.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom {
 
 button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.card-button-before-click {
     color: #fff;
-    background-color: rgb(145,10,10);
+    background-color: rgb(145, 10, 10);
     width: 100%;
     border-radius: 0;
-    }
-    
-    button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.card-button-after-click {
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.card-button-after-click {
     color: #fff;
     background-color: dodgerblue !important;
     width: 100%;
     border-radius: 0;
-    }
+}
 
 #centered {
     position: absolute;
@@ -118,7 +118,7 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.card-button-before-
 }
 
 @media only screen and (width: 1024px) and (height: 1366px ) {
-    h6.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom{
+    h6.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom {
         font-size: 17.5px;
     }
 }

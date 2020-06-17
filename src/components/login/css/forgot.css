@@ -1,11 +1,21 @@
-.forgot-container-wrapper{
+.forgot-container-wrapper {
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
+}
+
+.inner-layer {
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-size: cover;
 }
-.forgot-container-main{
+
+.forgot-container-main {
     width: 40%;
     height: 45%;
     display: flex;
@@ -14,7 +24,7 @@
     justify-content: center;
 }
 
-.forgot-header{
+.forgot-header {
     width: 70%;
     height: 20%;
     display: flex;
@@ -22,7 +32,7 @@
     justify-content: center;
 }
 
-.forgot-container{
+.forgot-container {
     width: 70%;
     height: 75%;
     display: flex;
@@ -31,7 +41,7 @@
     border: 1px solid #E4E4E4;
 }
 
-.forgot-email-form{
+.forgot-email-form {
     width: 80%;
     height: 90%;
     display: flex;
@@ -41,11 +51,11 @@
     flex-direction: column;
 }
 
-.paragraph{
+.paragraph {
     width: 100%;
 }
 
-.forgot-textfield{
+.forgot-textfield {
     width: 100%;
     height: 63%;
     display: flex;
@@ -53,7 +63,7 @@
     justify-content: space-between;
 }
 
-.forgot-submit-button{
+.forgot-submit-button {
     height: 50px;
     background-color: rgb(145, 10, 10);
     border: none;
@@ -63,7 +73,7 @@
     outline: none;
 }
 
-.create-account{
+.create-account {
     background-color: #E4E4E4;
     width: 70%;
     height: 20%;
@@ -73,7 +83,7 @@
     border: 1px solid #E4E4E4;
 }
 
-.forgot-create-button{
+.forgot-create-button {
     border: none;
     background: transparent;
     outline: none;
@@ -82,70 +92,88 @@
 }
 
 @media only screen and (max-width: 414px) and (max-height: 823px ) {
-    .forgot-container-main{
+    .forgot-container-main {
         width: 100%;
         height: 54%;
     }
-    h1{
+
+    h1 {
         font-size: 10px;
     }
-    .forgot-header{
+
+    .forgot-header {
         height: 10%;
     }
-    .forgot-container{
+
+    .forgot-container {
         width: 90%;
         height: 69%;
     }
-    .forgot-password-paragraph{
+
+    .forgot-password-paragraph {
         font-size: 15px;
     }
-    .create-account{
+
+    .create-account {
         width: 90%;
     }
 }
-@media only screen and (max-width: 320px) and (max-height: 568px ) {
-    .forgot-container-main{
+
+@media only screen and (width: 320px) and (height: 568px ) {
+    .forgot-container-main {
         width: 100%;
         height: 65%;
     }
-    .forgot-password-paragraph{
+
+    .forgot-password-paragraph {
         font-size: 13px;
     }
-    .forgot-container{
+
+    .forgot-container {
         height: 67%;
     }
-    .forgot-submit-button{
+
+    .forgot-submit-button {
         height: 65px;
     }
 }
+
 @media only screen and (width: 768px) and (height: 1024px ) {
-    .forgot-container-main{
+    .forgot-container-main {
         width: 100%;
     }
-    .forgot-password-paragraph{
+
+    .forgot-password-paragraph {
         font-size: 20px;
     }
-    .forgot-container{
+
+    .forgot-container {
         height: 55%;
     }
-    .forgot-textfield{
+
+    .forgot-textfield {
         height: 60%;
     }
 }
+
 @media only screen and (width: 1024px) and (height: 1366px ) {
-    .forgot-container-main{
+    .forgot-container-main {
         width: 100%;
     }
-    .forgot-password-paragraph{
+
+    .forgot-password-paragraph {
         font-size: 25px;
     }
-    .forgot-container{
+
+    .forgot-container {
         height: 50%;
     }
-    .forgot-textfield{
+
+    .forgot-textfield {
         height: 50%;
     }
-    .forgot-password-textfield{
+
+    .forgot-password-textfield {
         height: 20%;
     }
 }

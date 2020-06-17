@@ -24,9 +24,9 @@ export default class Header extends React.Component {
         super(props);
         this.state = {
             searchText1: "",
-            visiblityValueOfLogin:'hidden',
-            visiblityOfDialogBox:false,
-            visibilityOfCloseIcon:'hidden',
+            visiblityValueOfLogin: 'hidden',
+            visiblityOfDialogBox: false,
+            visibilityOfCloseIcon: 'hidden',
             isLoggedIn: false
         }
     }
@@ -37,19 +37,19 @@ export default class Header extends React.Component {
         })
     }
 
-    handleLoginBoxVisiblity=(event)=>{
-        if(`${this.state.visiblityValueOfLogin}`==="hidden"){
-            this.setState({visiblityValueOfLogin:"visible"})
+    handleLoginBoxVisiblity = (event) => {
+        if (`${this.state.visiblityValueOfLogin}` === "hidden") {
+            this.setState({visiblityValueOfLogin: "visible"})
             return;
         }
-        if(`${this.state.visiblityValueOfLogin}`==="visible"){
-            this.setState({visiblityValueOfLogin:"hidden"})
+        if (`${this.state.visiblityValueOfLogin}` === "visible") {
+            this.setState({visiblityValueOfLogin: "hidden"})
             return;
         }
     }
 
-    handleDialogueBoxVisiblity=(event)=>{
-        this.setState({visiblityOfDialogBox:true,visibilityOfCloseIcon:"visible"})
+    handleDialogueBoxVisiblity = (event) => {
+        this.setState({visiblityOfDialogBox: true, visibilityOfCloseIcon: "visible"})
     }
 
     handleLogoutBoxVisibility = () => {
@@ -58,8 +58,8 @@ export default class Header extends React.Component {
         window.location.reload(true)
     }
 
-    setClickFlag=(flag)=>{
-        this.setState({visiblityOfDialogBox:flag,visibilityOfCloseIcon:"visible"})
+    setClickFlag = (flag) => {
+        this.setState({visiblityOfDialogBox: flag, visibilityOfCloseIcon: "visible"})
     }
 
     componentDidMount() {
@@ -68,24 +68,19 @@ export default class Header extends React.Component {
 
     isLoggedIn = () => {
         let user = localStorage.getItem('token');
-        //alert(user)
         console.log("abc")
         console.log(user)
-        if(user){
-           // alert("1")
+        if (user) {
             this.setState({
-                // logorsign: "LOGOUT",
-                // redirect: "cart",
                 isLoggedIn: true
-            })}
+            })
+        }
 
-        if(user == "null" || user == "undefined"){
-          //  alert("2")
+        if (user == "null" || user == "undefined") {
             this.setState({
-                // logorsign: "LOGIN/SIGNUP",
-                // redirect: "login",
                 isLoggedIn: false
-            })}
+            })
+        }
     }
 
 
@@ -96,25 +91,34 @@ export default class Header extends React.Component {
         return (
             <div>
                 {!this.state.isLoggedIn ?
-                <Card className="loginsignupcard" style={{boxShadow:"0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
-                    visibility:this.state.visiblityValueOfLogin,position:"fixed"}} variant="outlined">
-                    <CardContent><Typography style={{fontWeight: "bold"}}>Welcome</Typography>
-                        <Typography style={{fontSize: "small" ,marginTop:"2px"}} color="textSecondary" gutterBottom className="gutterbottomfont">To access the account and manage orders</Typography>
-                        <hr />
-                        <Button className="loginorsignupbutton" onClick={this.handleDialogueBoxVisiblity} >LOGIN/SIGNUP</Button>
-                    </CardContent>
-                </Card>
-                :
-                <Card  className="loginsignupcard" style={{
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
-                    visibility: this.state.visiblityValueOfLogin}} variant="outlined">
-                    <CardContent><Typography style={{fontWeight: "bold"}}>Hello, {this.props.getFullName}</Typography>
-                    <hr />
-                    <Typography style={{marginTop: "9px",display:"flex"}} color="textSecondary" gutterBottom><Link to="/myorder"><CardGiftcardIcon style={{marginRight: "6px"}}/></Link><Link to="/myorder">My Orders</Link></Typography>
-                    <Button className="loginorsignupbutton"
-                        onClick={this.handleLogoutBoxVisibility}>LOGOUT</Button>
-                    </CardContent>
-                </Card>
+                    <Card className="loginsignupcard" style={{
+                        boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
+                        visibility: this.state.visiblityValueOfLogin, position: "fixed"
+                    }} variant="outlined">
+                        <CardContent><Typography style={{fontWeight: "bold"}}>Welcome</Typography>
+                            <Typography style={{fontSize: "small", marginTop: "2px"}} color="textSecondary" gutterBottom
+                                        className="gutterbottomfont">To access the account and manage
+                                orders</Typography>
+                            <hr/>
+                            <Button className="loginorsignupbutton"
+                                    onClick={this.handleDialogueBoxVisiblity}>LOGIN/SIGNUP</Button>
+                        </CardContent>
+                    </Card>
+                    :
+                    <Card className="loginsignupcard" style={{
+                        boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
+                        visibility: this.state.visiblityValueOfLogin
+                    }} variant="outlined">
+                        <CardContent><Typography
+                            style={{fontWeight: "bold"}}>Hello, {this.props.getFullName}</Typography>
+                            <hr/>
+                            <Typography style={{marginTop: "9px", display: "flex"}} color="textSecondary"
+                                        gutterBottom><Link to="/myorder"><CardGiftcardIcon
+                                style={{marginRight: "6px"}}/></Link><Link to="/myorder">My Orders</Link></Typography>
+                            <Button className="loginorsignupbutton"
+                                    onClick={this.handleLogoutBoxVisibility}>LOGOUT</Button>
+                        </CardContent>
+                    </Card>
                 }
 
                 <AppBar position="fixed" style={{backgroundColor: "rgb(150, 0, 0)"}}>
@@ -127,7 +131,7 @@ export default class Header extends React.Component {
                         </Typography>
                         <div className="search" style={url === '' ? {visibility: "visible"} : {visibility: "hidden"}}>
                             <div className="searchIcon">
-                                <SearchIcon />
+                                <SearchIcon/>
                             </div>
                             <div className="searchText">
                                 <InputBase
@@ -136,23 +140,25 @@ export default class Header extends React.Component {
                                     onChange={this.handleChange}
                                 /></div>
                         </div>
-                        
 
-            <div className="addtocarticon" style={url === '' ? {visibility: "visible"} : {visibility: "hidden"}}>
-            <Badge badgeContent={this.props.count} color="secondary" className="badgeclass">
-            <Link to="/cart"><LocalGroceryStoreIcon className="carticon"/></Link>
-            </Badge>
-        </div>
 
-                        <div className="loginsignup" style={url != '' ? {visibility: "hidden"} : this.state.visiblityValueOfLogin === "visible" ? {borderBottom: "white solid 5px"} : {borderBottom: "rgb(150, 0, 0) solid 5px"}}>
+                        <div className="addtocarticon"
+                             style={url === '' ? {visibility: "visible"} : {visibility: "hidden"}}>
+                            <Badge badgeContent={this.props.count} color="secondary" className="badgeclass">
+                                <Link to="/cart"><LocalGroceryStoreIcon className="carticon"/></Link>
+                            </Badge>
+                        </div>
+
+                        <div className="loginsignup"
+                             style={url != '' ? {visibility: "hidden"} : this.state.visiblityValueOfLogin === "visible" ? {borderBottom: "white solid 5px"} : {borderBottom: "rgb(150, 0, 0) solid 5px"}}>
                             <PermIdentityIcon className="userIcon" onClick={this.handleLoginBoxVisiblity}/>
                         </div>
 
                     </Toolbar>
                 </AppBar>
-                {/*<div className="closeiconfordialoguebox"><CloseIcon /></div>*/}
-                <Dialog className="maindialoguebox" aria-labelledby="customized-dialog-title" open={this.state.visiblityOfDialogBox}>
-                    <DialogContent className="dialoguecontent" id="customized-dialog-title" >
+                <Dialog className="maindialoguebox" aria-labelledby="customized-dialog-title"
+                        open={this.state.visiblityOfDialogBox}>
+                    <DialogContent className="dialoguecontent" id="customized-dialog-title">
                         <LoginPage getClickFlag={this.setClickFlag}/>
                     </DialogContent>
                 </Dialog>

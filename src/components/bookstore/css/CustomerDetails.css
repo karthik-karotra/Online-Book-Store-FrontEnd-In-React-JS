@@ -31,6 +31,7 @@
     text-indent: 10px;
     color: white;
 }
+
 .cart-button {
     background-color: rgb(150, 0, 0);
     border: none;
@@ -41,6 +42,7 @@
     color: rgba(255, 255, 255, .6);
     margin-bottom: 60px;
 }
+
 .customerdetail-textfield {
     justify-content: space-around;
     align-content: center;
@@ -58,12 +60,14 @@
     width: 100%;
     height: 60%;
 }
-.customerdetail-button{
+
+.customerdetail-button {
     display: flex;
     justify-content: flex-end;
     height: 53px;
     width: 100%;
 }
+
 .customerdetail-address {
     justify-content: center;
     align-content: center;
@@ -71,7 +75,8 @@
     flex-direction: row;
     width: 225%;
 }
-.radio{
+
+.radio {
     display: flex;
     width: 250%;
     float: left;
@@ -79,32 +84,36 @@
     padding-top: 10px;
     margin-right: 40px;
 }
-.form{
+
+.form {
     display: flex;
     margin-right: 85%;
     size: 225%;
     align-items: left;
 }
-.radio-button-div{
+
+.radio-button-div {
     margin-right: 45%;
 }
-.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl.MuiInputBase-multiline.MuiOutlinedInput-multiline{
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl.MuiInputBase-multiline.MuiOutlinedInput-multiline {
     height: 75%;
 }
-button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.cart-button-visible{
-    color:  #fff;
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.cart-button-visible {
+    color: #fff;
     /* width: 20%; */
     border-radius: 0;
     height: 35px;
     margin-right: 40px;
-    background-color: rgb( 145, 10, 10);
+    background-color: rgb(145, 10, 10);
 }
 
-button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.cart-button-disable{
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.cart-button-disable {
     display: none;
 }
 
-.edit{
+.edit {
     position: absolute;
     transform: translate(2930%, -130%);
     background-color: white;
@@ -114,11 +123,11 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.cart-button-disable
     justify-content: center;
 }
 
-.edit-disable{
+.edit-disable {
     display: none;
 }
 
-.edit-button{
+.edit-button {
     border: none;
     background-color: white;
     font-size: 14px;
@@ -130,27 +139,29 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.cart-button-disable
     .customer-form-container {
         min-height: 500px;
     }
+
     .form-content {
         width: 300px;
-        margin-left: 10px;    
+        margin-left: 10px;
     }
-    .radio-button-div{
+
+    .radio-button-div {
         margin-right: -5%;
     }
 
-    .edit{
+    .edit {
         transform: translate(1030%, -130%);
     }
 }
 
 @media only screen and (min-width: 768px) and (min-height: 1024px ) {
-    .edit{
+    .edit {
         transform: translate(2200%, -130%);
     }
 }
 
 @media only screen and (width: 1024px) and (height: 1366px ) {
-    .edit{
+    .edit {
         transform: translate(3230%, -130%);
     }
 }
