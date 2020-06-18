@@ -26,13 +26,13 @@
     display: flex;
     flex-flow: wrap;
     justify-content: flex-start;
-    min-height: 589px;
+    min-height: 572.8px;
 }
 
 .flex-container > div {
-    width: 300px;
+    width: 278px;
     margin: 20px;
-    height: 380px;
+    height: 360px;
     border: 1px solid #F0F0F0;
 }
 
@@ -134,11 +134,151 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
     background: #bfbfbf;
 }
 
-@media only screen and (max-width: 414px) and (max-height: 823px ) {
+/*LOADER CSS*/
+.wrapper-loader {
+    width: 200px;
+    height: 60px;
+    position: absolute;
+    left: 50%;
+    top: 1%;
+    transform: translate(-50%, 50%);
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgb(165, 42, 42);
+    left: 15%;
+    margin-top: 165%;
+    transform-origin: 50%;
+    animation: circle .5s alternate infinite ease;
+}
+
+@keyframes circle {
+    0% {
+        top: 60px;
+        height: 5px;
+        border-radius: 50px 50px 25px 25px;
+        transform: scaleX(1.7);
+    }
+    40% {
+        height: 20px;
+        border-radius: 50%;
+        transform: scaleX(1);
+    }
+    60% {
+        height: 20px;
+        border-radius: 50%;
+        transform: scaleX(1);
+    }
+    100% {
+        top: 0%;
+    }
+}
+
+.circle:nth-child(2) {
+    left: 45%;
+    animation-delay: .2s;
+}
+
+.circle:nth-child(3) {
+    left: 105%;
+    animation-delay: .6s;
+}
+
+.circle:nth-child(4) {
+    left: auto;
+    right: 15%;
+    animation-delay: .3s;
+}
+
+.shadow {
+    width: 20px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    margin-top: 200%;
+    transform-origin: 50%;
+    z-index: -1;
+    left: 15%;
+    filter: blur(1px);
+    animation: shadow .5s alternate infinite ease;
+}
+
+@keyframes shadow {
+    0% {
+        transform: scaleX(1.5);
+    }
+    40% {
+        transform: scaleX(1);
+        opacity: .7;
+    }
+    60% {
+        transform: scaleX(1);
+        opacity: .7;
+    }
+    100% {
+        transform: scaleX(.2);
+        opacity: .4;
+    }
+}
+
+.shadow:nth-child(5) {
+    left: 45%;
+    animation-delay: .2s
+}
+
+.shadow:nth-child(6) {
+    left: 104%;
+    animation-delay: .2s
+}
+
+.shadow:nth-child(7) {
+    left: auto;
+    right: 15%;
+    animation-delay: .3s;
+}
+
+.wrapper-loader span {
+    position: absolute;
+    margin-top: 210%;
+    font-family: 'Lato';
+    font-size: 26px;
+    letter-spacing: 12px;
+    color: rgb(165, 42, 42);
+    left: 15%;
+}
+
+.no-result-found {
+    width: 100%;
+    min-height: 639px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-result {
+    width: 35.7%;
+    height: 355px;
+}
+
+.pagination-disable {
+    display: none;
+}
+
+.filterstyle-disable {
+    display: none;
+}
+
+@media only screen and (max-width: 411px) and (max-height: 823px ) {
     .flex-container {
         width: 100%;
         align-items: center;
         justify-content: center;
+        min-height: 20%;
     }
 
     .count-and-filter {
@@ -149,8 +289,19 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
     }
 
     .selectfield {
+        width: 98%;
+        height: 103%;
+        margin-right: 41%;
+    }
+
+    .no-result-found {
         width: 100%;
-        height: 10%;
+        min-height: 458px;
+    }
+
+    .no-result {
+        width: 100%;
+        height: 355px;
     }
 }
 
@@ -166,9 +317,34 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
         align-items: center;
         justify-content: center;
     }
+
+    .no-result-found {
+        min-height: 842px;
+    }
+
+    .no-result {
+        width: 65%;
+    }
+
+    .filterstyle-disable {
+        display: block;
+        visibility: hidden;
+        width: 350px;
+    }
+
 }
 
 @media only screen and (width: 1024px) and (height: 1366px ) {
+
+    .flex-container {
+        width: 100%;
+        min-height: 1115px;
+    }
+
+    .count-and-filter {
+        width: 100%;
+    }
+
     .flex-container > div {
         width: 299px;
     }
@@ -179,5 +355,13 @@ button.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPagin
 
     .filterstyle {
         width: 470px;
+    }
+
+    .no-result-found {
+        min-height: 1183px;
+    }
+
+    .no-result {
+        width: 65%;
     }
 }

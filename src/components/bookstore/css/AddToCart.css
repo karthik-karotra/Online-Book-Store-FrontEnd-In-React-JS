@@ -275,6 +275,14 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.disable {
         margin-top: 1.4%;
         margin-right: 40.7%;
     }
+
+    .subtotalprice {
+        width: 50%;
+    }
+
+    .horizontal-line {
+        width: 38%;
+    }
 }
 
 @media only screen and (width: 1024px) and (height: 1366px ) {

@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
 import LoginAndRegistrationAxios from "../../../service/LoginAndRegistrationAxios";
-import {Link} from "react-router-dom";
 import {ThemeProvider} from "@material-ui/styles";
 import {createMuiTheme} from "@material-ui/core";
 import NavigationBar from "../../util/js/NavigationBar";
@@ -34,7 +33,6 @@ class Verification extends React.Component {
 
     resendEmail() {
         new LoginAndRegistrationAxios().verifyEmail(this.props.location.search).then((response) => {
-            console.log(response.data);
             if (`${response.data}` === "Account Verified") {
                 this.setState({accountVerification: 'account-verified'})
             } else {

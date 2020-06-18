@@ -60,7 +60,6 @@ class ResetPassword extends React.Component {
             const data = {password: this.state.password}
             if (this.state.status1 == false && this.state.status2 == false) {
                 new LoginAndRegistrationAxios().resetPassword(data, this.props.location.search).then((response) => {
-                    console.log(response.data)
                     if (`${response.data}` === "Password Reseted Successfully") {
                         this.setState({
                             severity: "success",
@@ -118,9 +117,6 @@ class ResetPassword extends React.Component {
         })
 
         if (this.state.password !== this.state.confirmPassword) {
-            console.log(this.state.password);
-            console.log(this.state.confirmPassword);
-
             this.setState({
 
                 status2: true,
@@ -128,7 +124,6 @@ class ResetPassword extends React.Component {
             })
         }
         if (this.state.password === this.state.confirmPassword) {
-            console.log("success");
             this.setState({
                 status2: false,
                 helperText2: ' '
@@ -148,7 +143,9 @@ class ResetPassword extends React.Component {
         return (
             <div className="reset-container-wrapper">
                 <NavigationBar/>
+
                 <div className="layer-inner">
+
                     <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={this.state.snackbaropen}
                               autoHideDuration={4000} onClose={this.snackbarClose}>
                         <Alert onClose={this.snackbarClose} severity={this.state.severity} variant={"filled"}>
@@ -186,6 +183,7 @@ class ResetPassword extends React.Component {
                             </Link>
                         </div>
                     </div>
+
                 </div>
             </div>
         );

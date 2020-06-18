@@ -58,7 +58,7 @@ button.MuiButtonBase-root.MuiCardActionArea-root {
 
 .MuiCardMedia-root.media {
     width: 40%;
-    height: 175px;
+    height: 165px;
 }
 
 h6.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom {
@@ -115,6 +115,17 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.card-button-after-c
 
 .hidden {
     visibility: hidden;
+}
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+    .MuiCardMedia-root.media {
+        width: 40%;
+        height: 150px;
+    }
+
+    h6.MuiTypography-root.MuiTypography-h6.MuiTypography-gutterBottom {
+        font-size: 17.5px;
+    }
 }
 
 @media only screen and (width: 1024px) and (height: 1366px ) {

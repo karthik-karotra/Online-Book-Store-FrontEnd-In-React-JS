@@ -12,7 +12,7 @@
 .crossiconinlogin {
     position: absolute;
     margin-left: 31%;
-    transform: translate(1000%, 50%);
+    transform: translate(2000%, 50%);
     color: white;
     border: 2px solid white;
     display: flex;
@@ -92,7 +92,6 @@ a {
 #passWord {
     height: 10px;
 }
-
 
 .login-html .sign-up-htm {
     top: 5%;
@@ -359,7 +358,6 @@ input#userName, input#passWord {
     .user-login-form {
         margin-top: 0;
         margin-left: 13%;
-        /* display:flex; */
     }
 }
 

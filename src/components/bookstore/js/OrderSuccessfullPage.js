@@ -15,6 +15,13 @@ class OrderSuccessfullPage extends React.Component {
         this.props.history.push('/');
     }
 
+    componentDidMount() {
+        if (localStorage.getItem('token') != null && localStorage.getItem('data') != null) {
+        } else {
+            this.props.history.push('/login');
+        }
+    }
+
     render() {
         const email = "admin@bookstore.com";
         const mobileNumber = "+91 9087654321";
@@ -25,9 +32,9 @@ class OrderSuccessfullPage extends React.Component {
                 <div className="success">
                     <div className="success-cards">
                         <CardMedia className="success-media" image={successfull}/>
-                        <div>hurray!!! your order is confirmed</div>
-                        <div>your order id #653183 save the order id for</div>
-                        <div>further communication..</div>
+                        <div id="firstLine">hurray!!! your order is confirmed</div>
+                        <div id="secondLine">your order id #{this.props.match.params.random} save the order id for</div>
+                        <div id="secondLine">further communication...</div>
                     </div>
                     <div className="user-details">
                         <table>
@@ -47,8 +54,7 @@ class OrderSuccessfullPage extends React.Component {
                                 </td>
                             </tr>
                         </table>
-                        <Button variant="contained" className="success-button" onClick={this.handle}>Continue
-                            Shopping</Button>
+                        <Button variant="contained" id="success-button" onClick={this.handle}>Continue Shopping</Button>
                     </div>
                 </div>
                 <div className="userfooter">

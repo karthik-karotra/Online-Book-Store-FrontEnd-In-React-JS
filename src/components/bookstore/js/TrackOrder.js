@@ -6,9 +6,9 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
-import EmailIcon from '@material-ui/icons/Email';
-import LocalShippingIcon from '@material-ui/icons/LocalShipping';
-import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
+import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
+import DirectionsBoatIcon from '@material-ui/icons/DirectionsBoat';
+import WhereToVoteIcon from '@material-ui/icons/WhereToVote';
 import StepConnector from '@material-ui/core/StepConnector';
 
 class TrackOrder extends React.Component {
@@ -89,9 +89,9 @@ class TrackOrder extends React.Component {
 
             const icons = {
                 1: <LocalGroceryStoreIcon/>,
-                2: <EmailIcon/>,
-                3: <LocalShippingIcon/>,
-                4: <PersonPinCircleIcon/>,
+                2: <CardGiftcardIcon/>,
+                3: <DirectionsBoatIcon/>,
+                4: <WhereToVoteIcon/>,
             };
 
             return (

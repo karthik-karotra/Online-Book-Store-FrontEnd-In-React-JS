@@ -56,20 +56,17 @@ class Signin extends Component {
                     password: this.state.password,
                 }
                 new LoginAndRegistrationAxios().loginUser(data).then((response) => {
-                    console.log(response.headers);
-                    if (response.data == "LOGIN SUCCESSFUL") {
-                        // alert("")
+                    if (response.data.message == "LOGIN SUCCESSFUL") {
                         localStorage.setItem('token', response.headers.authorization)
+                        localStorage.setItem('data', response.data.data)
                         this.setState({
                             severity: "success",
                             snackbaropen: true,
-                            snackbarmsg: response.data
+                            snackbarmsg: response.data.message
                         }, () => {
                             this.setData(this.state.severity, this.state.snackbaropen, this.state.snackbarmsg)
                         });
-                        setTimeout(() => {
-                            this.props.history.push("/");
-                        }, 2000);
+                        this.props.history.push("/");
                         window.location.reload(true);
                     } else {
                         this.setState({
@@ -83,7 +80,7 @@ class Signin extends Component {
 
                 })
                     .catch((error) => {
-                        // console.log(error)
+                        console.log(error)
                     })
             }
         }

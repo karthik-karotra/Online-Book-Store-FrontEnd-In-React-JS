@@ -25,7 +25,6 @@ class ForgotPassword extends React.Component {
         this.setState({snackbaropen: false});
     };
 
-
     handleChange = (e) => {
         this.setState({email: e.target.value}, () => {
             this.emailValidation()

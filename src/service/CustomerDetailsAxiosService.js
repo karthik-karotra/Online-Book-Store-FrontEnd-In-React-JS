@@ -1,4 +1,4 @@
-import {post, get} from './Service'
+import {get, post} from './Service'
 
 class CustomerDetailsAxiosService {
 
@@ -9,7 +9,6 @@ class CustomerDetailsAxiosService {
     getCustomerDetails() {
         return (get('customer'))
     }
-
 }
 
 export default CustomerDetailsAxiosService;

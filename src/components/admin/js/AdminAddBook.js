@@ -6,6 +6,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
 import AdminAxiosService from "../../../service/AdminAxiosService";
 import '../../bookstore/css/BookStoreHomePage.css'
+import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 
 class AdminAddBook extends React.Component {
     constructor(props) {
@@ -124,7 +125,6 @@ class AdminAddBook extends React.Component {
                     publishingYear: this.state.publishingYear
                 }
                 new AdminAxiosService().addBookToDatabase(data).then((response) => {
-                    console.log(response.data);
                     if (response.data.message === "ADDED SUCCESSFULLY") {
                         this.setState({
                             severity: "success",
@@ -201,12 +201,20 @@ class AdminAddBook extends React.Component {
     };
 
     getImageURL = () => {
-        console.log(this.state.setImageURL)
         const formData = new FormData();
         formData.append('file', this.state.setImageURL);
         new AdminAxiosService().addImage(formData).then(response => {
-            console.log(response.data)
-            this.setState({imageURL: response.data})
+            if (response.data === 'Only Image Files Can Be Uploaded') {
+                this.setState({
+                    severity: "error",
+                    snackbaropen: true,
+                    snackbarmsg: response.data,
+                    setImageUrl: ''
+                });
+            } else {
+                this.setState({imageURL: response.data.data})
+            }
+
         }).catch(response => {
             console.log(response)
         })
@@ -264,7 +272,7 @@ class AdminAddBook extends React.Component {
             status3: true,
             helpertext3: 'Required*',
         })
-        var validNamePattern = /^([a-zA-Z]{3,}[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*[ ]*[a-zA-Z]*)$/;
+        var validNamePattern = /^[A-Za-z. ]{3,}[ ]*[A-Za-z.]*$/;
         if (this.state.authorName.trim() !== "") {
             if (validNamePattern.test(this.state.authorName) === false) {
                 this.setState({
@@ -384,7 +392,7 @@ class AdminAddBook extends React.Component {
                 helpertext8: 'Required*',
             })
         }
-        var validDescriptionPattern = /^.{0,1000}$/;
+        var validDescriptionPattern = /^\w{1,1000}/;
         if (this.state.bookDetails.trim() !== "") {
             if (validDescriptionPattern.test(this.state.bookDetails) === false) {
                 this.setState({
@@ -402,6 +410,15 @@ class AdminAddBook extends React.Component {
     }
 
     render() {
+
+        const theme = createMuiTheme({
+            palette: {
+                primary: {
+                    main: '#a52a2a',
+                },
+            },
+        });
+
         return (
             <div>
                 <div className="container">
@@ -416,11 +433,13 @@ class AdminAddBook extends React.Component {
                             <h2>Book Details</h2>
                         </div>
                         <div className="data">
-                            <TextField error={this.state.status1} className="input" id="outlined-basic" label="ISBN No."
-                                       variant="outlined" autoComplete="off"
-                                       helperText={this.state.helpertext1} value={this.state.isbn}
-                                       onClick={this.handleChange} onChange={this.handleChange} name="isbn"/>
-
+                            <ThemeProvider theme={theme}>
+                                <TextField error={this.state.status1} className="input" id="outlined-basic"
+                                           label="ISBN No."
+                                           variant="outlined" autoComplete="off"
+                                           helperText={this.state.helpertext1} value={this.state.isbn}
+                                           onClick={this.handleChange} onChange={this.handleChange} name="isbn"/>
+                            </ThemeProvider>
                             <TextField error={this.state.status2} className="input" id="outlined-basic"
                                        label="Book Name" variant="outlined" autoComplete="off"
                                        value={this.state.bookName} helperText={this.state.helpertext2}

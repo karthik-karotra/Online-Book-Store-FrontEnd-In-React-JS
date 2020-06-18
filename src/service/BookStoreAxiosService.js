@@ -11,9 +11,8 @@ class BookStoreAxiosService {
     }
 
     getSearchAndFilterBooks(pageNo, searchText, filterAttributes) {
-        return (get('sort/' + pageNo + '/' + searchText + '/' + filterAttributes))
+        return (get('books/sort/' + pageNo + '/' + searchText + '/' + filterAttributes))
     }
-
 }
 
 export default BookStoreAxiosService;

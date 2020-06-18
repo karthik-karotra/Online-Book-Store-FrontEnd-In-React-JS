@@ -21,14 +21,17 @@ class MyOrder extends React.Component {
             if (response.data == "No Books Are Ordered Yet") {
                 this.setState({bookDetails: []})
             } else {
-                console.log(response.data.data)
                 this.setState({bookDetails: response.data.data})
             }
         })
     }
 
     componentDidMount() {
-        this.orderedBookDetails();
+        if (localStorage.getItem('token') != null && localStorage.getItem('data') != null) {
+            this.orderedBookDetails();
+        } else {
+            this.props.history.push('/login');
+        }
     }
 
     render() {
@@ -48,7 +51,7 @@ class MyOrder extends React.Component {
                             </Breadcrumbs>
                         </div>
 
-                        {this.state.bookDetails.map((bookDetails, index) =>
+                        {this.state.bookDetails.reverse().map((bookDetails, index) =>
                             <div className="order-details-container">
 
                                 <div className="my-order-date">
@@ -79,6 +82,8 @@ class MyOrder extends React.Component {
                                 </div>
                             </div>
                         )}
+
+
                     </div>
                 </div>
                 <div className="order-footer">

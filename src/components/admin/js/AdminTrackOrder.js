@@ -7,9 +7,9 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
-import EmailIcon from '@material-ui/icons/Email';
-import LocalShippingIcon from '@material-ui/icons/LocalShipping';
-import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
+import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
+import DirectionsBoatIcon from '@material-ui/icons/DirectionsBoat';
+import WhereToVoteIcon from '@material-ui/icons/WhereToVote';
 import StepConnector from '@material-ui/core/StepConnector';
 import AdminAxiosService from '../../../service/AdminAxiosService';
 
@@ -139,9 +139,10 @@ class AdminTrackOrder extends React.Component {
     }
 
     getTotalPrice = () => {
-        for (var i = 0; i < this.props.orderDetails.orderProduct.length; i++) {
-            this.setState({totalPrice: this.state.totalPrice + this.props.orderDetails.orderProduct[i].book.bookPrice * this.props.orderDetails.orderProduct[i].quantity})
-        }
+        let price = this.props.orderDetails.orderProduct.map((orderProduct, index) => {
+            return (orderProduct.book.bookPrice * orderProduct.quantity)
+        });
+        this.state.totalPrice = price.reduce((a, b) => a + b)
     }
 
     componentDidMount() {
@@ -205,9 +206,9 @@ class AdminTrackOrder extends React.Component {
 
             const icons = {
                 1: <LocalGroceryStoreIcon/>,
-                2: <EmailIcon/>,
-                3: <LocalShippingIcon/>,
-                4: <PersonPinCircleIcon/>,
+                2: <CardGiftcardIcon/>,
+                3: <DirectionsBoatIcon/>,
+                4: <WhereToVoteIcon/>,
             };
 
             return (
@@ -244,25 +245,26 @@ class AdminTrackOrder extends React.Component {
                         cursor: 'default',
                         backgroundColor: this.state.orderColor,
                         color: this.state.colorOrder
-                    }} onClick={this.order}>Order Id. : {this.props.orderDetails.id}</div>
+                    }} onClick={this.order}>Order Summary
+                    </div>
                     <div className="update-button" style={{
                         cursor: 'default',
                         backgroundColor: this.state.updateColor,
                         color: this.state.colorUpdate
-                    }} onClick={this.updateStatusPanel}>Update Order Status
+                    }} onClick={this.updateStatusPanel}>Order Status
                     </div>
                 </div>
                 <div className={this.state.orderId}>
                     <div className="details-of-order">
-                        <div className="sumarry">Order Summary :</div>
+                        <div className="sumarry">Order Id. : {this.props.orderDetails.orderId}</div>
                         <div className="date">Order Placed : {this.props.orderDetails.orderDate}</div>
                         <div className="subitem">SubItem : {this.props.orderDetails.orderProduct.length}</div>
-                        <div className="prices">Total : Rs. {this.state.totalPrice}</div>
+                        <div className="prices">Total : Rs. {this.props.orderDetails.totalPrice}</div>
                     </div>
                 </div>
                 <div className={this.state.updatePanel}>
                     <div className="level-of-status">
-                        <div className="update-header">Update order Status :</div>
+                        <div className="update-header">Update Order Status :</div>
                         <div className="checkbox-containers">
                             <div className="checkbox-wrapper">
                                 <div className="checkbox-status">Ordered</div>

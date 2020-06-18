@@ -9,9 +9,18 @@ function post(data, url) {
     })
 }
 
-function tokenPost(url) {
+function adminPost(data, url) {
+    return Axios({
+        method: 'post', headers: {'token': localStorage.getItem('adminToken')},
+        url: `${URL.apiURL}${url}`,
+        data: data
+    })
+}
+
+function tokenPost(url, discountCoupon) {
     return Axios({
         method: 'post', headers: {'token': localStorage.getItem('token')},
+        params: {discountCoupon: discountCoupon},
         url: `${URL.apiURL}${url}`
     })
 }
@@ -19,6 +28,13 @@ function tokenPost(url) {
 function get(url) {
     return Axios({
         method: 'get', headers: {'token': localStorage.getItem('token')},
+        url: `${URL.apiURL}${url}`,
+    })
+}
+
+function adminGet(url) {
+    return Axios({
+        method: 'get', headers: {'token': localStorage.getItem('adminToken')},
         url: `${URL.apiURL}${url}`,
     })
 }
@@ -37,4 +53,11 @@ function update(url) {
     })
 }
 
-export {post, tokenPost, get, deleteData, update}
+function adminUpdate(url) {
+    return Axios({
+        method: 'put', headers: {'token': localStorage.getItem('adminToken')},
+        url: `${URL.apiURL}${url}`,
+    })
+}
+
+export {post, adminPost, adminGet, adminUpdate, tokenPost, get, deleteData, update}

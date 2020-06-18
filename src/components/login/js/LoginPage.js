@@ -105,9 +105,9 @@ class LoginPage extends Component {
                     password: this.state.password,
                     phoneNo: this.state.phoneNumber,
                     status: false,
+                    userRole: "USER"
                 }
                 new LoginAndRegistrationAxios().addUser(data).then((response) => {
-                    // console.log(response.data);
                     if (`${response.data.message}` === "Registration Successfull !! Please Check Your Registered Email For Email Verification") {
                         this.setState({
                             severity: "success",
@@ -125,11 +125,10 @@ class LoginPage extends Component {
 
                 })
                     .catch((error) => {
-                        // console.log(error)
+                        console.log(error)
                     })
             }
         }
-
     }
 
     emailValidation() {
@@ -272,8 +271,6 @@ class LoginPage extends Component {
         });
 
         const url = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
-
-        // console.log(this.state.helperText);
         return (
             <div className="hero" style={url === '' ? {backgroundColor: "transparent"} : {backgroundColor: "#b3b3b3"}}>
                 <div className="crossiconinlogin" onClick={this.getThisEvent}

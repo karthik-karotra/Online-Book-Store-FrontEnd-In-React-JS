@@ -55,6 +55,7 @@ export default class Header extends React.Component {
     handleLogoutBoxVisibility = () => {
         this.setState({isLoggedIn: false, visiblityValueOfLogin: 'hidden'})
         localStorage.removeItem('token')
+        localStorage.removeItem('data')
         window.location.reload(true)
     }
 
@@ -68,8 +69,6 @@ export default class Header extends React.Component {
 
     isLoggedIn = () => {
         let user = localStorage.getItem('token');
-        console.log("abc")
-        console.log(user)
         if (user) {
             this.setState({
                 isLoggedIn: true
@@ -110,7 +109,7 @@ export default class Header extends React.Component {
                         visibility: this.state.visiblityValueOfLogin
                     }} variant="outlined">
                         <CardContent><Typography
-                            style={{fontWeight: "bold"}}>Hello, {this.props.getFullName}</Typography>
+                            style={{fontWeight: "bold"}}>Hello, {localStorage.getItem('data')}</Typography>
                             <hr/>
                             <Typography style={{marginTop: "9px", display: "flex"}} color="textSecondary"
                                         gutterBottom><Link to="/myorder"><CardGiftcardIcon

@@ -1,4 +1,4 @@
-import {post, tokenPost, get, deleteData, update} from './Service';
+import {deleteData, get, post, tokenPost, update} from './Service';
 
 class OrderBookAxiosService {
 
@@ -19,13 +19,12 @@ class OrderBookAxiosService {
     }
 
     placeOrder() {
-        return (tokenPost('bookstore/order'))
+        return (tokenPost('bookstore/order/'))
     }
 
     getOrderedBooks() {
-        return (get('bookstore/order'))
+        return (get('bookstore/orders'))
     }
-
 }
 
 export default OrderBookAxiosService;

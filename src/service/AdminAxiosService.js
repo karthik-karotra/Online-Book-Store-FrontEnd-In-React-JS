@@ -1,21 +1,25 @@
-import {post, get, update} from './Service'
+import {adminGet, adminPost, adminUpdate} from './Service'
 
 class AdminAxiosService {
 
     addBookToDatabase(data) {
-        return (post(data, 'admin/book'))
+        return (adminPost(data, 'admin/book'))
     }
 
     addImage(data) {
-        return (post(data, 'admin/book/image'))
+        return (adminPost(data, 'admin/book/image'))
     }
 
     trackOrder(pageValue) {
-        return (get('admin/orders/' + pageValue))
+        return (adminGet('admin/orders/' + pageValue))
     }
 
     updateOrderStatus(orderId, orderStatus) {
-        return (update('admin/order/status/' + orderId + '/' + orderStatus))
+        return (adminUpdate('admin/order/status/' + orderId + '/' + orderStatus))
+    }
+
+    getCount() {
+        return (adminGet('admin/orders/count'))
     }
 }
 

@@ -1,4 +1,4 @@
-import {post, get} from './Service'
+import {get, post} from './Service'
 
 class LoginAndRegistrationAxios {
 
@@ -25,8 +25,6 @@ class LoginAndRegistrationAxios {
     resetPassword(data, token) {
         return (post(data, `user/reset/password/${token}`))
     }
-
-
 }
 
 export default LoginAndRegistrationAxios;

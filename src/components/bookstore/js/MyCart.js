@@ -35,8 +35,8 @@ class MyCart extends React.Component {
     }
 
     updateQuantity = () => {
-        console.log(this.props.bookDetails.bookCartID + " " + this.state.quantityValue)
         new OrderBookAxiosService().updateQuantity(this.props.bookDetails.bookCartID, this.state.quantityValue)
+        this.props.callDisplay();
     }
 
     render() {

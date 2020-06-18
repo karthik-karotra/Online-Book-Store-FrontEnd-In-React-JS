@@ -7,10 +7,7 @@ import BookStoreAxiosService from "../../../service/BookStoreAxiosService";
 import Pagination from "@material-ui/lab/Pagination";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import OrderBookAxiosService from "../../../service/OrderBookAxiosService";
-import imagek from '../../../assests/images/booknotfound.jpg';
-import CardMedia from '@material-ui/core/CardMedia';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import CustomerDetailsAxiosService from "../../../service/CustomerDetailsAxiosService";
+import NoResultFound from "../../../assests/images/NoResultFound.jpg"
 
 export class BookStoreHomePage extends Component {
 
@@ -18,7 +15,7 @@ export class BookStoreHomePage extends Component {
         super(props);
         this.state = {
             bookDetails: [],
-            pageValue: 0,
+            pageValue: 1,
             totalBookCount: '',
             bookPerPage: 12,
             searchText: '',
@@ -28,17 +25,30 @@ export class BookStoreHomePage extends Component {
             searchAndFilterFlag: false,
             cartDetails: [],
             isLoaded: false,
-            userName: ''
+            setPaginationVisibility: 'pagination-disable',
+            setFilterVisibility: 'filterstyle-disable'
         }
     }
 
     displayBooks = () => {
         new BookStoreAxiosService().getBooksFromDatabase(this.state.pageValue)
             .then((response) => {
-                this.cartBookDetails()
-                this.setState({bookDetails: response.data.data}, () => {
-                    this.getBooksCount()
-                });
+                if (response.data === "No Books Were Found On The Page") {
+                    this.setState({
+                        bookDetails: [],
+                        setPaginationVisibility: 'pagination-disable',
+                        setFilterVisibility: 'filterstyle-disable'
+                    });
+                } else {
+                    this.cartBookDetails()
+                    this.setState({
+                        bookDetails: response.data.data,
+                        setPaginationVisibility: 'pagination',
+                        setFilterVisibility: 'filterstyle'
+                    }, () => {
+                        this.getBooksCount()
+                    });
+                }
             })
             .catch((error) => {
                 console.log(error)
@@ -47,13 +57,13 @@ export class BookStoreHomePage extends Component {
 
     handleChange = (event, value) => {
         if (this.state.searchAndFilterFlag === false) {
-            this.setState({pageValue: value - 1}, () => {
+            this.setState({pageValue: value}, () => {
                 this.displayBooks()
                 window.scrollTo(0, 0);
             })
         }
         if (this.state.searchAndFilterFlag === true) {
-            this.setState({pageValue: value - 1}, () => {
+            this.setState({pageValue: value}, () => {
                 this.displaySearchAndFilterBook()
             })
         }
@@ -61,7 +71,7 @@ export class BookStoreHomePage extends Component {
 
     getBooksCount = () => {
         new BookStoreAxiosService().getCount().then((response) => {
-            this.setState({totalBookCount: response.data, isLoaded: true})
+            this.setState({totalBookCount: response.data.data, isLoaded: true})
         })
     }
 
@@ -79,7 +89,10 @@ export class BookStoreHomePage extends Component {
     }
 
     handleFilter = (event) => {
-        this.setState({selectedSearchAndFilter: event.target.value}, () => {
+        this.setState({
+            selectedSearchAndFilter: event.target.value,
+            searchAndFilterFlag: true
+        }, () => {
             this.displaySearchAndFilterBook()
         })
     }
@@ -87,11 +100,20 @@ export class BookStoreHomePage extends Component {
     displaySearchAndFilterBook = () => {
         new BookStoreAxiosService().getSearchAndFilterBooks(this.state.pageValue, this.state.searchValue, this.state.selectedSearchAndFilter)
             .then((response) => {
-                console.log(response.data)
                 if (response.data == 'No Books For Searched String Were Found') {
-                    this.setState({bookDetails: [], totalBookCount: 0})
+                    this.setState({
+                        bookDetails: [],
+                        totalBookCount: 0,
+                        setPaginationVisibility: 'pagination-disable',
+                        setFilterVisibility: 'filterstyle-disable'
+                    })
                 } else {
-                    this.setState({bookDetails: response.data.content, totalBookCount: response.data.totalElements});
+                    this.setState({
+                        bookDetails: response.data.data.content,
+                        totalBookCount: response.data.data.totalElements,
+                        setPaginationVisibility: 'pagination',
+                        setFilterVisibility: 'filterstyle'
+                    });
                 }
             })
     }
@@ -108,7 +130,6 @@ export class BookStoreHomePage extends Component {
 
     cartBookDetails = () => {
         new OrderBookAxiosService().myCart().then((response) => {
-            console.log(response.data.data)
             if (response.data == "No Books Found In Cart") {
                 this.setState({cartDetails: []})
             } else {
@@ -121,70 +142,77 @@ export class BookStoreHomePage extends Component {
         this.cartBookDetails();
     }
 
-    getCustomerDetails() {
-        new CustomerDetailsAxiosService().getCustomerDetails().then((response) => {
-            console.log(response.data)
-            if (response.data.message == "Response Successful") {
-                this.setState({userName: response.data.data.fullName})
-            } else {
-                this.setState({userName: ""})
-            }
-        });
-    }
-
     componentDidMount() {
         this.displayBooks();
         this.getBooksCount();
-        this.getCustomerDetails();
     }
 
     render() {
         return (
-            <div className="container1">
-                <NavigationBar getSearchedText={this.sendSearchedText} count={this.state.cartDetails.length}
-                               getFullName={this.state.userName}/>
-                <div className="count-and-filter-container">
-                    <div className="count-and-filter">
-                        <div className="count">
-                            <h2>Books<a className="book-count">({this.state.totalBookCount} items)</a></h2>
-                        </div>
-                        <div className="filterstyle">
-                            <NativeSelect className="selectfield"
-                                          id="demo-customized-select-native"
-                                          onChange={this.handleFilter}
-                                          onClick={this.handleFilter}
-                                          value={this.state.selectedFilter}
-                            >
-                                <option aria-label="sort" selected value="">Sort by</option>
-                                <option aria-label="sort" value="LOW_TO_HIGH">Price: Low To High</option>
-                                <option aria-label="sort" value="HIGH_TO_LOW">Price: High To Low</option>
-                                <option aria-label="sort" value="NEWEST_ARRIVALS">Newest Arrivals</option>
-                            </NativeSelect>
-                        </div>
+
+            this.state.isLoaded === false ?
+                <div><NavigationBar getSearchedText={this.sendSearchedText} count={this.state.cartDetails.length}/>
+                    <div className="wrapper-loader">
+                        <div className="circle"></div>
+                        <div className="circle"></div>
+                        <div className="circle"></div>
+                        <div className="circle"></div>
+                        <div className="shadow"></div>
+                        <div className="shadow"></div>
+                        <div className="shadow"></div>
+                        <div className="shadow"></div>
+                        <span>Loading...</span>
                     </div>
                 </div>
-                <div className="flex-container-main">
-                    <div className="flex-container">
-                        {this.state.isLoaded == false ? <CircularProgress className="image-not-found"/> :
-                            <div className="image-not-found"
-                                 style={this.state.totalBookCount == 0 && this.state.isLoaded == true ? {visibility: "visible"} : {visibility: "hidden"}}>
-                                <CardMedia className="media" image={imagek}/>
+                :
+                <div className="container1">
+                    <NavigationBar getSearchedText={this.sendSearchedText} count={this.state.cartDetails.length}/>
+                    <div className="count-and-filter-container">
+                        <div className="count-and-filter">
+                            <div className="count">
+                                <h2>Books<a className="book-count">({this.state.totalBookCount} items)</a></h2>
                             </div>
-                        }
-                        {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails}
-                                                                             cartDetails={this.state.cartDetails}
-                                                                             saveBagDetails={this.getBagDetails}
-                                                                             sendItemCount={this.updateCount}/>)}
+                            <div className={this.state.setFilterVisibility}>
+                                <NativeSelect className="selectfield"
+                                              id="demo-customized-select-native"
+                                              onChange={this.handleFilter}
+                                              onClick={this.handleFilter}
+                                              value={this.state.selectedFilter}
+                                >
+                                    <option aria-label="sort" selected value="NEWEST_ARRIVALS">Sort by</option>
+                                    <option aria-label="sort" value="LOW_TO_HIGH">Price: Low To High</option>
+                                    <option aria-label="sort" value="HIGH_TO_LOW">Price: High To Low</option>
+                                    <option aria-label="sort" value="NEWEST_ARRIVALS">Newest Arrivals</option>
+                                </NativeSelect>
+                            </div>
+                        </div>
+                    </div>
+                    {this.state.bookDetails.length === 0 ?
+                        <div className="no-result-found">
+                            <div className="no-result">
+                                <img src={NoResultFound} height="100%" width="100%"/>
+                            </div>
+                        </div>
+                        :
+                        <div className="flex-container-main">
+                            <div className="flex-container">
+                                {this.state.bookDetails.map(bookDetails => <CardView bookDetails={bookDetails}
+                                                                                     cartDetails={this.state.cartDetails}
+                                                                                     saveBagDetails={this.getBagDetails}
+                                                                                     sendItemCount={this.updateCount}/>)}
+                            </div>
+                        </div>
+                    }
+
+                    <div className={this.state.setPaginationVisibility}>
+                        <Pagination count={Math.ceil(this.state.totalBookCount / this.state.bookPerPage)}
+                                    shape="rounded"
+                                    onChange={this.handleChange}/>
+                    </div>
+                    <div className="userfooter">
+                        <BookStoreFooter/>
                     </div>
                 </div>
-                <div className="pagination">
-                    <Pagination count={Math.ceil(this.state.totalBookCount / this.state.bookPerPage)} shape="rounded"
-                                onChange={this.handleChange}/>
-                </div>
-                <div className="userfooter">
-                    <BookStoreFooter/>
-                </div>
-            </div>
         )
     }
 }

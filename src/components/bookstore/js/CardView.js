@@ -25,6 +25,9 @@ class CardView extends React.Component {
         if (this.setBagItemsState() != 'Go To Cart') {
             this.props.saveBagDetails(this.props.bookDetails.id)
         }
+        if (localStorage.getItem('token') == null) {
+            this.props.history.push("/login")
+        }
 
     }
 
