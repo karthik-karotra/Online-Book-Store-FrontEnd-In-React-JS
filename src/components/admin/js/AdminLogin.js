@@ -4,6 +4,7 @@ import '../css/AdminLogin.css';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from "@material-ui/lab/Alert";
 import TextField from "@material-ui/core/TextField";
+import AdminAxiosService from '../../../service/AdminAxiosService';
 
 class AdminLogin extends Component {
 
@@ -56,6 +57,25 @@ class AdminLogin extends Component {
                     email: this.state.email,
                     password: this.state.password,
                 }
+                new AdminAxiosService().adminLogin(data).then((response) => {
+                    if (response.data.message == "Login Successful") {
+                        localStorage.setItem('adminToken', response.headers.authorization)
+                        localStorage.setItem('adminData', response.data.data)
+                        this.setState({
+                            severity: "success",
+                            snackbaropen: true,
+                            snackbarmsg: response.data.message
+                        });
+                        this.props.history.push("/admin");
+                    } else {
+                        this.setState({
+                            severity: "error",
+                            snackbaropen: true,
+                            snackbarmsg: response.data
+                        });
+                    }
+
+                })
             }
         }
     }

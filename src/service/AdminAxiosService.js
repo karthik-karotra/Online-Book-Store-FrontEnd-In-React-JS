@@ -18,6 +18,10 @@ class AdminAxiosService {
         return (adminUpdate('admin/order/status/' + orderId + '/' + orderStatus))
     }
 
+    adminLogin(data) {
+        return (adminPost(data, 'admin/login'))
+    }
+
     getCount() {
         return (adminGet('admin/orders/count'))
     }
