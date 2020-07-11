@@ -10,6 +10,11 @@ import OrderBookAxiosService from "../../../service/OrderBookAxiosService";
 import CustomerDetailsAxiosService from "../../../service/CustomerDetailsAxiosService";
 import {Link} from "react-router-dom";
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Divider from "@material-ui/core/Divider";
+import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import Coupon from './Coupon.js'
 import {withRouter} from 'react-router';
 
 
@@ -28,8 +33,23 @@ class AddToCart extends React.Component {
             customerDetails: [],
             customerData: [],
             operatorSetDisable: false,
-            orderID: '', random: 0,
+            visibilityOfDialogBox: false,
+            discountTotal: "",
+            discountCouponPrice: 0,
+            coupons: [],
+            couponStatus: "",
+            couponPrice: 0,
+            coupon: "",
+            index: 0, orderID: '', random: 0,
         }
+    }
+
+    getCoupon = () => {
+        this.setState({visibilityOfDialogBox: true})
+    }
+
+    handleClose = () => {
+        this.setState({visibilityOfDialogBox: false})
     }
 
     handlePlaceOrder = () => {
@@ -69,6 +89,7 @@ class AddToCart extends React.Component {
         }
         this.setState({customerData: data1})
         this.setTotalPrice();
+        this.discountCoupon();
     }
 
     setTotalPrice = () => {
@@ -77,6 +98,9 @@ class AddToCart extends React.Component {
             return (books.book.bookPrice * books.quantity)
         });
         this.state.totalPrice = price.reduce((a, b) => a + b)
+        this.setState({
+            discountCouponPrice: this.state.totalPrice
+        })
     }
 
     handleCheckout = () => {
@@ -87,11 +111,51 @@ class AddToCart extends React.Component {
                 }, () => this.props.history.push(`/successfull/${this.state.orderID}`))
             });
         })
+        this.addCoupon();
     }
 
 
     callDisplayCartBooks = () => {
         this.cartBookDetails();
+    }
+
+    discountCoupon = () => {
+        new OrderBookAxiosService().getCoupons(this.state.totalPrice).then(response => {
+            if (response.data.message === "Coupons Fetched Successfully") {
+                this.setState({
+                    coupons: response.data.data
+                })
+            } else {
+                this.setState({
+                    coupons: []
+                })
+            }
+        })
+    }
+
+    addCoupon = () => {
+        new OrderBookAxiosService().addDiscountPrice(this.state.coupon, this.state.totalPrice).then(response => {
+            if (response.data.data == 0) {
+                this.setState({
+                    discountCouponPrice: response.data.data == 0 ? this.state.totalPrice : response.data.data
+                })
+            }
+        })
+    }
+
+    handleTotalPrice = (data, status, price, index) => {
+        this.setState({
+            visibilityOfDialogBox: false,
+            coupon: data,
+            couponStatus: status,
+            couponPrice: price,
+            discountCouponPrice: (this.state.totalPrice - price) < 0 ? 0 : this.state.totalPrice - price,
+            index: index
+        })
+    }
+
+    handleCancel = () => {
+        this.setState({visibilityOfDialogBox: false});
     }
 
     componentDidMount() {
@@ -165,6 +229,50 @@ class AddToCart extends React.Component {
                                     </div>
                                 )}
                             </div>
+
+                            <div className={this.state.setPriceVisibility}>
+                                <div className="coupon-container">
+
+                                    <Divider/>
+                                    <div className="coupon-div">
+                                        <b>Coupons</b>
+                                        <div className="coupon-div1">
+                                            <LocalOfferOutlinedIcon id="offer-icon"/>
+                                            {this.state.couponStatus === "applied" ?
+                                                <div className="coupon-div1-sub">
+                                                    <p className="coupon-sub-title">1 Coupon Applied</p>
+                                                    <Button id="coupon-apply-btn" onClick={this.getCoupon}>Edit</Button>
+                                                </div>
+                                                :
+                                                <div className="coupon-div1-sub">
+                                                    <p className="coupon-sub-title">Apply Coupons</p>
+                                                    <Button id="coupon-apply-btn"
+                                                            onClick={this.getCoupon}>Apply</Button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <Divider/>
+                                    <div className="discount-container">
+                                        <p><b>Price details</b></p>
+                                        <div className="subtotalprice">
+                                            <div className="discount-price">Sub Total Price:</div>
+                                            <div className="price-tag">Rs. {this.state.totalPrice}</div>
+                                        </div>
+                                        <div className="subtotalprice">
+                                            <div className="discount-price">Discount Price:</div>
+                                            <div className="price-tag">Rs. {this.state.couponPrice}</div>
+                                        </div>
+                                        <hr className="horizontal-line"/>
+                                        <div className="subtotalprice">
+                                            <div className="discount-price"><b>Total Price:</b></div>
+                                            <div className="price-tag"><b>Rs. {this.state.discountCouponPrice}</b></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div className={this.state.setOrderSummaryButtonVisibility}>
                                 <Button variant="contained" color="primary" className='visible'
                                         onClick={this.handleCheckout}>
@@ -177,6 +285,16 @@ class AddToCart extends React.Component {
                 <div className="cart-footer">
                     <BookStoreFooter/>
                 </div>
+
+                <Dialog className="coupon-dialog-box" aria-labelledby="customized-dialog-title"
+                        open={this.state.visibilityOfDialogBox} onClose={this.handleClose}>
+                    <DialogContent id="dialoguecontent" id="customized-dialog-title">
+                        <Coupon coupons={this.state.coupons} totalPrice={this.state.totalPrice}
+                                handleTotalPrice={this.handleTotalPrice} handleDialogVisibility={this.handleCancel}
+                                index={this.state.index}/>
+                    </DialogContent>
+                </Dialog>
+
             </div>
         )
     }
